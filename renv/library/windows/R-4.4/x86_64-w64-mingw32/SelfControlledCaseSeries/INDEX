@@ -1,0 +1,126 @@
+SccsData-class          SCCS Data
+SccsIntervalData-class
+                        SCCS Interval Data
+checkEventExposureIndependenceAssumption
+                        Check diagnostic for event-dependent exposure
+checkEventObservationIndependenceAssumption
+                        Check diagnostic for event-dependent
+                        observation end
+checkRareOutcomeAssumption
+                        Check if rare outcome assumption is violated
+checkTimeStabilityAssumption
+                        Check stability of outcome rate over time
+computeMdrr             Compute the minimum detectable relative risk
+computePreExposureGainP
+                        Compute P for pre-exposure risk gain
+computeTimeStability    Check stability of outcome rate over time
+convertJsonToSccsAnalysesSpecifications
+                        Convert JSON to SccsAnalysesSpecifications
+convertSccsAnalysesSpecificationsToJson
+                        Convert SccsAnalysesSpecifications to JSON
+convertUntypedListToSccsAnalysesSpecifications
+                        Convert untyped list to
+                        SccsAnalysesSpecifications
+createAgeCovariateSettings
+                        Create age covariate settings
+createCalendarTimeCovariateSettings
+                        Create calendar time settings
+createControlIntervalSettings
+                        Create control interval settings
+createCreateSccsIntervalDataArgs
+                        Create a parameter object for the
+                        'createSccsIntervalData()' function
+createCreateScriIntervalDataArgs
+                        Create a parameter object for the
+                        'createScriIntervalData()' function
+createCreateStudyPopulationArgs
+                        Create a parameter object for the
+                        'createStudyPopulation()' function
+createDefaultSccsMultiThreadingSettings
+                        Create default SelfControlledCaseSeries
+                        multi-threading settings
+createEraCovariateSettings
+                        Create era covariate settings
+createExposure          Create exposure definition
+createExposuresOutcome
+                        Create a exposures-outcome combination.
+createFitSccsModelArgs
+                        Create a parameter object for the function
+                        fitSccsModel
+createGetDbSccsDataArgs
+                        Create a parameter object for the function
+                        getDbSccsData
+createResultsDataModel
+                        Create the results data model tables on a
+                        database server.
+createSccsAnalysesSpecifications
+                        Create full SCCS analysis specifications
+createSccsAnalysis      Create a SelfControlledCaseSeries analysis
+                        specification
+createSccsDiagnosticThresholds
+                        Create SCCS diagnostics thresholds
+createSccsIntervalData
+                        Create SCCS era data
+createSccsMultiThreadingSettings
+                        Create SelfControlledCaseSeries multi-threading
+                        settings
+createSccsSimulationSettings
+                        Create SCCS simulation settings
+createScriIntervalData
+                        Create Self-Controlled Risk Interval (SCRI) era
+                        data
+createSeasonalityCovariateSettings
+                        Create seasonality settings
+createSimulationRiskWindow
+                        Create a risk window definition for simulation
+createStudyPopulation   Create a study population
+cyclicSplineDesign      Create a design matrix for a cyclic spline
+exportToCsv             Export SCCSresults to CSV files
+fitSccsModel            Fit the SCCS model
+getAttritionTable       Get the attrition table for a population
+getDataMigrator         Get database migrations instance
+getDbSccsData           Load data for SCCS from the database
+getDiagnosticsSummary   Get a summary report of the analyses
+                        diagnostics
+getFileReference        Get file reference
+getModel                Output the full model
+getResultsDataModelSpecifications
+                        Get specifications for SelfControlledCaseSeries
+                        results data model
+getResultsSummary       Get a summary report of the analyses results
+hasAgeEffect            Does the model contain an age effect?
+hasCalendarTimeEffect   Does the model contain a calendar time effect?
+hasSeasonality          Does the model contain a seasonality effect?
+isSccsData              Check whether an object is a SccsData object
+isSccsIntervalData      Check whether an object is a SccsIntervalData
+                        object
+loadExposuresOutcomeList
+                        Load a list of 'ExposuresOutcome' from file
+loadSccsAnalysisList    Load a list of sccsAnalysis from file
+loadSccsData            Load the cohort method data from a file
+loadSccsIntervalData    Load the cohort method data from a file
+migrateDataModel        Migrate Data model
+plotAgeEffect           Plot the age effect
+plotAgeSpans            Plot the age ranges spanned by each observation
+                        period.
+plotCalendarTimeEffect
+                        Plot the calendar time effect
+plotCalendarTimeSpans   Plot the calendar time ranges spanned by each
+                        observation period.
+plotEventObservationDependence
+                        Plot time from event to observation end for
+                        censored and uncensored time.
+plotEventToCalendarTime
+                        Plot the ratio of observed to expected events
+                        over calendar time.
+plotExposureCentered    Plot information centered around the start of
+                        exposure
+plotSeasonality         Plot the seasonality effect
+runSccsAnalyses         Run a list of analyses
+saveExposuresOutcomeList
+                        Save a list of 'ExposuresOutcome' to file
+saveSccsAnalysisList    Save a list of SccsAnalysis to file
+saveSccsData            Save the cohort method data to file
+saveSccsIntervalData    Save the cohort method data to file
+simulateSccsData        Simulate SCCS data
+uploadResults           Upload results to the database server.

@@ -1,0 +1,193 @@
+% LaTeX Article Template
+\documentclass[12pt]{article}
+\topmargin -0.7in
+\textheight 9.0in
+%\textwidth 6in
+\textwidth 6.5in
+%\oddsidemargin 0.25in
+%\oddsidemargin -.25in
+\oddsidemargin 0.0in
+
+% \VignetteIndexEntry{Test Ratio of 2 Poisson Rates}
+% \VignetteKeyword{Relative Risk}
+% \VignetteKeyword{Exact Test}
+
+\begin{document}
+
+\begin{center}
+{\Large \bf Testing the Ratio of Two Poisson Rates} \\
+Michael P. Fay \\
+\today
+\end{center}
+
+<<echo=FALSE,results=hide,eval=T>>=
+library(rateratio.test)
+n<-17877
+m<-16660
+@
+
+
+%\section{Description of Tests}
+
+\section{Example}
+\label{sec-example}
+
+Here is a quick example of the function \texttt{rateratio.test}. Suppose you have two rates that you assume are Poisson and you want to test that 
+they are different. Suppose you observe 2 events with time at risk of $n=\Sexpr{n}$ in one group and 9 events with time at risk of $m=\Sexpr{m}$ in 
+another group. Here is the test:
+<<echo=TRUE,eval=T>>=
+rateratio.test(c(2,9),c(n,m))
+@
+The result is barely non-significant at the 0.05 level. 
+This example was chosen to make a point, that is why the p-value is so close to 0.05. See Section~\ref{sec-caution} below. 
+
+\section{Assumptions and Notation}
+
+Assume that  $Y \sim Poisson(n \lambda_y)$ and $X \sim Poisson( m \lambda_x )$. We are interested in the rate ratio,
+$\theta = \lambda_y/\lambda_x$. The parameters $n$ and $m$ are assumed known and represent the time spent in the Poisson process with the given rates.  For example, $n$ could the the number of person-years at risk associated with $Y$.
+We wish to test one of the three following hypotheses:
+\begin{description}
+\item[less]
+\begin{eqnarray*}
+&H_0:& \theta \geq \Delta \\
+&H_1:& \theta < \Delta
+\end{eqnarray*}
+\item[greater]
+\begin{eqnarray*}
+&H_0:& \theta \leq \Delta \\
+&H_1:& \theta > \Delta
+\end{eqnarray*}
+\item[two-sided]
+\begin{eqnarray*}
+&H_0:& \theta = \Delta \\
+&H_1:& \theta \neq \Delta
+\end{eqnarray*}
+\end{description}
+
+
+For the tests using the rate ratios, we can use the uniformly most powerful (UMP) unbiased test. This test is based on conditioning on the sum $X+Y$ (see e.g., Lehmann and Romano, 2005, p. 125 or p. 152 of Lehmann, 1986). We modify Lehmann's presentation by allowing the constants $m$ and $n$, representing the time in the Poisson process.
+We have that
+\[
+Y | X+Y=t \sim Binomial \left(t, p(\theta) \right)
+\]
+where
+\begin{eqnarray}
+p(\theta)  = \frac{ n \lambda_y }{ n \lambda_y + m \lambda_x } = \frac{ n \theta }{ n \theta + m }. \label{eq:ptheta}
+\end{eqnarray}
+
+\section{Confidence Intervals}
+
+Since $p(\theta)$ is a monotonic increasing function of $\theta$, if we have exact confidence intervals for $p(\theta)$, then we can transform them to exact confidence intervals for $\theta$.
+The $R$ function {\sf binom.test} gives exact intervals for binomial observations (see Clopper and Pearson, 1934 or Leemis and Trivedi, 1996). We write the $100(1-\alpha)\%$ one-sided lower confidence limit for $p$ as
+$L_p(Y ; \alpha)$ and the  $100(1-\alpha)\%$ one-sided upper confidence limit for $p$ as $U_p(Y ; \alpha)$.
+For the  $100(1-\alpha)\%$ two-sided cofidence interval, {\sf binom.test} and Clopper and Pearson (1934) use the central confidence interval defined as
+$[ L_p(Y ; \alpha/2), L_p(Y ; \alpha/2) ]$.
+The {\it central} confidence interval guarantees that
+\[
+Pr[ p < L_p(Y ; \alpha/2) | p, t] \leq \alpha/2 \mbox{ for all $p$ and $t$}
+\]
+and
+\[
+Pr[ p > U_p(Y ; \alpha/2) | p,t] \leq \alpha/2 \mbox{ for all $p$ and $t$}
+\]
+For shorter exact intervals which are not central see Blaker (2000) and the references therein.
+
+To obtain confidence intervals for $\theta$  we set
+\[
+L_p(Y;\alpha) = \frac{ n L_{\theta}(Y;\alpha) }{ n L_{\theta}(Y;\alpha) + m},
+\]
+and  perform some algebra to get
+\begin{eqnarray*}
+L_{\theta}(Y;\alpha) = \frac{m L_p(Y;\alpha) }{n \{ 1-L_p(Y;\alpha) \}  }.
+\end{eqnarray*}
+Similarly,
+\begin{eqnarray*}
+U_{\theta}(Y;\alpha) = \frac{m U_p(Y;\alpha) }{n \{ 1-U_p(Y;\alpha) \}  }.
+\end{eqnarray*}
+
+\section{P-values}
+
+Just as in the last section, we can use results from the tests of $p$ and translate them to tests of $\theta$.
+Thus, for example the one-sided p-value of the test with the alternative hypothesis that $\theta > \Delta$ 
+is equivalent to the one-sided p-value of the test that $p > p(\Delta)$. For the two-sided p-value we use the 
+minimum of 1 or twice the minimum of the two one-sided p-values. There are other ways to define the two-sided 
+p-value but they do not give equivalent
+inferences with the confidence intervals described above (see Section~\ref{sec-caution} below).
+
+
+%\begin{description}
+\section{Relationship to Other Tests} 
+\label{sec-caution}
+
+
+In the R function \texttt{binom.test} (as least up until \Sexpr{R.Version()$version.string}) the two-sided p-value is calculated by defining more extreme responses 
+as those values with binomial density functions less than or equal to the observed density. This is a valid 
+and reasonable way of defining two-sided p-values but it {\em does not match} with the two-sided confidence intervals. 
+Returning to our example from Section~\ref{sec-example} but using \texttt{binom.test} we can match the confidence intervals by using 
+equation~\ref{eq:ptheta}.
+<<echo=TRUE,eval=T>>=
+n<-17877
+m<-16674
+rateratio.test(c(2,9),c(n,m))$conf.int
+b.ci<-binom.test(2,2+9,p=n/(n+m))$conf.int
+theta.ci<-m*b.ci/(n*(1-b.ci))
+theta.ci
+@
+However, the p-values do not match for a two-sided test of  $p(1)=n/(n+m)$.
+<<echo=TRUE,eval=T>>=
+R.Version()$version.string
+rateratio.test(c(2,9),c(n,m))
+binom.test(2,2+9,p=n/(n+m))
+@
+The p-values for \texttt{rateratio.test} are internally consistent,
+ i.e., if the  two-sided p-value is less than $\alpha$ then the $100(1-\alpha/2)\%$ confidence interval does not contain $\Delta$. 
+In contrast the p-values for \texttt{binom.test} are not internally consistent as shown by the example. 
+A similar internal inconsistency happens with \texttt{fisher.test}.
+<<echo=TRUE,eval=T>>=
+fisher.test(matrix(c(2,9,n-2,m-9),2,2))
+@
+
+\section*{References}
+
+\begin{description}
+\item Blaker, H. (2000). ``Confidence curves and improved exact confidence intervals for discrete distributions''
+{\it Canadian Journal of Statistics} {\bf 28,} 783-798 (correction {\bf 29,} 681).
+\item Clopper, C.J. and Pearson, E.S> (1934). ``The use of confidence or fiducial limits illustrated in the case of the binomial''. {\it Biometrika}, {\bf 26,} 404-413.
+\item Lehmann, E.L. (1986). {\it Testing Statistical Hypotheses (second edition)} Wadsworth \& Brooks/Cole, Pacific Grove, California.
+\item Lehmann, E.L., and Romano, J.P. (2005). {\it Testing Statistical Hypotheses (third edition)}
+Springer: New York.
+\item Leemis, L.M. and Trivedi, K.S. (1996). ``A comparison of approximate interval estimators for the Bernoulli parameter''
+{\it American Statistician} {\bf 50,} 63-68.
+\end{description}
+
+\end{document}
+
+
+\subsection{Alternative=``greater''}
+
+Note that larger $\lambda_y$ with $\lambda_x$ held constant implies larger $p(\theta)$. So the UMP unbiased test rejects the null of {\bf greater}  when
+\[
+Y > F^{-1}_B \left(1-\alpha,X+Y,\frac{n \Delta}{ n \Delta +m}  \right)
+\]
+where  $F^{-1}_B(1-\alpha, t, p)$ is defined as the smallest value, $w,$  such that for $W \sim Binomial(t, p)$,
+\[
+Pr[ W \leq  w ] \geq 1-\alpha    \Leftrightarrow  Pr[ W > w ] \leq \alpha.
+\]
+Note in the computer language $R$, $F_B(x,n,p)={\sf pbinom(x,n,p)}$ and $F^{-1}_B(q,n,p) = {\sf qbinom(q,n,p)}$.
+
+\subsection{Alternative=``less''}
+
+Similarly the UMP unbiased test rejects the null of {\bf less} when $Y < q_2$, for some cutoff $q_2$ such that
+$Pr[Reject] \leq \alpha$.
+Starting from the definition of the cutoff value  we go through the following steps,
+\begin{eqnarray*}
+ & & Pr[ Y < w | \theta = \Delta, X+Y=t ] \leq \alpha \\
+ & \Rightarrow & Pr[ t - X < w | \theta = \Delta, X+Y=t ] \leq \alpha \\
+ & \Rightarrow & Pr[  X > t-w | \theta = \Delta, X+Y=t ] \leq \alpha \\
+ & \Rightarrow & 1 - Pr[  X \leq  t-w | \theta = \Delta, X+Y=t ] \leq \alpha \\
+ & \Rightarrow & Pr[  X \leq  t-w | \theta = \Delta, X+Y=t ] \geq 1- \alpha \\
+\end{eqnarray*}
+Thus, by the definition of $F^{-1}_B$ we have  $t- w = F^{-1}_B(1-\alpha, t, m/(\Delta n + m) )$
+and we reject when $Y < t - F^{-1}_B(1-\alpha, t, m/(\Delta n + m) )$ or
+equivalently when $X > F^{-1}_B (1-\alpha, t, m/(\Delta n + m) )$.
+

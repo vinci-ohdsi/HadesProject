@@ -1,0 +1,26 @@
+EnsemblePatientLevelPrediction
+                        EnsemblePatientLevelPrediction
+applyEnsemble           Apply an ensembleModel to new data
+applyEnsembleToPredictions
+                        Apply an ensembleModel to list of base model
+                        prediction objects
+createFusionCombiner    Create the settings for a fusion ensemble
+createStackerCombiner   Create the settings for a stacker ensemble -
+                        this is an emsemble that learns how to combine
+                        level 1 models using labelled data
+filterBaseModels        Filter our base level 1 models that do not
+                        perform sufficiently well
+loadEnsemble            Load a previously saved ensemble result
+loadEnsembleModel       Load a previously saved ensemble model (object
+                        of class ensembleModel)
+runEnsemble             Code to run the ensemble model development
+saveEnsemble            Save an ensemble result
+saveEnsembleModel       Save an ensemble model (object of class
+                        ensembleModel)
+setEnsembleFromDesign   Create setting for creating ensemble from model
+                        settings
+setEnsembleFromFiles    Create setting for creating ensemble from model
+                        settings
+setEnsembleFromResults
+                        Create setting for creating ensemble from model
+                        settings

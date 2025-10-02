@@ -1,0 +1,25 @@
+computePerformanceMetricsFromCounts
+                        Compute performance metrics based on a 2-by-2
+                        counts table
+createCreateEvaluationCohortArgs
+                        Create a parameter object for the function
+                        createEvaluationCohort
+createDefaultCovariateSettings
+                        Create the default covariate settings
+createEvaluationCohort
+                        Create the evaluation cohort
+createPheValuatorAnalysis
+                        Create a PheValuator analysis specification
+createTestPhenotypeAlgorithmArgs
+                        Create a parameter object for the function
+                        testPhenotypeAlgorithm
+loadPheValuatorAnalysisList
+                        Load a list of phevaluatorAnalysis from file
+runPheValuatorAnalyses
+                        Run a list of analyses
+savePheValuatorAnalysisList
+                        Save a list of phevaluatorAnalysis to file
+summarizePheValuatorAnalyses
+                        Summarize results of PheValuator analyses
+testPhenotypeAlgorithm
+                        Test phenotype algorithms

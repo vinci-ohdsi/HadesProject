@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: Cohort Generation for the OMOP Common Data Model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+<h1> Cohort Generation for the OMOP Common Data Model
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;CohortGenerator&rsquo; version 0.11.2</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="addCohortSubsetDefinition.html">addCohortSubsetDefinition</a></td>
+<td>Add cohort subset definition to a cohort definition set</td></tr>
+<tr><td style="width: 25%;"><a href="checkAndFixCohortDefinitionSetDataTypes.html">checkAndFixCohortDefinitionSetDataTypes</a></td>
+<td>Check if a cohort definition set is using the proper data types</td></tr>
+<tr><td style="width: 25%;"><a href="CohortSubsetDefinition.html">CohortSubsetDefinition</a></td>
+<td>Cohort Subset Definition</td></tr>
+<tr><td style="width: 25%;"><a href="CohortSubsetOperator.html">CohortSubsetOperator</a></td>
+<td>Cohort Subset Operator</td></tr>
+<tr><td style="width: 25%;"><a href="computeChecksum.html">computeChecksum</a></td>
+<td>Computes the checksum for a value</td></tr>
+<tr><td style="width: 25%;"><a href="createCohortSubset.html">createCohortSubset</a></td>
+<td>A definition of subset functions to be applied to a set of cohorts</td></tr>
+<tr><td style="width: 25%;"><a href="createCohortSubsetDefinition.html">createCohortSubsetDefinition</a></td>
+<td>Create Subset Definition</td></tr>
+<tr><td style="width: 25%;"><a href="createCohortTables.html">createCohortTables</a></td>
+<td>Create cohort tables</td></tr>
+<tr><td style="width: 25%;"><a href="createDemographicSubset.html">createDemographicSubset</a></td>
+<td>Create createDemographicSubset Subset</td></tr>
+<tr><td style="width: 25%;"><a href="createEmptyCohortDefinitionSet.html">createEmptyCohortDefinitionSet</a></td>
+<td>Create an empty cohort definition set</td></tr>
+<tr><td style="width: 25%;"><a href="createEmptyNegativeControlOutcomeCohortSet.html">createEmptyNegativeControlOutcomeCohortSet</a></td>
+<td>Create an empty negative control outcome cohort set</td></tr>
+<tr><td style="width: 25%;"><a href="createLimitSubset.html">createLimitSubset</a></td>
+<td>Create Limit Subset</td></tr>
+<tr><td style="width: 25%;"><a href="createResultsDataModel.html">createResultsDataModel</a></td>
+<td>Create the results data model tables on a database server.</td></tr>
+<tr><td style="width: 25%;"><a href="createSubsetCohortWindow.html">createSubsetCohortWindow</a></td>
+<td>A definition of subset functions to be applied to a set of cohorts</td></tr>
+<tr><td style="width: 25%;"><a href="DemographicSubsetOperator.html">DemographicSubsetOperator</a></td>
+<td>Demographic Subset Operator</td></tr>
+<tr><td style="width: 25%;"><a href="dropCohortStatsTables.html">dropCohortStatsTables</a></td>
+<td>Drop cohort statistics tables</td></tr>
+<tr><td style="width: 25%;"><a href="exportCohortStatsTables.html">exportCohortStatsTables</a></td>
+<td>Export the cohort statistics tables to the file system</td></tr>
+<tr><td style="width: 25%;"><a href="generateCohortSet.html">generateCohortSet</a></td>
+<td>Generate a set of cohorts</td></tr>
+<tr><td style="width: 25%;"><a href="generateNegativeControlOutcomeCohorts.html">generateNegativeControlOutcomeCohorts</a></td>
+<td>Generate a set of negative control outcome cohorts</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortCounts.html">getCohortCounts</a></td>
+<td>Count the cohort(s)</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortDefinitionSet.html">getCohortDefinitionSet</a></td>
+<td>Get a cohort definition set</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortInclusionRules.html">getCohortInclusionRules</a></td>
+<td>Get Cohort Inclusion Rules from a cohort definition set</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortStats.html">getCohortStats</a></td>
+<td>Get Cohort Inclusion Stats Table Data</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortTableNames.html">getCohortTableNames</a></td>
+<td>Used to get a list of cohort table names to use when creating the cohort tables</td></tr>
+<tr><td style="width: 25%;"><a href="getDataMigrator.html">getDataMigrator</a></td>
+<td>Get database migrations instance</td></tr>
+<tr><td style="width: 25%;"><a href="getRequiredTasks.html">getRequiredTasks</a></td>
+<td>Get a list of tasks required when running in incremental mode</td></tr>
+<tr><td style="width: 25%;"><a href="getResultsDataModelSpecifications.html">getResultsDataModelSpecifications</a></td>
+<td>Get specifications for CohortGenerator results data model</td></tr>
+<tr><td style="width: 25%;"><a href="getSubsetDefinitions.html">getSubsetDefinitions</a></td>
+<td>Get cohort subset definitions from a cohort definition set</td></tr>
+<tr><td style="width: 25%;"><a href="insertInclusionRuleNames.html">insertInclusionRuleNames</a></td>
+<td>Used to insert the inclusion rule names from a cohort definition set when generating cohorts that include cohort statistics</td></tr>
+<tr><td style="width: 25%;"><a href="isCamelCase.html">isCamelCase</a></td>
+<td>Used to check if a string is in lower camel case</td></tr>
+<tr><td style="width: 25%;"><a href="isCohortDefinitionSet.html">isCohortDefinitionSet</a></td>
+<td>Is the data.frame a cohort definition set?</td></tr>
+<tr><td style="width: 25%;"><a href="isFormattedForDatabaseUpload.html">isFormattedForDatabaseUpload</a></td>
+<td>Is the data.frame formatted for uploading to a database?</td></tr>
+<tr><td style="width: 25%;"><a href="isSnakeCase.html">isSnakeCase</a></td>
+<td>Used to check if a string is in snake case</td></tr>
+<tr><td style="width: 25%;"><a href="isTaskRequired.html">isTaskRequired</a></td>
+<td>Is a task required when running in incremental mode</td></tr>
+<tr><td style="width: 25%;"><a href="LimitSubsetOperator.html">LimitSubsetOperator</a></td>
+<td>Limit Subset Operator</td></tr>
+<tr><td style="width: 25%;"><a href="migrateDataModel.html">migrateDataModel</a></td>
+<td>Migrate Data model</td></tr>
+<tr><td style="width: 25%;"><a href="readCsv.html">readCsv</a></td>
+<td>Used to read a .csv file</td></tr>
+<tr><td style="width: 25%;"><a href="recordTasksDone.html">recordTasksDone</a></td>
+<td>Record a task as complete</td></tr>
+<tr><td style="width: 25%;"><a href="runCohortGeneration.html">runCohortGeneration</a></td>
+<td>Run a cohort generation and export results</td></tr>
+<tr><td style="width: 25%;"><a href="sampleCohortDefinitionSet.html">sampleCohortDefinitionSet</a></td>
+<td>Sample Cohort Definition Set</td></tr>
+<tr><td style="width: 25%;"><a href="saveCohortDefinitionSet.html">saveCohortDefinitionSet</a></td>
+<td>Save the cohort definition set to the file system</td></tr>
+<tr><td style="width: 25%;"><a href="saveCohortSubsetDefinition.html">saveCohortSubsetDefinition</a></td>
+<td>Save cohort subset definitions to json</td></tr>
+<tr><td style="width: 25%;"><a href="saveIncremental.html">saveIncremental</a></td>
+<td>Used in incremental mode to save values to a file</td></tr>
+<tr><td style="width: 25%;"><a href="SubsetCohortWindow.html">SubsetCohortWindow</a></td>
+<td>Time Window For Cohort Subset Operator</td></tr>
+<tr><td style="width: 25%;"><a href="SubsetOperator.html">SubsetOperator</a></td>
+<td>Abstract base class for subsets.</td></tr>
+<tr><td style="width: 25%;"><a href="uploadResults.html">uploadResults</a></td>
+<td>Upload results to the database server.</td></tr>
+<tr><td style="width: 25%;"><a href="writeCsv.html">writeCsv</a></td>
+<td>Used to write a .csv file</td></tr>
+</table>
+</div></body></html>

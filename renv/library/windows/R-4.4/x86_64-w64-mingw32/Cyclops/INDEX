@@ -1,0 +1,75 @@
+Multitype               Create a multitype outcome object
+cacheCyclopsModelForJava
+                        Place Cyclops model fit object in a persistent
+                        cache
+clearCyclopsModelCache
+                        Clear the Cyclops persistent cache
+coef.cyclopsFit         Extract model coefficients
+confint.cyclopsFit      Confidence intervals for Cyclops model
+                        parameters
+convertToCyclopsData    Convert data from two data frames or ffdf
+                        objects into a CyclopsData object
+convertToTimeVaryingCoef
+                        Convert short sparse covariate table to long
+                        sparse covariate table for time-varying
+                        coefficients.
+coverage                Coverage
+createAutoGridCrossValidationControl
+                        Create a Cyclops control object that supports
+                        multiple hyperparameters
+createControl           Create a Cyclops control object
+createCyclopsData       Create a Cyclops data object
+createNonSeparablePrior
+                        Create a Cyclops prior object that returns the
+                        MLE of non-separable coefficients
+createParameterizedPrior
+                        Create a Cyclops parameterized prior object
+createPrior             Create a Cyclops prior object
+createWeightBasedSearchControl
+                        Create a Cyclops control object that supports
+                        in- / out-of-sample hyperparameter search using
+                        weights
+cyclops                 Cyclops: Cyclic coordinate descent for
+                        logistic, Poisson and survival analysis
+cyclopsLibraryFileName
+                        Get full path to installed Cyclops library
+fitCyclopsModel         Fit a Cyclops model
+fitCyclopsSimulation    Fit simulated data
+getCovariateIds         Get covariate identifiers
+getCovariateTypes       Get covariate types
+getCyclopsProfileLogLikelihood
+                        Profile likelihood for Cyclops model parameters
+getFineGrayWeights      Creates a 'Surv' object that forces in
+                        competing risks and the IPCW needed for
+                        Fine-Gray estimation.
+getFloatingPointSize    Get floating point size
+getHyperParameter       Get hyperparameter
+getNumberOfCovariates   Get total number of covariates
+getNumberOfRows         Get total number of rows
+getNumberOfStrata       Get number of strata
+getUnivariableCorrelation
+                        Get univariable correlation
+getUnivariableSeparability
+                        Get univariable linear separability
+gradient                Extract gradient
+isInitialized           Check if a Cyclops data object is initialized
+listGPUDevices          List available GPU devices
+logLik.cyclopsFit       Extract log-likelihood
+meanLinearPredictor     Calculates xbar*beta
+mse                     Mean squared error
+oxford                  Oxford self-controlled case series data
+predict.cyclopsFit      Model predictions
+print.cyclopsData       Print a Cyclops data object
+print.cyclopsFit        Print a Cyclops model fit object
+readCyclopsData         Read Cyclops data from file
+residuals.cyclopsFit    Model residuals
+runBootstrap            Run bootstrap for Cyclops model parameters
+setOpenCLDevice         Set GPU device
+simulateCyclopsData     Simulation Cyclops dataset
+splitTime               Split the analysis time into several intervals
+                        for time-varying coefficients.
+summary.cyclopsData     Cyclops data object summary
+survfit.cyclopsFit      Calculate baseline hazard function
+testProportionality     Test hazard ratio proportionality assumption
+vcov.cyclopsFit         Calculate variance-covariance matrix for a
+                        fitted Cyclops model object

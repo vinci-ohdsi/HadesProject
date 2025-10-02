@@ -1,0 +1,2 @@
+createFastIhtPrior      Create a fastIHT Cyclops prior object
+createIhtPrior          Create an IHT Cyclops prior object

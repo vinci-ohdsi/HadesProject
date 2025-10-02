@@ -1,0 +1,30 @@
+CohortDefinition        R6 Class Representing a CohortDefinition
+CohortReference         R6 Class Representing a CohortReference
+CohortSubgroup          R6 Class Representing a Cohort Subgroup
+                        definition
+DateRange               R6 Class Representing a DataRange
+IncidenceAnalysis       R6 Class Representing a IncidenceAnalysis
+IncidenceDesign         R6 Class Representing a IncidenceDesign
+Outcome                 R6 Class Representing an Outcome definition
+StrataSettings          R6 Class Representing the Stratification
+                        Settings of a IncidenceDesign
+TimeAtRisk              R6 Class Representing an Time-at-Risk (TAR)
+                        definition
+buildOptions            Builds the BuilderOptions jObject with the
+                        specified paramaters
+buildQuery              Builds SQL code to run analyses according given
+                        Cohort Characterization design
+createCohortRef         Creates R6 object for CohortReference
+createCohortSubgroup    Creates R6 object for CohortSubgroup
+createDateRange         Creates R6 object for DateRange
+createIncidenceAnalysis
+                        Creates R6 object for IncidenceAnalysis
+createIncidenceDesign   Creates R6 object for IncidenceDesign
+createOutcomeDef        Creates R6 object for Outcome
+createStrataSettings    Creates R6 object for StrataSettings
+createTimeAtRiskDef     Creates R6 object for TimeAtRisk
+executeAnalysis         Executes IR analysis given a design, options,
+                        and connection settings.
+getCleanupSql           Gets the sql that drops the results tables
+getResultsDdl           Gets the results schema DDL for Incidence
+                        Analysis

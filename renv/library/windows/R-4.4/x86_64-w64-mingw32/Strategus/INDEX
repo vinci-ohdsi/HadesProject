@@ -1,0 +1,82 @@
+CharacterizationModule
+                        Characterize cohorts with the HADES
+                        Characterization Package
+CohortDiagnosticsModule
+                        Evaluate phenotypes with the HADES
+                        CohortDiagnostics Package
+CohortGeneratorModule   Generate cohorts with the HADES CohortGenerator
+                        Package
+CohortIncidenceModule   Compute incidence with the HADES
+                        CohortIncidence Package
+CohortMethodModule      New-user cohort studies with the HADES
+                        CohortMethod Package
+EvidenceSynthesisModule
+                        Meta-analysis with the HADES EvidenceSynthesis
+                        Package
+PatientLevelPredictionModule
+                        Patient-level prediction with the HADES
+                        PatientLevelPrediction Package
+PatientLevelPredictionValidationModule
+                        Validation of patient-level prediction models
+                        with the HADES PatientLevelPrediction Package
+SelfControlledCaseSeriesModule
+                        Self-Controlled Case Series design with the
+                        HADES SelfControlledCaseSeries Package
+StrategusModule         StrategusModule defines the base class for each
+                        HADES module
+TreatmentPatternsModule
+                        Evaluate phenotypes with the DARWIN
+                        TreatmentPatterns Package
+addCharacterizationModuleSpecifications
+                        Add Characterization module specifications to
+                        analysis specifications
+addCohortDiagnosticsModuleSpecifications
+                        Add Cohort Diagnostics module specifications to
+                        analysis specifications
+addCohortGeneratorModuleSpecifications
+                        Add Cohort Generator module specifications to
+                        analysis specifications
+addCohortIncidenceModuleSpecifications
+                        Add Cohort Incidence module specifications to
+                        analysis specifications
+addCohortMethodeModuleSpecifications
+                        Add Cohort Method module specifications to
+                        analysis specifications
+addEvidenceSynthesisModuleSpecifications
+                        Add Evidence Synthesis module specifications to
+                        analysis specifications
+addModuleSpecifications
+                        Add generic module specifications to analysis
+                        specifications
+addPatientLevelPredictionModuleSpecifications
+                        Add Patient Level Prediction module
+                        specifications to analysis specifications
+addPatientLevelPredictionValidationModuleSpecifications
+                        Add Patient Level Prediction Validation Module
+                        module specifications to analysis
+                        specifications
+addSelfControlledCaseSeriesModuleSpecifications
+                        Add Self Controlled Case Series Module module
+                        specifications to analysis specifications
+addSharedResources      Add shared resources (i.e. cohorts) to analysis
+                        specifications
+addTreatmentPatternsModuleSpecifications
+                        Add Treatment Patterns Module specifications to
+                        analysis specifications
+createCdmExecutionSettings
+                        Create CDM execution settings
+createEmptyAnalysisSpecifications
+                        Create an empty analysis specifications object.
+createEmptyAnalysisSpecificiations
+                        DEPRECATED DUE TO MISSPELLING
+createResultDataModel   Create Result Data Model
+createResultsDataModelSettings
+                        Create Results Data Model Settings
+createResultsExecutionSettings
+                        Create Results execution settings
+execute                 Execute analysis specifications.
+getCdmDatabaseMetaData
+                        Gets the metadata for your OMOP CDM Database
+uploadResults           Upload results
+zipResults              Create a zip file with all study results for
+                        sharing with study coordinator

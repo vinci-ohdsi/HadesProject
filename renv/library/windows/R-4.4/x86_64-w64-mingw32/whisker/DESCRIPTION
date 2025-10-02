@@ -1,0 +1,25 @@
+Package: whisker
+Maintainer: Edwin de Jonge <edwindjonge@gmail.com>
+License: GPL-3
+Title: {{mustache}} for R, Logicless Templating
+Type: Package
+LazyLoad: yes
+Author: Edwin de Jonge
+Description: Implements 'Mustache' logicless templating.
+Version: 0.4.1
+URL: https://github.com/edwindj/whisker
+Suggests: markdown
+RoxygenNote: 6.1.1
+NeedsCompilation: no
+Packaged: 2022-12-05 15:15:55 UTC; hornik
+Repository: RSPM
+Date/Publication: 2022-12-05 15:33:50 UTC
+Encoding: UTF-8
+Built: R 4.4.0; ; 2024-04-25 19:53:17 UTC; windows
+RemoteType: standard
+RemotePkgRef: whisker
+RemoteRef: whisker
+RemoteRepos: https://packagemanager.posit.co/cran/latest
+RemoteReposName: CRAN
+RemotePkgPlatform: x86_64-w64-mingw32
+RemoteSha: 0.4.1

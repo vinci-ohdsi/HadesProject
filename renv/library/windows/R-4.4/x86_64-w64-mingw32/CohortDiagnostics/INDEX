@@ -1,0 +1,30 @@
+checkInputFileEncoding
+                        Check character encoding of input file
+createDiagnosticsExplorerZip
+                        Create publishable shiny zip
+createMergedResultsFile
+                        Merge Shiny diagnostics files into sqlite
+                        database
+createResultsDataModel
+                        Create the results data model tables on a
+                        database server.
+deployPositConnectApp   Rsconnect deploy
+executeDiagnostics      Execute cohort diagnostics
+getCdmDataSourceInformation
+                        Returns information from CDM source table.
+getCohortCounts         Count the cohort(s)
+getDataMigrator         Get database migrations instance
+getDefaultCovariateSettings
+                        Get default covariate settings
+getDefaultVocabularyTableNames
+                        Get a list of vocabulary table names
+getResultsDataModelSpecifications
+                        Get specifications for Cohort Diagnostics
+                        results data model
+launchDiagnosticsExplorer
+                        Launch the Diagnostics Explorer Shiny app
+migrateDataModel        Migrate Data model
+runCohortTimeSeriesDiagnostics
+                        Given a set of instantiated cohorts get time
+                        series for the cohorts.
+uploadResults           Upload results to the database server.
