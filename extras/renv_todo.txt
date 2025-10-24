@@ -1,0 +1,14 @@
+* Used in `SemaglutideNvamd`:
+
+    "Characterization": {
+      "Package": "Characterization",
+      "Version": "2.1.3",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "vinci-ohdsi",
+      "RemoteRepo": "Characterization",
+      "RemoteRef": "develop",
+      "RemoteSha": "487a513c7c1b340c09c7106291e7c17912e2b128"
+    },
+    

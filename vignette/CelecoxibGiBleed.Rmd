@@ -1,0 +1,695 @@
+---
+title: "CohortMethod Multiple Analysis Tutorial for VA Researchers"
+author: "VA OHDSI team"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+  pdf_document:
+    number_sections: yes
+    toc: yes
+---
+
+# Project notes
+  
+# Setup 
+
+## Load R libraries 
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+rm(list = ls())
+library(CohortMethod)
+library(knitr)
+library(CohortGenerator)
+library(Capr)
+library(EmpiricalCalibration)
+library(dplyr) 
+library(ggplot2)
+library(PhenotypeLibrary)
+library(purrr)
+
+```
+
+```{r}
+
+folder <- "./output"
+
+if (!dir.exists(folder)){
+  dir.create(folder)
+}
+
+```
+
+## Database details 
+
+Fill in the three empty quotes below 
+
+```{r}
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "sql server",
+  server = "")
+
+# Add the database containing the OMOP CDM data
+cdmDatabaseSchema <- ""
+
+# Add a database with read/write access as this is where the cohorts will be generated
+cohortDatabaseSchema <- ""
+cohortTable <- "celecoxibGiBleed"
+options(sqlRenderTempEmulationSchema = NULL)
+
+# Andromeda is an OHDSI package to handle larger-than-memory data 
+options(andromedaTempFolder = tempdir()) 
+
+```
+
+# Cohorts (Capr)
+
+We need to define the exposures and outcomes for our study. Here, we will define our exposures using the OHDSI `Capr` package. We define two cohorts, one for celecoxib and one for diclofenac. For each cohort we require a prior diagnosis of 'osteoarthritis of knee', and 365 days of continuous prior observation. we restrict to the first exposure per person:
+
+## Definitions
+
+### Attrition 
+
+Participants must have prior diagnoses of osteoarthritis of knee
+
+```{r}
+
+osteoArthritisOfKneeConceptId <- 4079750
+
+osteoArthritisOfKnee <- cs(
+  descendants(osteoArthritisOfKneeConceptId),
+  name = "Osteoarthritis of knee")
+
+attrition <-  attrition(
+  "prior osteoarthritis of knee" = withAll(
+    atLeast(1, 
+            conditionOccurrence(osteoArthritisOfKnee), 
+            duringInterval(eventStarts(-Inf, 0)))))
+
+```
+
+
+### Target
+
+New users of celecoxib
+
+Notes:
+- an OHDSI cohort is zero or more people who meet a criteria for a period of time 
+- return value of cs() is a tibble with concept id and columns representing other arguments you specify 
+- cohort() takes arguments for:
+  - entry: patient's first occurrence of the celecoxib concept set after they've been in the db for 1 year 
+  - attrition: must have had dx for osteoarthritis any time prior to entry
+  - exit: patient exits the cohort after not being exposed to celecoxib for 30 days 
+  - era: defines the start and end date of registration 
+  
+```{r}
+
+celecoxibConceptId <- 1118084
+
+celecoxib <- cs(
+  descendants(celecoxibConceptId),
+  name = "Celecoxib")
+
+celecoxibCohort <- cohort(
+  entry = entry(
+    drugExposure(celecoxib, firstOccurrence()),
+    observationWindow = continuousObservation(priorDays = 365)),
+  attrition = attrition,
+  exit = exit(endStrategy = drugExit(celecoxib,
+                                     persistenceWindow = 30,
+                                     surveillanceWindow = 0)))
+
+```
+
+### Comparator
+
+New users of diclofenac 
+
+```{r}
+
+diclofenacConceptId <- 1124300
+
+diclofenac  <- cs(
+  descendants(diclofenacConceptId),
+  name = "Diclofenac")
+
+diclofenacCohort <- cohort(
+  entry = entry(
+    drugExposure(diclofenac, firstOccurrence()),
+    observationWindow = continuousObservation(priorDays = 365)),
+  attrition = attrition,
+  exit = exit(endStrategy = drugExit(diclofenac,
+                                     persistenceWindow = 30,
+                                     surveillanceWindow = 0)))
+
+```
+
+Make the exposure cohorts and clean up global environment 
+
+```{r}
+
+exposureCohorts <- makeCohortSet(celecoxibCohort, diclofenacCohort)
+
+rm(list=c('diclofenacCohort', 'celecoxibCohort', 'diclofenac', 'celecoxib', 
+         'attrition', 'osteoArthritisOfKnee', 'osteoArthritisOfKneeConceptId',
+         'celecoxibConceptId', 'diclofenacConceptId'))
+
+```
+
+### Outcome of interest 
+
+GI bleed with inpatient admission from OHDSI phenotype library 
+
+```{r}
+
+outcomeCohorts <- getPlCohortDefinitionSet(77)
+
+```
+
+### Negative controls 
+
+Negative controls should have a theoretical hazard ratio of 1 
+
+```{r }
+
+negativeControlIds <- c(29735, 140673, 197494,
+                        198185, 198199, 200528, 257315,
+                         314658, 317376, 321319, 380731,
+                         432661, 432867, 433516, 433701,
+                         433753, 435140, 435459, 435524,
+                         435783, 436665, 436676, 442619,
+                         444252, 444429, 4131756, 4134120,
+                         4134454, 4152280, 4165112, 4174262,
+                         4182210, 4270490, 4286201, 4289933)
+
+negativeControlCohorts <- tibble(
+  cohortId = negativeControlIds,
+  cohortName = sprintf("Negative control %d", negativeControlIds),
+  outcomeConceptId = negativeControlIds)
+
+```
+
+Descriptions of the negative controls 
+
+```{r}
+
+dbGetQuery(DatabaseConnector::connect(connectionDetails),
+                             paste0("select distinct concept_id, 
+                              concept_name
+                              from cdw_omop.omopv5.concept
+                             where vocabulary_id = 'SNOMED' and
+                             concept_id in (", 
+                                    paste0(negativeControlIds, 
+                                           collapse=", "), 
+                                    ")"))
+
+```
+
+## Generate and write to database (CohortGenerator)
+
+Cohorts defined above will be generated and saved in the SQL database 
+
+
+```{r }
+
+allCohorts <- dplyr::bind_rows(outcomeCohorts,
+                        exposureCohorts)
+
+rm(list=c('outcomeCohorts', 'exposureCohorts')) 
+
+cohortTableNames <- getCohortTableNames(cohortTable = cohortTable)
+
+createCohortTables(connectionDetails = connectionDetails,
+                   cohortDatabaseSchema = cohortDatabaseSchema,
+                   cohortTableNames = cohortTableNames)
+
+generateCohortSet(connectionDetails = connectionDetails,
+                  cdmDatabaseSchema = cdmDatabaseSchema,
+                  cohortDatabaseSchema = cohortDatabaseSchema,
+                  cohortTableNames = cohortTableNames,
+                  cohortDefinitionSet = allCohorts)
+
+generateNegativeControlOutcomeCohorts(
+  connectionDetails = connectionDetails,
+  cdmDatabaseSchema = cdmDatabaseSchema,
+  cohortDatabaseSchema = cohortDatabaseSchema,
+  cohortTable = cohortTable,
+  negativeControlOutcomeCohortSet = negativeControlCohorts)
+
+rm(list = c('cohortTableNames', 'allCohorts'))
+
+```
+
+What do the cohort tables look like? 
+
+```{r}
+
+with(list(tbls = DatabaseConnector::dbListTables(DatabaseConnector::connect(connectionDetails),
+                                       databaseSchema = cohortDatabaseSchema)),
+     lapply(tbls,
+            \(x) tbl(DatabaseConnector::connect(connectionDetails), 
+                     paste0(cohortDatabaseSchema, ".", x)))) 
+          
+```
+
+
+If all went well, we now have a table with the cohorts of interest. We can see how many entries per cohort:
+
+TODO - add description of the cohort definition id 
+
+```{r }
+
+connection <- DatabaseConnector::connect(connectionDetails)
+sql <- "SELECT cohort_definition_id, COUNT(*) AS count FROM @cohortDatabaseSchema.@cohortTable GROUP BY cohort_definition_id"
+DatabaseConnector::renderTranslateQuerySql(
+  connection = connection, 
+  sql = sql,  
+  cohortDatabaseSchema = cohortDatabaseSchema, 
+  cohortTable = cohortTable) %>%
+  arrange(COHORT_DEFINITION_ID) 
+
+DatabaseConnector::disconnect(connection)
+
+rm(list = c('connection', 'sql'))
+```
+
+# Analyses (CohortMethod)
+
+- return value of createOutcome is a list with outcomeId, FALSE for outcome of interest 
+
+- tcos is a list of the target & comparator ids (1 and 2), then list of outcome ids (77 for outcome of interest)
+
+```{r}
+
+outcomeOfInterest <- createOutcome(outcomeId = 77,
+                                   outcomeOfInterest = TRUE)
+
+negativeControlOutcomes <- lapply(
+  negativeControlIds,
+  function(outcomeId) createOutcome(outcomeId = outcomeId,
+                                    outcomeOfInterest = FALSE,
+                                    trueEffectSize = 1))
+
+tcos <- createTargetComparatorOutcomes(
+  targetId = 1,
+  comparatorId = 2,
+  outcomes = append(list(outcomeOfInterest),
+                    negativeControlOutcomes))
+
+targetComparatorOutcomesList <- list(tcos)
+
+rm(list=c('negativeControlOutcomes', 'tcos'))
+
+```
+
+## Definitions
+
+### Cohorts
+
+- covarSettings is a list of what we want on the right hand side of the propensity score regression 
+
+- default pulls over 100k covariates which will be reduced in regularized propensity score regression
+
+```{r}
+
+covarSettings <- createDefaultCovariateSettings(
+  excludedCovariateConceptIds = c(1118084, 1124300),
+  addDescendantsToExclude = TRUE)
+
+covarSettings
+
+```
+
+```{r}
+
+getDbCmDataArgs <- createGetDbCohortMethodDataArgs(
+  studyStartDate = "",
+  studyEndDate = "",
+  washoutPeriod = 183,
+  restrictToCommonPeriod = FALSE,
+  firstExposureOnly = TRUE,
+  removeDuplicateSubjects = "remove all",
+  covariateSettings = covarSettings)
+
+getDbCmDataArgs
+
+```
+
+```{r}
+
+createStudyPopArgs <- createCreateStudyPopulationArgs(
+  removeSubjectsWithPriorOutcome = TRUE,
+  minDaysAtRisk = 1,
+  riskWindowStart = 0,
+  startAnchor = "cohort start",
+  riskWindowEnd = 30,
+  endAnchor = "cohort end")
+
+createStudyPopArgs
+
+```
+
+### Propensity score
+
+For large study populations, best to use cvRepetitions = 1 
+
+```{r eval=TRUE}
+
+createPsArgs <- createCreatePsArgs(
+  excludeCovariateIds = c(),
+  includeCovariateIds = c(),
+  maxCohortSizeForFitting = 0,
+  errorOnHighCorrelation = TRUE,
+  stopOnError = TRUE,
+  prior = createPrior("laplace", exclude = c(0), useCrossValidation = FALSE),
+  control = createControl(noiseLevel = "silent", cvType = "auto", seed = 1,
+    resetCoefficients = TRUE, tolerance = 2e-07, cvRepetitions = 1, startingVariance =
+    0.01),
+  estimator = "ate"
+) 
+
+computeSharedCovBalArgs <- createComputeCovariateBalanceArgs()
+
+computeCovBalArgs <- createComputeCovariateBalanceArgs(
+  covariateFilter = getDefaultCmTable1Specifications()
+)
+
+```
+
+## Analysis 1: simple outcome model 
+
+```{r eval=TRUE}
+
+cmAnalyses <- list() 
+
+cmAnalyses$cmAnalysis1 <- createCmAnalysis(
+  analysisId = 1,
+  description = "No matching, simple outcome model",
+  getDbCohortMethodDataArgs = getDbCmDataArgs,
+  createStudyPopArgs = createStudyPopArgs,
+  fitOutcomeModelArgs = createFitOutcomeModelArgs(modelType = "cox"))
+
+```
+
+## Analysis 2: Matching
+
+```{r eval=TRUE}
+
+cmAnalyses$cmAnalysis3 <- createCmAnalysis(
+  analysisId = 3,
+  description = "Matching",
+  getDbCohortMethodDataArgs = getDbCmDataArgs,
+  createStudyPopArgs = createStudyPopArgs,
+  createPsArgs = createPsArgs,
+  matchOnPsArgs = createMatchOnPsArgs(maxRatio = 100),
+  computeSharedCovariateBalanceArgs = computeSharedCovBalArgs,
+  computeCovariateBalanceArgs = createComputeCovariateBalanceArgs(
+    covariateFilter = getDefaultCmTable1Specifications()),
+  fitOutcomeModelArgs = createFitOutcomeModelArgs(
+    modelType = "cox",
+    stratified = TRUE))
+
+```
+
+## Analysis 3: Stratification 
+
+```{r eval=FALSE}
+
+cmAnalyses$cmAnalysis4 <- createCmAnalysis(
+  analysisId = 4,
+  description = "Stratification",
+  getDbCohortMethodDataArgs = getDbCmDataArgs,
+  createStudyPopArgs = createStudyPopArgs,
+  createPsArgs = createPsArgs,
+  stratifyByPsArgs = createStratifyByPsArgs(numberOfStrata = 5),
+  computeSharedCovariateBalanceArgs = computeSharedCovBalArgs,
+  computeCovariateBalanceArgs = createComputeCovariateBalanceArgs(
+    covariateFilter = getDefaultCmTable1Specifications()),
+  fitOutcomeModelArgs = createFitOutcomeModelArgs(
+    modelType = "cox",
+    stratified = TRUE))
+
+```
+
+
+```{r}
+
+result <- with(list(multiThreadingSettings = createDefaultMultiThreadingSettings(parallel::detectCores())),
+               runCmAnalyses(connectionDetails = connectionDetails,
+                             cdmDatabaseSchema = cdmDatabaseSchema,
+                             exposureDatabaseSchema = cohortDatabaseSchema,
+                             exposureTable = cohortTable,
+                             outcomeDatabaseSchema = cohortDatabaseSchema,
+                             outcomeTable = cohortTable,
+                             outputFolder = folder,
+                             cmAnalysisList = cmAnalyses,
+                             targetComparatorOutcomesList = targetComparatorOutcomesList,
+                             multiThreadingSettings = multiThreadingSettings)) 
+
+```
+
+/db/ is a reference to the sqlite database in the /andromedaTemp/ directory 
+
+```{r}
+
+db <- CohortMethod::loadCohortMethodData(paste0(folder, "/CmData_l1_t1_c2.zip")) 
+
+db$cohorts
+
+db$analysisRef
+
+db$outcomes
+
+```
+
+/StudyPop/ is a dataframe with one row per participant with start date, treatment and outcome information
+
+```{r}
+
+head(readRDS("output/StudyPop_l1_s1_t1_c2_o77.rds"))
+
+```
+
+# Propensity score results
+
+- /propensityScore/ is the probability of receiving the target treatment
+- /iptw/ is the reciprocal of the probability of receiving the treatment that was received 
+
+```{r }
+
+psFile <- result %>%
+  filter(targetId == 1,
+         comparatorId == 2,
+         outcomeId == 77,
+         analysisId == 3) %>%
+  pull(psFile)
+
+ps <- readRDS(file.path(folder, psFile))
+
+head(ps) %>%
+  select(personSeqId, treatment, outcomeCount, 
+         propensityScore, preferenceScore, iptw)
+
+
+```
+
+## Preference score
+
+```{r}
+
+plotPs(ps, 
+       scale = "preference", 
+       showCountsLabel = TRUE, 
+       showAucLabel = TRUE, 
+       showEquiposeLabel = TRUE)
+
+```
+
+## AUROC
+
+```{r }
+
+computePsAuc(ps)
+
+```
+
+## PS model covariates and coefficients 
+
+```{r eval=FALSE}
+
+getPsModel(ps, db) %>%
+  arrange(desc(abs(coefficient))) %>%
+  mutate(rank = row_number()) %>% 
+  select(rank, covariateId, covariateName, coefficient) %>% kable()
+
+```
+
+## Balance
+
+```{r}
+
+balance <- computeCovariateBalance(ps, db)
+
+```
+
+```{r eval=FALSE}
+
+plotCovariateBalanceScatterPlot(balance, showCovariateCountLabel = TRUE, showMaxLabel = TRUE)
+
+```
+
+```{r, fig.height = 6}
+
+plotCovariateBalanceOfTopVariables(balance)
+
+```
+
+## Table 1: Selected PS covariates before and after weighting 
+
+```{r }
+
+createCmTable1(balance) %>% kable()
+
+```
+
+This tells us, per target-comparator-outcome-analysis combination, the estimated relative risk and 95% confidence interval, as well as the number of people in the treated and comparator group (after trimming and matching if applicable), and the number of outcomes observed for those groups within the specified risk windows.
+
+```{r }
+
+table <- getGeneralizabilityTable(balance)
+truncRight <- function(x, n){
+  nc <- nchar(x)
+  x[nc > (n - 3)] <- paste('...',substr(x[nc > (n - 3)], nc[nc > (n - 3)] - n + 1, nc[nc > (n - 3)]),sep = "")
+  x
+}
+table$covariateName <- truncRight(table$covariateName, 30)
+table
+
+```
+
+## Minimum detectable risk ratio 
+
+```{r}
+
+computeMdrr(
+  population = ps,
+  modelType = "cox",
+  alpha = 0.05,
+  power = 0.8,
+  twoSided = TRUE)
+
+```
+
+## Follow up distribution 
+```{r}
+
+getFollowUpDistribution(population = ps)
+
+```
+
+```{r eval=TRUE}
+
+plotFollowUpDistribution(population = ps)
+
+```
+
+# Outcome models
+
+## Coefficients and confidence intervals 
+```{r }
+
+resultsSum <- getResultsSummary(folder)
+
+resultsSum
+
+```
+
+
+## Kaplan-Meier plot
+
+We can create the Kaplan-Meier plot:
+
+```{r}
+
+plotKaplanMeier(ps, includeZero = FALSE)
+
+```
+
+## Time-to-event plot
+
+We can also plot time-to-event, showing both events before and after the index date, and events during and outside the defined time-at-risk window. This plot can provide insight into the temporal pattern of the outcome relative to the exposures:
+
+```{r}
+
+plotTimeToEvent(cohortMethodData = db,
+                outcomeId = 77,
+                firstExposureOnly = FALSE,
+                washoutPeriod = 0,
+                removeDuplicateSubjects = "keep all",
+                minDaysAtRisk = 1,
+                riskWindowStart = 0,
+                startAnchor = "cohort start",
+                riskWindowEnd = 30,
+                endAnchor = "cohort end")
+
+```
+
+
+## Empirical calibration and negative control distribution
+
+Because our study included negative control outcomes, our analysis summary also contains calibrated confidence intervals and p-values. We can also create the calibration effect plots for every analysis ID. In each plot, the blue dots represent our negative control outcomes, and the yellow diamond represents our health outcome of interest: GI bleed. An unbiased, well-calibrated analysis should have 95% of the negative controls between the dashed lines (ie. 95% should have p \> .05).
+
+```{r}
+
+# Analysis 1: No matching, simple outcome model
+ncs <- resultsSum %>%
+  filter(analysisId == 1,
+         outcomeId != 77)
+hoi <- resultsSum %>%
+  filter(analysisId == 1,
+         outcomeId == 77)
+
+null <- fitNull(ncs$logRr, ncs$seLogRr)
+
+plotCalibrationEffect(logRrNegatives = ncs$logRr, 
+                      seLogRrNegatives = ncs$seLogRr, 
+                      logRrPositives = hoi$logRr, 
+                      seLogRrPositives = hoi$seLogRr, null)
+
+```
+
+```{r }
+
+# Analysis 2: Inverse probability of treatment weighting
+ncs <- resultsSum %>%
+  filter(analysisId == 2,
+         outcomeId != 77)
+
+hoi <- resultsSum %>%
+  filter(analysisId == 2,
+         outcomeId == 77)
+
+null <- fitNull(ncs$logRr, ncs$seLogRr)
+
+plotCalibrationEffect(logRrNegatives = ncs$logRr, 
+                      seLogRrNegatives = ncs$seLogRr, 
+                      logRrPositives = hoi$logRr, 
+                      seLogRrPositives = hoi$seLogRr, null)
+
+```
+
+## Attribution table 
+```{r}
+
+getAttritionTable(ps)
+
+```
+
+```{r}
+
+drawAttritionDiagram(ps)
+
+```
+
+
