@@ -1,0 +1,7 @@
+hydrate                 Hydrate a package skeleton according to study
+                        specifications
+listSkeletons           List skeletons included in Hydra
+loadSpecifications      Load specifications from a JSON file
+prepareForOfflineStudyPackageExecution
+                        Prepare system to run hydrated packages without
+                        further internet connection

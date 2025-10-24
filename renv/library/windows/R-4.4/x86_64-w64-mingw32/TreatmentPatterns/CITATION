@@ -1,0 +1,16 @@
+bibentry(
+  bibtype = "Article",
+  key = "TreatmentPatterns",
+  title = "TreatmentPatterns: An R package to facilitate the standardized development and analysis of treatment patterns across disease domains",
+  author = c(
+    person(given = "Aniek F", family = "Markus"),
+    person(given = "Katia MC", family = "Verhamme"),
+    person(given = "Jan A", family = "Kors"),
+    person(given = "Peter R", family = "Rijnbeek")
+  ),
+  journal = "Computer Methods and Programs in Biomedicine",
+  year = 2022,
+  month = "oct",
+  doi = "10.1016/j.cmpb.2022.107081",
+  url = "https://doi.org/10.1016/j.cmpb.2022.107081"
+)

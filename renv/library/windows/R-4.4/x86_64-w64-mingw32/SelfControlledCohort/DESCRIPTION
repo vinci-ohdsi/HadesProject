@@ -1,0 +1,30 @@
+Package: SelfControlledCohort
+Type: Package
+Title: Population-Level Estimation Method that Estimates Incidence Rate
+    Comparison of Exposed/Unexposed Time Within an Exposed Cohort
+Version: 1.6.0
+Date: 2022-01-05
+Authors@R: c( person("Jamie", "Gilbert", email = "jpg@azimov.co.uk", role = c("cre", "aut")), person("Martijn", "Schuemie", email = "schuemie@ohdsi.org", role = c("aut")), person("Patrick", "Ryan", role = c("aut")), person("Observational Health Data Science and Informatics", role = c("cph")) )
+Maintainer: Jamie Gilbert <jpg@azimov.co.uk>
+Description: A method to estimate risk by comparing time exposed with time unexposed among the exposed cohort.
+URL: https://github.com/OHDSI/SelfControlledCohort
+BugReports: https://github.com/OHDSI/SelfControlledCohort/issues
+Depends: DatabaseConnector (>= 5.0.0), R (>= 4.0.0)
+Imports: SqlRender (>= 1.4.3), ParallelLogger, rateratio.test
+Suggests: withr, testthat, knitr, rmarkdown, Eunomia, DiagrammeR, dplyr, tidyr,
+    R.utils
+License: Apache License 2.0
+RoxygenNote: 7.1.2
+VignetteBuilder: knitr
+Author: Jamie Gilbert [cre, aut], Martijn Schuemie [aut], Patrick Ryan [aut], Observational Health Data Science and Informatics [cph]
+Built: R 4.4.1; ; 2025-10-24 21:22:09 UTC; windows
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: SelfControlledCohort
+RemoteUsername: ohdsi
+RemoteRef: v1.6.0
+GithubHost: api.github.com
+GithubRepo: SelfControlledCohort
+GithubUsername: ohdsi
+GithubRef: v1.6.0
+Remotes: ohdsi/Eunomia

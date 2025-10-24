@@ -1,0 +1,43 @@
+Package: Hades
+Type: Package
+Title: Health Analytics Data-to-Evidence Suite
+Version: 1.19.0
+Date: 2025-03-12
+Authors@R: c( person("Martijn", "Schuemie", , "schuemie@ohdsi.org", role = c("aut", "cre")), person("Observational Health Data Science and Informatics", role = c("cph")) )
+Maintainer: Martijn Schuemie <schuemie@ohdsi.org>
+Description: A collection of packages for executing data-analytics against the OMOP Common Data Model.
+License: Apache License 2.0
+URL: https://ohdsi.github.io/Hades/, https://github.com/OHDSI/Hades
+BugReports: https://github.com/OHDSI/Hades/issues
+Imports: SqlRender, Andromeda, DatabaseConnector, ParallelLogger, Capr, CirceR,
+    Cyclops, DeepPatientLevelPrediction, EmpiricalCalibration,
+    EnsemblePatientLevelPrediction, Eunomia, EvidenceSynthesis, BigKnn,
+    ROhdsiWebApi, FeatureExtraction, CohortDiagnostics, CohortMethod,
+    CohortGenerator, CohortExplorer, SelfControlledCaseSeries,
+    SelfControlledCohort, PatientLevelPrediction, PhenotypeLibrary,
+    PheValuator, MethodEvaluation, OhdsiSharing, IterativeHardThresholding,
+    OhdsiShinyModules, ResultModelManager, Characterization,
+    OhdsiShinyAppBuilder, DataQualityDashboard, BrokenAdaptiveRidge, Achilles,
+    Keeper, CohortIncidence, Strategus, TreatmentPatterns, OhdsiReportGenerator
+Suggests: Hydra, ShinyAppBuilder
+LazyData: false
+RoxygenNote: 7.3.2
+Encoding: UTF-8
+Author: Martijn Schuemie [aut, cre], Observational Health Data Science and Informatics [cph]
+Built: R 4.4.1; ; 2025-10-24 21:27:44 UTC; windows
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: Hades
+RemoteUsername: ohdsi
+RemoteRef: v1.19.0
+GithubHost: api.github.com
+GithubRepo: Hades
+GithubUsername: ohdsi
+GithubRef: v1.19.0
+Remotes: ohdsi/BigKnn, ohdsi/ROhdsiWebApi,
+    ohdsi/EnsemblePatientLevelPrediction, ohdsi/CohortDiagnostics,
+    ohdsi/CohortMethod, ohdsi/SelfControlledCohort, ohdsi/MethodEvaluation,
+    ohdsi/OhdsiSharing, ohdsi/PhenotypeLibrary, ohdsi/PheValuator, ohdsi/Hydra,
+    ohdsi/Capr, ohdsi/DeepPatientLevelPrediction, ohdsi/OhdsiShinyModules,
+    ohdsi/ShinyAppBuilder, ohdsi/DataQualityDashboard, ohdsi/Keeper,
+    ohdsi/CohortIncidence, ohdsi/Strategus

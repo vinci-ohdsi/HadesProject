@@ -1,0 +1,26 @@
+Package: EnsemblePatientLevelPrediction
+Type: Package
+Title: Expanding PatientLevelPrediction with ensemble capabilities
+Version: 1.0.3
+Author: Jenna Reps [aut, cre]
+Maintainer: Jenna M Reps <reps@ohdsi.org>
+Description: This package uses functions in PatientLevelPrediction to develop and evaluate ensemble models.
+Depends: R (>= 3.5.0)
+Imports: dplyr, PatientLevelPrediction (>= 6.0.0), ParallelLogger, rlang, tidyr
+Suggests: Eunomia, FeatureExtraction, knitr, markdown, ResultModelManager,
+    rmarkdown, testthat, xgboost
+License: Apache License 2.0
+VignetteBuilder: knitr
+LazyData: TRUE
+RoxygenNote: 7.3.2
+Encoding: UTF-8
+Built: R 4.4.1; ; 2025-10-24 21:21:02 UTC; windows
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: EnsemblePatientLevelPrediction
+RemoteUsername: ohdsi
+RemoteRef: v1.0.3
+GithubHost: api.github.com
+GithubRepo: EnsemblePatientLevelPrediction
+GithubUsername: ohdsi
+GithubRef: v1.0.3

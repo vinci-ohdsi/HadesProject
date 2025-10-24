@@ -1,0 +1,115 @@
+DatabaseConnectorDriver
+                        Create a DatabaseConnectorDriver object
+assertTempEmulationSchemaSet
+                        Assert the temp emulation schema is set
+computeDataHash         Compute hash of data
+connect                 connect
+createConnectionDetails
+                        createConnectionDetails
+createDbiConnectionDetails
+                        Create DBI connection details
+createZipFile           Compress files and/or folders into a single zip
+                        file
+dbAppendTable,DatabaseConnectorConnection,character-method
+                        Insert rows into a table
+dbClearResult,DatabaseConnectorDbiResult-method
+                        Clear a result set
+dbClearResult,DatabaseConnectorJdbcResult-method
+                        Clear a result set
+dbColumnInfo,DatabaseConnectorDbiResult-method
+                        Information about result types
+dbColumnInfo,DatabaseConnectorJdbcResult-method
+                        Information about result types
+dbConnect,DatabaseConnectorDriver-method
+                        Create a connection to a DBMS
+dbCreateTable,DatabaseConnectorConnection-method
+                        Create a table in the database
+dbDisconnect,DatabaseConnectorConnection-method
+                        Disconnect (close) a connection
+dbExecute,DatabaseConnectorDbiConnection,character-method
+                        Change database state
+dbExecute,DatabaseConnectorJdbcConnection,character-method
+                        Change database state
+dbExistsTable,DatabaseConnectorConnection,character-method
+                        Does a table exist?
+dbFetch,DatabaseConnectorDbiResult-method
+                        Fetch records from a previously executed query
+dbFetch,DatabaseConnectorJdbcResult-method
+                        Fetch records from a previously executed query
+dbGetInfo,DatabaseConnectorConnection-method
+                        Get DBMS metadata
+dbGetInfo,DatabaseConnectorDriver-method
+                        Get DBMS metadata
+dbGetQuery,DatabaseConnectorDbiConnection,character-method
+                        Retrieve results from a query
+dbGetQuery,DatabaseConnectorJdbcConnection,character-method
+                        Retrieve results from a query
+dbGetRowCount,DatabaseConnectorDbiResult-method
+                        The number of rows fetched so far
+dbGetRowCount,DatabaseConnectorJdbcResult-method
+                        The number of rows fetched so far
+dbGetRowsAffected,DatabaseConnectorDbiResult-method
+                        The number of rows affected
+dbGetRowsAffected,DatabaseConnectorJdbcResult-method
+                        The number of rows affected
+dbGetStatement,DatabaseConnectorDbiResult-method
+                        Get the statement associated with a result set
+dbGetStatement,DatabaseConnectorJdbcResult-method
+                        Get the statement associated with a result set
+dbHasCompleted,DatabaseConnectorDbiResult-method
+                        Completion status
+dbHasCompleted,DatabaseConnectorJdbcResult-method
+                        Completion status
+dbIsValid,DatabaseConnectorDbiConnection-method
+                        Is this DBMS object still valid?
+dbIsValid,DatabaseConnectorJdbcConnection-method
+                        Is this DBMS object still valid?
+dbListFields,DatabaseConnectorConnection,character-method
+                        List field names of a remote table
+dbListTables,DatabaseConnectorConnection-method
+                        List remote tables
+dbReadTable,DatabaseConnectorConnection,character-method
+                        Read database tables as data frames
+dbRemoveTable,DatabaseConnectorConnection,ANY-method
+                        Remove a table from the database
+dbSendQuery,DatabaseConnectorDbiConnection,character-method
+                        Execute a query on a given database connection
+dbSendQuery,DatabaseConnectorJdbcConnection,character-method
+                        Execute a query on a given database connection
+dbSendStatement,DatabaseConnectorConnection,character-method
+                        Execute a data manipulation statement on a
+                        given database connection
+dbUnloadDriver,DatabaseConnectorDriver-method
+                        Load and unload database drivers
+dbWriteTable,DatabaseConnectorConnection,ANY-method
+                        Copy data frames to database tables
+dbms                    Get the database platform from a connection
+disconnect              Disconnect from the server
+downloadJdbcDrivers     Download DatabaseConnector JDBC Jar files
+dropEmulatedTempTables
+                        Drop all emulated temp tables.
+executeSql              Execute SQL code
+existsTable             Does the table exist?
+extractQueryTimes       Extract query times from a 'ParallelLogger' log
+                        file
+getAvailableJavaHeapSpace
+                        Get available Java heap space
+getTableNames           List all tables in a database schema.
+inDatabaseSchema        Refer to a table in a database schema
+insertTable             Insert a table on the server
+isSqlReservedWord       Test a character vector of SQL names for SQL
+                        reserved words
+jdbcDrivers             How to download and use JDBC drivers for the
+                        various data platforms.
+querySql                Retrieve data to a data.frame
+querySqlToAndromeda     Retrieves data to a local Andromeda object
+renderTranslateExecuteSql
+                        Render, translate, execute SQL code
+renderTranslateQueryApplyBatched
+                        Render, translate, and perform process to
+                        batches of data.
+renderTranslateQuerySql
+                        Render, translate, and query to data.frame
+renderTranslateQuerySqlToAndromeda
+                        Render, translate, and query to local Andromeda
+requiresTempEmulation   Does the DBMS require temp table emulation?

@@ -1,0 +1,8 @@
+PRROC-package           Compute and plot PR and ROC curves and the
+                        areas under the curves for weighted and
+                        unweighted data
+ggprroc                 Plotting PRROC objects using ggplot2
+plot.PRROC              Plotting PRROC objects
+pr.curve                PR curve
+print.PRROC             printing PRROC objects
+roc.curve               ROC curve

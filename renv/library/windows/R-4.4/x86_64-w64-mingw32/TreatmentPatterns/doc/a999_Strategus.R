@@ -1,0 +1,98 @@
+## ----setup, include=FALSE-----------------------------------------------------
+knitr::opts_chunk$set(echo = TRUE)
+
+## ----database, eval=FALSE-----------------------------------------------------
+#  library(Strategus)
+#  library(Eunomia)
+#  library(CohortGenerator)
+#  library(CirceR)
+#  library(TreatmentPatterns)
+#  
+#  connectionDetails <- Eunomia::getEunomiaConnectionDetails()
+#  
+#  outputFolder <- tempdir()
+#  
+#  executeSettings <- Strategus::createCdmExecutionSettings(
+#    workDatabaseSchema = "main",
+#    cdmDatabaseSchema = "main",
+#    cohortTableNames = CohortGenerator::getCohortTableNames(cohortTable = "cohort_table"),
+#    workFolder = file.path(outputFolder, "work"),
+#    resultsFolder = file.path(outputFolder, "result"),
+#    minCellCount = 5
+#  )
+
+## ----cohort_generator, eval=FALSE---------------------------------------------
+#  # Read cohort json files provided by TreatmentPatterns
+#  files <- list.files(
+#    path = system.file(package = "TreatmentPatterns", "exampleCohorts"),
+#    full.names = TRUE
+#  )
+#  json <- sapply(files, readLines)
+#  json <- sapply(json, paste, collapse = "")
+#  
+#  # Build SQL from JSON definition
+#  sql <- sapply(
+#    X = json,
+#    FUN = CirceR::buildCohortQuery,
+#    options = CirceR::createGenerateOptions(generateStats = FALSE)
+#  )
+#  
+#  # Set cohort names
+#  cohortNames <- sapply(basename(files), function(name) {
+#    strtrim(name, nchar(name) - 5)
+#  })
+#  
+#  # Build cohortSet
+#  cohortSet <- data.frame(
+#    cohortId = seq_len(length(json)),
+#    cohortName = cohortNames,
+#    sql = sql,
+#    json = json
+#  )
+#  
+#  # Specify CohortGenerator module
+#  cgMod <- Strategus::CohortGeneratorModule$new()
+#  
+#  # Add `cohortSet` to the shared specifications
+#  cohortSharedResource <- cgMod$createCohortSharedResourceSpecifications(
+#    cohortDefinitionSet = cohortSet
+#  )
+#  
+#  # Create the CohortGenerator specification
+#  cgSpec <- cgMod$createModuleSpecifications()
+
+## ----treatment_patterns, eval=FALSE-------------------------------------------
+#  # Create a cohort 'types' table from the cohortSet to indicate whcih cohorts
+#  # are a 'target' and 'event' cohorts
+#  cohorts <- data.frame(
+#    cohortId = cohortSet$cohortId,
+#    cohortName = cohortSet$cohortName,
+#    type = c(rep("event", 7), "target")
+#  )
+#  
+#  # Create the TreatmentPatterns module
+#  tpMod <- Strategus::TreatmentPatternsModule$new()
+#  
+#  # Create the TreatmentPatterns specification
+#  tpSpec <- tpMod$createModuleSpecifications(
+#    cohorts = cohorts,
+#    minEraDuration = 30,
+#    combinationWindow = 30,
+#    minPostCombinationDuration = 30
+#    # ...
+#  )
+
+## ----execution, eval=FALSE----------------------------------------------------
+#  # Add specifications to an empty analysis specification
+#  analysisSpec <- Strategus::createEmptyAnalysisSpecificiations() |>
+#    Strategus::addSharedResources(cohortSharedResource) |>
+#    Strategus::addCohortGeneratorModuleSpecifications(cgSpec) |>
+#    Strategus::addTreatmentPatternsModuleSpecifications(tpSpec)
+#  
+#  # Execute the analysis
+#  Strategus::execute(
+#    analysisSpecifications = analysisSpec,
+#    executionSettings = executeSettings,
+#    connectionDetails = connectionDetails
+#  )
+
