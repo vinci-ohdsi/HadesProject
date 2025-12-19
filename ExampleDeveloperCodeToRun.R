@@ -1,4 +1,4 @@
-# Example project start-up
+# Example developer project start-up
 # @author Marc A Suchard
 
 # ENVIRONMENT SETTINGS NEEDED FOR RUNNING STUDY IN ENVIRONMENT ------------
