@@ -1,7 +1,0 @@
-createKeeper            Export person level data from OMOP CDM tables
-                        for eligible persons in the cohort.
-createPrompt            Create the main prompt based on a Keeper output
-                        row.
-createPromptSettings    Create settings for generating prompts
-createSystemPrompt      Create a system prompt for a LLM
-parseLlmResponse        Parse the response of a LLM

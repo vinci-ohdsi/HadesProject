@@ -1,9 +1,0 @@
-buildRelease            Create OMOP CDM SQL files
-buildReleaseZip         Create OMOP CDM release zip
-createDdl               Create the OHDSI-SQL Common Data Model DDL code
-downloadCurrentDdl      Get current DDL sitting on the main branch
-executeDdl              Generate and execute the DDL on a database
-listSupportedDialects   List RDBMS dialects supported by this package
-listSupportedVersions   List CDM versions supported by this package
-parseWiki               Parse Wiki files
-writeDdl                Write DDL script
