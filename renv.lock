@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.4.1",
+    "Version": "4.5.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -412,7 +412,7 @@
     },
     "RSQLite": {
       "Package": "RSQLite",
-      "Version": "2.4.3",
+      "Version": "2.4.5",
       "Source": "Repository",
       "Repository": "CRAN"
     },
@@ -537,7 +537,7 @@
     },
     "arrow": {
       "Package": "arrow",
-      "Version": "21.0.0.1",
+      "Version": "23.0.0",
       "Source": "Repository",
       "Repository": "CRAN"
     },
@@ -813,7 +813,7 @@
     },
     "duckdb": {
       "Package": "duckdb",
-      "Version": "1.4.0",
+      "Version": "1.4.3",
       "Source": "Repository",
       "Repository": "CRAN"
     },
