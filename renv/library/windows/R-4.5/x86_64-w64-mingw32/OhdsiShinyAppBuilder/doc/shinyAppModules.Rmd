@@ -1,0 +1,274 @@
+---
+title: "Using OhdsiShinyAppBuilder"
+author: "Jenna Reps, Jamie Gilbert, Josh Ide, Nate Hall"
+date: "`r Sys.Date() `"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{guide}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Using the Shiny App Builder
+
+The shiny app builder provides a way to combine different ohdsi shiny modules into a single app.  For example, if you have a characterization study, a cohort method study and a prediction study that are related as they all use the same cohorts, then you may want to view the results in a single shiny app.  This can be done by using `OhdsiShinyAppBuilder` to combine the characterization, cohort method and prediction shiny modules in `OhdsiShinyModules`. The main source of shiny modules is the `OhdsiShinyModules` R package, however, it is possible to add modules from other R packages or use local functions.
+
+In this vignette we provide examples on how to use the `OhdsiShinyAppBuilder` to create flexible shiny apps for exploring OHDSI results.
+
+The `OhdsiShinyAppBuilder` requires that all results to be explored by the shiny app are saved into a single database (i.e., all results for the different shiny modules in an app are saved into the same result database), as a single database connection is shared across shiny modules. 
+
+# Creating a config file
+
+To create a shiny app config that contains four shiny modules:
+
+- About (an introduction to the shiny app)
+- Cohort Generation (details about generated cohorts)
+- Estimation (details about causal inference studies via the cohort method)
+- Prediction (details about patient level prediction models)
+
+All of these are available as shiny modules in `OhdsiShinyModules`.  
+
+## Creating module config settings 
+To create the shiny app via `OhdsiShinyAppBuilder` we first need to create a config specification for all the shiny modules we wish to include into the single shiny app.  A config can be created using `createModuleConfig`.  
+
+```{r echo=FALSE}
+
+inputsForConfig <- data.frame(
+  Inputs = c('moduleId','tabName',
+             'shinyModulePackage',
+             'shinyModulePackageVersion',
+      'moduleUiFunction', 'moduleServerFunction',
+      'moduleInfoBoxFile',
+      'moduleIcon',
+      'installSource',
+      'gitHubRepo'
+),
+
+Description = c("a unique id for the shiny app", "The menu text for the module", "The R package that contains the shiny module or NULL if using a local function", "The minimum version of shinyModulePackage that is require or NULL", "The name of the module's UI function", "The name of the module's server function", 
+                "The function in the shinyModulePackage package that contains the helper information",
+                "An icon to use in the menu for this module",
+                "The Repo (CRAN or github) where users can install shinyModulePackage",
+                "If shinyModulePackage is available from github, this is the github repo you can find it")
+)
+
+knitr::kable(inputsForConfig)
+
+```
+
+Note: it is possible to add shiny modules from any R package by setting `shinyModulePackage` to the R package with the UI and server functions and then specifying the UI function as `moduleUiFunction` and server function as `moduleServerFunction`.  If you wish to use local functions for the UI and server, set `shinyModulePackage` to NULL.  However, the server function must take as input `id` (the module id as standard for shiny server modules) and `resultDatabaseSettings` (a list containing the database result details required when extracting the results from the database that can be created using `OhdsiShinyAppBuilder::createDefaultResultDatabaseSettings`).
+
+## Creating the about module config 
+
+For the about module we will specify in the config to use the about shiny modules in `OhdsiShinyModules`.  The UI is named `aboutViewer`, the server is named `aboutServer` and the about helper function is called `aboutHelperFile()`. As the about module provides information about the shiny app, the 'info' icon seems appropriate. The inputs into `createModuleConfig` for an about module are:
+
+```{r eval=FALSE}
+
+aboutModule <- createModuleConfig(
+      moduleId = 'about',
+      tabName = "About",
+      shinyModulePackage = "OhdsiShinyModules",
+      moduleUiFunction = 'aboutViewer',
+      moduleServerFunction = 'aboutServer',
+      moduleInfoBoxFile =  "aboutHelperFile()",
+      moduleIcon = 'info',
+      installSource = 'github',
+      gitHubRepo = 'ohdsi'
+    )
+
+```
+
+For simplicity, the `OhdsiShinyAppBuilder` contains a function called `createDefaultAboutConfig` with these default about settings into `createModuleConfig`, this is quicker to use than `createModuleConfig` if you are using a standard about module.  Alternatively, you could just run:
+
+```{r eval=FALSE}
+
+aboutModule <- createDefaultAboutConfig()
+
+```
+
+## Creating the prediction module config 
+
+To add a prediction module you can specify the `OhdsiShinyModule` functions: `aboutPrediction` for the module UI, `aboutPrediction` for the module server and `aboutPredictionFile()` for the about helper function. A suitable icon is `chart-line`.  For the prediction module, results in the database format created by the `PatientLevelPrediction` package must be in a database that will be connected to when viewing the shiny app.  
+
+```{r eval=FALSE}
+
+predictionModule <- createModuleConfig(
+    moduleId = 'prediction',
+    tabName = "Prediction",
+    shinyModulePackage = 'OhdsiShinyModules',
+    moduleUiFunction = "predictionViewer",
+    moduleServerFunction = "predictionServer",
+    moduleInfoBoxFile =  "predictionHelperFile()",
+    moduleIcon = "chart-line",
+    installSource = 'github',
+    gitHubRepo = 'ohdsi'
+    )
+
+```
+
+For simplicity, the `OhdsiShinyAppBuilder` contains a function called `createDefaultPredictionConfig` with these default prediction settings.  Atlernatively, you could just run:
+
+```{r eval=FALSE}
+
+predictionModule <- createDefaultPredictionConfig()
+
+```
+
+## Creating the cohort generation and cohort method using default functions
+
+We have default config creation for cohort method and cohort generation using UI and server functions found in `OhdsiShinyAppBuilder`:
+
+```{r eval=FALSE}
+
+cohortMethodModule <- createDefaultEstimationConfig()
+
+cohortGeneratorModule <- createDefaultCohortGeneratorConfig()
+
+```
+
+## Combining config settings
+
+Next step is to combine the module config settings into a shiny app config.  First we use `initializeModuleConfig()` to create an empty shiny app config and then we use `addModuleConfig()` to add each of the module configs we previously created:
+
+```{r eval=FALSE}
+
+library(dplyr)
+shinyAppConfig <- initializeModuleConfig() %>%
+  addModuleConfig(aboutModule) %>%
+  addModuleConfig(cohortGeneratorModule) %>%
+  addModuleConfig(cohortMethodModule) %>%
+  addModuleConfig(predictionModule)
+
+```
+
+It is possible to save the shiny app config using `saveConfig(shinyAppConfig, 'save location')` and load a previously saved shiny app config `shinyAppConfig <- loadConfig('save location')`
+
+# View Shiny App 
+
+## Create an app.R for a shiny server
+
+To create the `shiny` app you need to first create the shinyAppConfig, then specify the connectionDetails where the results are stored and finally you can call `createShinyApp`.
+
+To run the shiny app on a shiny server you need to create an app.R file with the config the connection correctly specified.  For example, your app.R could contain the following lines of code:
+
+```{r eval=FALSE}
+# save this as app.R and upload it to a shiny server
+
+# create the config using existing UI and server functions 
+# in OhdsiShinyModules or by creating the UI and server functions
+fooModuleUi <- function (id = "foo") {
+    shiny::fluidPage(title = "foo")
+  }
+  
+fooModule <- function(
+  id = 'foo',
+  connectionHandler = NULL,
+  resultDatabaseSettings = NULL,
+  config
+  ) {
+  shiny::moduleServer(id, function(input, output, session) { })
+}
+  
+fooHelpInfo <- function() {
+  'NA'
+}
+  
+moduleConfig <- createModuleConfig(
+  moduleId = 'foo',
+  tabName = "foo",
+  shinyModulePackage = NULL,
+  moduleUiFunction = fooModuleUi,
+  moduleServerFunction = fooModule,
+  moduleInfoBoxFile = "fooHelpInfo()",
+  moduleIcon = "info"
+)
+  
+shinyAppConfig <- initializeModuleConfig()
+shinyAppConfig <- addModuleConfig(shinyAppConfig, moduleConfig)
+  
+# create a connection to the result database
+# in this example it is an empty sql database
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = 'sqlite', 
+  server = './madeup.sql'
+  )
+# Create the app
+createShinyApp(
+  config = shinyAppConfig, 
+  connectionDetails = connectionDetails, 
+  resultDatabaseSettings = createDefaultResultDatabaseSettings()
+    )
+```
+
+Note: if you specify a package dependency via the 'shinyModulePackage' value in the config that was not previously installed, you will be asked whether you want to install the required package when you run `createShinyApp` or `viewShiny`.
+
+## Open a shiny app locally
+
+To just view the shiny app locally, you need to specify the config and connection details to the result database and then run the following lines of code in R:
+
+```{r eval=FALSE}
+# create the config using existing UI and server functions 
+# in OhdsiShinyModules or by creating the UI and server functions
+fooModuleUi <- function (id = "foo") {
+    shiny::fluidPage(title = "foo")
+  }
+  
+fooModule <- function(
+  id = 'foo',
+  connectionHandler = NULL,
+  resultDatabaseSettings = NULL,
+  config
+  ) {
+  shiny::moduleServer(id, function(input, output, session) { })
+}
+  
+fooHelpInfo <- function() {
+  file.path(tempdir(), 'help.html')
+}
+  
+moduleConfig <- createModuleConfig(
+  moduleId = 'foo',
+  tabName = "foo",
+  shinyModulePackage = NULL,
+  moduleUiFunction = fooModuleUi,
+  moduleServerFunction = fooModule,
+  moduleInfoBoxFile = "fooHelpInfo()",
+  moduleIcon = "info"
+)
+  
+shinyAppConfig <- initializeModuleConfig()
+shinyAppConfig <- addModuleConfig(shinyAppConfig, moduleConfig)
+  
+# create a connection to the result database
+# in this example it is an empty sql database
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = 'sqlite', 
+  server = './madeup.sql'
+  )
+
+# specify the app title
+appTitle <- 'Example Foo App'
+
+# provide a short paragraph to described the study
+# that the is exploring the results of.
+studyDescription <- "An empty made up study for the vignette demo.  The shiny app with show one menu option called 'foo' that will not do anything."
+
+# specify whether you want to use a pooled connection
+usePooledConnection <- F
+
+# open a shiny app that lets you explore results
+viewShiny(
+  config = shinyAppConfig, 
+  connectionDetails = connectionDetails, 
+  resultDatabaseSettings = createDefaultResultDatabaseSettings(), 
+  title = appTitle, 
+  usePooledConnection = usePooledConnection, 
+  studyDescription = studyDescription
+    )
+```
+You can specify the title for the app and a short description of the study via the inputs `title` and `studyDescription` into the `viewShiny` and `createShinyApp` functions. 
+
+

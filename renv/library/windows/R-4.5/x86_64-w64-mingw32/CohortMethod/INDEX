@@ -1,0 +1,133 @@
+CohortMethodData-class
+                        Cohort Method Data
+adjustedKm              Compute a weight-adjusted Kaplan-Meier curve
+checkCmInstallation     Check is CohortMethod and its dependencies are
+                        correctly installed
+cohortMethodDataSimulationProfile
+                        A simulation profile
+computeCovariateBalance
+                        Compute covariate balance before and after PS
+                        adjustment
+computeEquipoise        Compute fraction in equipoise
+computeMdrr             Compute the minimum detectable relative risk
+computePsAuc            Compute the area under the ROC curve
+createCmAnalysis        Create a CohortMethod analysis specification
+createCmDiagnosticThresholds
+                        Create CohortMethod diagnostics thresholds
+createCmTable1          Create a table 1
+createCohortMethodDataSimulationProfile
+                        Create simulation profile
+createComputeCovariateBalanceArgs
+                        Create a parameter object for the function
+                        computeCovariateBalance
+createCreatePsArgs      Create a parameter object for the function
+                        createPs
+createCreateStudyPopulationArgs
+                        Create a parameter object for the function
+                        createStudyPopulation
+createDefaultMultiThreadingSettings
+                        Create default CohortMethod multi-threading
+                        settings
+createFitOutcomeModelArgs
+                        Create a parameter object for the function
+                        fitOutcomeModel
+createGetDbCohortMethodDataArgs
+                        Create a parameter object for the function
+                        getDbCohortMethodData
+createMatchOnPsAndCovariatesArgs
+                        Create a parameter object for the function
+                        matchOnPsAndCovariates
+createMatchOnPsArgs     Create a parameter object for the function
+                        matchOnPs
+createMultiThreadingSettings
+                        Create CohortMethod multi-threading settings
+createOutcome           Create outcome definition
+createPs                Create propensity scores
+createResultsDataModel
+                        Create the results data model tables on a
+                        database server.
+createStratifyByPsAndCovariatesArgs
+                        Create a parameter object for the function
+                        stratifyByPsAndCovariates
+createStratifyByPsArgs
+                        Create a parameter object for the function
+                        stratifyByPs
+createStudyPopulation   Create a study population
+createTargetComparatorOutcomes
+                        Create target-comparator-outcomes combinations.
+createTrimByIptwArgs    Create a parameter object for the function
+                        trimByIptw
+createTrimByPsArgs      Create a parameter object for the function
+                        trimByPs
+createTrimByPsToEquipoiseArgs
+                        Create a parameter object for the function
+                        trimByPsToEquipoise
+createTruncateIptwArgs
+                        Create a parameter object for the function
+                        truncateIptw
+drawAttritionDiagram    Draw the attrition diagram
+exportToCsv             Export cohort method results to CSV files
+fitOutcomeModel         Create an outcome model, and compute the
+                        relative risk
+getAttritionTable       Get the attrition table for a population
+getDataMigrator         Get database migrations instance
+getDbCohortMethodData   Get the cohort data from the server
+getDefaultCmTable1Specifications
+                        Get the default table 1 specifications
+getFileReference        Get file reference
+getFollowUpDistribution
+                        Get the distribution of follow-up time
+getGeneralizabilityTable
+                        Get information on generalizability
+getInteractionResultsSummary
+                        Get a summary report of the analyses results
+getOutcomeModel         Get the outcome model
+getPsModel              Get the propensity model
+getResultsDataModelSpecifications
+                        Get specifications for CohortMethod results
+                        data model
+getResultsSummary       Get a summary report of the analyses results
+insertExportedResultsInSqlite
+                        Insert exported results into a SQLite database
+isCohortMethodData      Check whether an object is a CohortMethodData
+                        object
+launchResultsViewer     Launch Shiny app using
+launchResultsViewerUsingSqlite
+                        Launch Shiny app using a SQLite database
+loadCmAnalysisList      Load a list of cmAnalysis from file
+loadCohortMethodData    Load the cohort method data from a file
+loadTargetComparatorOutcomesList
+                        Load a list of targetComparatorOutcomes from
+                        file
+matchOnPs               Match persons by propensity score
+matchOnPsAndCovariates
+                        Match by propensity score as well as other
+                        covariates
+migrateDataModel        Migrate Data model
+plotCovariateBalanceOfTopVariables
+                        Plot variables with largest imbalance
+plotCovariateBalanceScatterPlot
+                        Create a scatterplot of the covariate balance
+plotCovariatePrevalence
+                        Plot covariate prevalence
+plotFollowUpDistribution
+                        Plot the distribution of follow-up time
+plotKaplanMeier         Plot the Kaplan-Meier curve
+plotPs                  Plot the propensity score distribution
+plotTimeToEvent         Plot time-to-event
+runCmAnalyses           Run a list of analyses
+saveCmAnalysisList      Save a list of cmAnalysis to file
+saveCohortMethodData    Save the cohort method data to file
+saveTargetComparatorOutcomesList
+                        Save a list of targetComparatorOutcomes to file
+simulateCohortMethodData
+                        Generate simulated data
+stratifyByPs            Stratify persons by propensity score
+stratifyByPsAndCovariates
+                        Stratify persons by propensity score and other
+                        covariates
+trimByIptw              Remove subjects with a high IPTW
+trimByPs                Trim persons by propensity score
+trimByPsToEquipoise     Keep only persons in clinical equipoise
+truncateIptw            Truncate IPTW values
+uploadResults           Upload results to the database server.

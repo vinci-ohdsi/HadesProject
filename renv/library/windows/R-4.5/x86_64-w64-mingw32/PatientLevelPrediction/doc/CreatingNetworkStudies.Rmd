@@ -1,0 +1,109 @@
+---
+title: "Making patient-level predictive network study packages using Strategus"
+author: "Egill Fridgeirsson, Jenna Reps"
+date: '`r Sys.Date()`'
+output: rmarkdown::html_vignette
+vignettes: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Making patient-level predictive network study packages}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE}
+library(PatientLevelPrediction)
+vignetteDataFolder <- "s:/temp/plpVignette"
+# Load all needed data if it exists on this computer:
+if (file.exists(vignetteDataFolder)) {
+  plpModel <- loadPlpModel(file.path(vignetteDataFolder, "model"))
+  lrResults <- loadPlpModel(file.path(vignetteDataFolder, "results"))
+}
+```
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(PatientLevelPrediction)
+```
+
+\newpage
+
+# Introduction
+
+The OHDSI Patient-Level Prediction (PLP) package provides the framework to implement prediction models at scale. This can range from developing a large number of models across sites (methodology and study design insight) to extensive external validation of existing models in the OHDSI PLP framework (model insight). This vignette describes how you can use the `Strategus` package to create and execute network studies using the PLP framework. (`Strategus`)[https://github.com/OHDSI/Strategus] is a package to create and execute network studies in the OHDSI ecosystem. It works by creating a json file that holds all the specifications of the study, such as the target and outcome cohort definition, the settings of the model and PLP pipeline. This json can then be shared with other data partners who then can use Strategus to execute the study on their data. `Strategus` output is always csv files with aggregated data that can then be shared with the study coordinater. `Strategus` can be used for all kinds of studies, not only PLP studies, such as characterization, population level estimation and more. This vignette describes how to create and run `Strategus` studies that use the PLP framework to develop and validate patient-level prediction models. 
+
+# Main steps for running a network study
+
+## Step 1 – developing the study
+
+-   Design the study: target/outcome cohort logic, concept sets for medical definitions, settings for developing new model or validation of adding existing models to framework. Suggestion: look in literature for validated definitions.
+-   Write a protocol that motivates the study and provides full details (sufficient for people to replicate the study in the future).
+-   Write an R script to create the json analysis specification file for the study. A useful study repo template can be found [here](https://github.com/ohdsi-studies/StrategusStudyRepoTemplate/). For a PLP model development study this means creating a `modelDesign` object. But first we need a target and outcome cohort defitinion. For this example we will use the following prediction problem:
+
+Among patients who have just started on an ACE inhibitor for the first time, who will experience angioedema in the following year?
+
+This is the same problem as example 2 in the vignette [Building Predictive Models](https://ohdsi.github.io/PatientLevelPrediction/articles/BuildingPredictiveModels.html).
+
+The cohorts to use can be fetched from the OHDSI Demo atlas. The target cohort is defined as patients who have started on an ACE inhibitor for the first time, and the outcome cohort is defined as patients who have experienced angioedema within one year of starting the ACE inhibitor. The target cohort is [this one](https://atlas-demo.ohdsi.org/#/cohortdefinition/1770617), and the outcome cohort is [this one](https://atlas-demo.ohdsi.org/#/cohortdefinition/1770616). First thing that needs to be done is fetch those cohorts. This is done by pressing the link for the cohort, going to the `Export` tab, and within that tab going to the `JSON` sub-tab. There you will see a box with the JSON defining the cohort. Below that on the left side is a `copy to clipboard` button. If you copy the JSON from there, you can paste it into an empty file and add the `json` extension.
+
+
+
+```r
+library(PatientLevelPrediction)
+
+# Create a model design object
+modelDesign <- createModelDesign(
+  targetId = 1,
+  outcomeId = 2,
+  populationSettings = createStudyPopulationSettings(
+    requireTimeAtRisk = FALSE,
+    riskWindowEnd = 3*365
+  ),
+  covariateSettings = FeatureExtraction::createCovariateSettings(
+    useDemographicsGender = TRUE,
+    useDemographicsAge = TRUE,
+    useConditionOccurrenceLongTerm = TRUE,
+    useDrugEraLongTerm = TRUE,
+    useCharlsonIndex = TRUE,
+    longTermStartDays = -365,
+    endDays = 0
+  ),
+  preprocessSettings = createPreprocessSettings(), # default settings used
+  modelSettings = setLassoLogsticRegression(seed = 42)
+  splitSettings = createDefaultSplitSettings(splitSeed = 42)
+)
+```
+
+Next we need to create the json analysis specification file using Strategus. 
+
+```R
+
+
+```
+
+
+## Step 2 – implementing the study part 1
+
+-   Get contributors to install the package and dependencies. Ensure the package is installed correctly for each contributor by asking them to run the checkInstall functions (as specified in the InstallationGuide).
+-   Get contributors to run the createCohort function to inspect the target/outcome definitions. If the definitions are not suitable for a site, go back to step 1 and revise the cohort definitions.
+
+## Step 3 – implementing the study part 2 (make sure the package is functioning as planned and the definitions are valid across sites)
+
+-   Get contributors to run the main.R with the settings configured to their environment
+-   Get the contributors to submit the results
+
+## Step 4 – Publication
+
+The study creator has the first option to be first author, if he/she does not wish to be first author then he/she can pick the most suitable person from the contributors. All contributors will be listed as authors on the paper. The last author will be the person who lead/managed the study, if this was the first author then the first author can pick the most suitable last author. All authors between the first and last author will be alphabetical by last name.
+
+# Package Skeleton - File Structure
+
+-   DESCRIPTION: This file describes the R package and the dependencies
+-   NAMESPACE: This file is created automatically by Roxygen
+-   Readme.md: This file should provide the step by step guidance on implementing the package
+-   R
+-   helpers.r: all the custom functions used by the package should be in this file (e.g., checkInstall)
+-   main.r: this file will call the functions in helpers.r to execute the full study
+-   submit.r: this file will be called at the end to submit the compressed folder to the study creator/manager.
+-   Man: this folder will contain the documentation for the functions in helpers.r (this should be automatically generated by roxygen)
+-   Inst
+-   sql/sql_sever \* targetCohort: the target cohort parameterised sql code \* outcomeCohort: the outcome cohort parameterised sql code
+-   plp_models: place any PLP models here
+-   Extras

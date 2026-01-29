@@ -1,0 +1,13 @@
+createCohorts           Construct cohorts
+downloadEunomiaData     Download Eunomia data files
+exportDataFiles         Export data files from a database(sqlite or
+                        duckdb)
+extractLoadData         Extract the Eunomia data files and load into a
+                        database Extract files from a .ZIP file and
+                        creates a OMOP CDM database that is then stored
+                        in the same directory as the .ZIP file.
+getDatabaseFile         Create a copy of a Eunomia dataset
+getEunomiaConnectionDetails
+                        Get Default Eunomia Connection Details
+loadDataFiles           Load data files into a database(sqlite or
+                        duckdb)

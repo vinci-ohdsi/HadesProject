@@ -1,0 +1,31 @@
+Package: OhdsiReportGenerator
+Type: Package
+Title: Observational Health Data Sciences and Informatics Report Generator
+Version: 2.0.0
+Date: 2025-9-24
+Authors@R: c( person("Jenna", "Reps", email = "jreps@its.jnj.com", role = c("aut", "cre")), person("Anthony", "Sena", email = "sena@ohdsi.org", role = c("aut")) )
+Maintainer: Jenna Reps <jreps@its.jnj.com>
+Description: Extract results into R from the Observational Health Data Sciences and Informatics result database (see <https://ohdsi.github.io/Strategus/results-schema/index.html>) and generate reports/presentations via 'quarto' that summarize results in HTML format. Learn more about 'OhdsiReportGenerator' at <https://ohdsi.github.io/OhdsiReportGenerator/>.
+License: Apache License 2.0
+URL: https://ohdsi.github.io/OhdsiReportGenerator/,
+    https://github.com/OHDSI/OhdsiReportGenerator
+BugReports: https://github.com/OHDSI/OhdsiReportGenerator/issues
+VignetteBuilder: knitr
+Depends: R (>= 3.3.0)
+Imports: CirceR, DatabaseConnector, forestplot, dplyr, fs, ggplot2, ggpubr, gt,
+    htmltools, kableExtra, ParallelLogger, quarto, reactable (>= 0.4.4), rlang,
+    rmarkdown, tibble, tidyr
+Suggests: knitr, markdown, ResultModelManager, RSQLite, testthat
+RoxygenNote: 7.3.2
+Encoding: UTF-8
+Author: Jenna Reps [aut, cre], Anthony Sena [aut]
+Built: R 4.5.2; ; 2026-01-29 05:01:19 UTC; windows
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: OhdsiReportGenerator
+RemoteUsername: ohdsi
+RemoteRef: v2.0.0
+GithubHost: api.github.com
+GithubRepo: OhdsiReportGenerator
+GithubUsername: ohdsi
+GithubRef: v2.0.0

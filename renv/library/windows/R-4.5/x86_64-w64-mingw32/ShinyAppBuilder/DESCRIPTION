@@ -1,0 +1,32 @@
+Package: ShinyAppBuilder
+Type: Package
+Title: Viewing OHDSI Results Via Shiny Modules
+Version: 3.2.0
+Date: 2024-11-22
+Authors@R: c( person("Jenna", "Reps", email = "jreps@its.jnj.com", role = c("aut", "cre")), person("Nathan", "Hall", role = c("aut")), person("Josh", "Ide", role = c("aut")), person("Jamie", "Gibert", role = c("aut")) )
+Maintainer: Jenna Reps <jreps@its.jnj.com>
+Description: Interactively view analysis results across different types of analyses.
+License: Apache License 2.0
+URL: https://ohdsi.github.io/ShinyAppBuilder,
+    https://github.com/OHDSI/ShinyAppBuilder
+BugReports: https://github.com/OHDSI/ShinyAppBuilder/issues
+VignetteBuilder: knitr
+Depends: R (>= 3.3.0)
+Imports: checkmate, DatabaseConnector, dplyr, OhdsiShinyModules (>= 3.0.0),
+    ParallelLogger (>= 2.0.0), ResultModelManager (>= 0.4.0), rlang, shiny,
+    shinydashboard
+Suggests: Eunomia, jsonlite, knitr, rmarkdown, testthat, markdown, remotes
+RoxygenNote: 7.3.1
+Encoding: UTF-8
+Author: Jenna Reps [aut, cre], Nathan Hall [aut], Josh Ide [aut], Jamie Gibert [aut]
+Built: R 4.5.2; ; 2026-01-29 05:14:45 UTC; windows
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: ShinyAppBuilder
+RemoteUsername: ohdsi
+RemoteRef: v3.2.0
+GithubHost: api.github.com
+GithubRepo: ShinyAppBuilder
+GithubUsername: ohdsi
+GithubRef: v3.2.0
+Remotes: ohdsi/Eunomia, ohdsi/OhdsiShinyModules

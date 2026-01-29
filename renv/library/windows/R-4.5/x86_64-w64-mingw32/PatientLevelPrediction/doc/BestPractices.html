@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Jenna Reps, Peter R. Rijnbeek" />
+
+<meta name="date" content="2025-07-25" />
+
+<title>Best Practice Research</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Best Practice Research</h1>
+<h4 class="author">Jenna Reps, Peter R. Rijnbeek</h4>
+<h4 class="date">2025-07-25</h4>
+
+
+
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Best Practices}
+%\VignetteEncdoing{UTF-8}
+-->
+<div id="best-practice-publications-using-the-ohdsi-patientlevelprediction-framework" class="section level2">
+<h2>Best practice publications using the OHDSI PatientLevelPrediction
+framework</h2>
+<table>
+<tr>
+<th>
+Topic
+</th>
+<th>
+Research Summary
+</th>
+<th>
+Link
+</th>
+</tr>
+<tr>
+<td>
+Problem Specification
+</td>
+<td>
+When is prediction suitable in observational data?
+</td>
+<td>
+Guidelines needed
+</td>
+</tr>
+<tr>
+<td>
+Data Creation
+</td>
+<td>
+Comparison of cohort vs case-control design
+</td>
+<td>
+<a href="https://doi.org/10.1186/s40537-021-00501-2">Journal of Big
+Data</a>
+</td>
+</tr>
+<tr>
+<td>
+Data Creation
+</td>
+<td>
+Addressing loss to follow-up (right censoring)
+</td>
+<td>
+<a href="https://doi.org/10.1186/s12911-021-01408-x">BMC medical
+informatics and decision makingk</a>
+</td>
+</tr>
+<tr>
+<td>
+Data Creation
+</td>
+<td>
+Investigating how to address left censoring in features construction
+</td>
+<td>
+<a href="https://doi.org/10.1186/s12874-021-01370-2">BMC Medical
+Research Methodology</a>
+</td>
+</tr>
+<tr>
+<td>
+Data Creation
+</td>
+<td>
+Impact of over/under-sampling
+</td>
+<td>
+<a href="https://doi.org/10.1186/s40537-023-00857-7"> Journal of big
+data</a>
+</td>
+</tr>
+<tr>
+<td>
+Data Creation
+</td>
+<td>
+Impact of phenotypes
+</td>
+<td>
+Study Done - Paper submitted
+</td>
+</tr>
+<tr>
+<td>
+Model development
+</td>
+<td>
+How much data do we need for prediction - Learning curves at scale
+</td>
+<td>
+<a href="https://doi.org/10.1016/j.ijmedinf.2022.104762">International
+Journal of Medical Informatics </a>
+</td>
+</tr>
+<tr>
+<td>
+Model development
+</td>
+<td>
+What impact does test/train/validation design have on model performance
+</td>
+<td>
+<a href="https://doi.org/10.1136/bmjopen-2021-050146">BMJ Open </a>
+</td>
+</tr>
+<tr>
+<td>
+Model development
+</td>
+<td>
+What is the impact of the classifier
+</td>
+<td>
+<a href="https://doi.org/10.1093/jamia/ocy032">JAMIA</a>
+</td>
+</tr>
+<tr>
+<td>
+Model development
+</td>
+<td>
+Can we find hyper-parameter combinations per classifier that
+consistently lead to good performing models when using claims/EHR data?
+</td>
+<td>
+Study needs to be done
+</td>
+</tr>
+<tr>
+<td>
+Model development
+</td>
+<td>
+Can we use ensembles to combine different algorithm models within a
+database to improve models transportability?
+</td>
+<td>
+<a href="https://doi.org/10.3233/SHTI230080"> Caring is
+Sharing–Exploiting the Value in Data for Health and Innovation </a>
+</td>
+</tr>
+<tr>
+<td>
+Model development
+</td>
+<td>
+Can we use ensembles to combine models developed using different
+databases to improve models transportability?
+</td>
+<td>
+<a href="https://doi.org/10.1186/s12911-022-01879-6"> BMC Medical
+Informatics and Decision Making </a>
+</td>
+</tr>
+<tr>
+<td>
+Model development
+</td>
+<td>
+Impact of regularization method
+</td>
+<td>
+<a href="https://doi.org/10.1093/jamia/ocae109"> JAMIA </a>
+</td>
+</tr>
+<tr>
+<td>
+Evaluation
+</td>
+<td>
+Why prediction is not suitable for risk factor identification
+</td>
+<td>
+<a href="https://proceedings.mlr.press/v182/markus22a.html"> Machine
+Learning for Healthcare Conference </a>
+</td>
+</tr>
+<tr>
+<td>
+Evaluation
+</td>
+<td>
+Iterative pairwise external validation to put validation into context
+</td>
+<td>
+<a href="https://doi.org/10.1007/s40264-022-01161-8"> Drug Safety </a>
+</td>
+</tr>
+<tr>
+<td>
+Evaluation
+</td>
+<td>
+A novel method to estimate external validation using aggregate
+statistics
+</td>
+<td>
+Study under review
+</td>
+</tr>
+<tr>
+<td>
+Evaluation
+</td>
+<td>
+How should we present model performance? (e.g., new visualizations)
+</td>
+<td>
+<a href="https://doi.org/10.1093/jamiaopen/ooab017">JAMIA Open</a>
+</td>
+</tr>
+<tr>
+<td>
+Evaluation
+</td>
+<td>
+How to interpret external validation performance (can we figure out why
+the performance drops or stays consistent)?
+</td>
+<td>
+Study needs to be done
+</td>
+</tr>
+<tr>
+<td>
+Evaluation
+</td>
+<td>
+Recalibration methods
+</td>
+<td>
+Study needs to be done
+</td>
+</tr>
+<tr>
+<td>
+Evaluation
+</td>
+<td>
+Is there a way to automatically simplify models?
+</td>
+<td>
+<a href="https://ohdsi-studies.github.io/FeatureSelectionComparison/docs/Protocol.html">Study
+protocol under development </a>
+</td>
+</tr>
+</table>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

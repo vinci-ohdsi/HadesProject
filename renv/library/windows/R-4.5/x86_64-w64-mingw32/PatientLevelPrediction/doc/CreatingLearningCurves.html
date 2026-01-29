@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Luis H. John, Jenna M. Reps, Peter R. Rijnbeek" />
+
+<meta name="date" content="2025-07-25" />
+
+<title>Creating Learning Curves</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Creating Learning Curves</h1>
+<h4 class="author">Luis H. John, Jenna M. Reps, Peter R. Rijnbeek</h4>
+<h4 class="date">2025-07-25</h4>
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This vignette describes how you can use the Observational Health Data
+Sciences and Informatics (OHDSI) <a href="https://github.com/OHDSI/PatientLevelPrediction"><code>PatientLevelPrediction</code></a>
+package to create learning curves. This vignette assumes you have read
+and are comfortable with building patient level prediction models as
+described in the <code>vignette(&#39;BuildingPredictiveModels&#39;)</code>.</p>
+<p>Prediction models will show overly-optimistic performance when
+predicting on the same data as used for training. Therefore,
+best-practice is to partition our data into a training set and testing
+set. We then train our prediction model on the training set portion and
+asses its ability to generalize to unseen data by measuring its
+performance on the testing set.</p>
+<p>Learning curves assess the effect of training set size on model
+performance by training a sequence of prediction models on successively
+larger subsets of the training set. A learning curve plot can also help
+in diagnosing a bias or variance problem as explained below.</p>
+<div class="float">
+<img src="data:application/octet-stream;base64,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" alt="Learning curve example." />
+<div class="figcaption">Learning curve example.</div>
+</div>
+<p>Figure 1, shows an example of learning curve plot in which the
+vertical axis represents the model performance and the horizontal axis
+the training set size. If training set size is small, the performance on
+the training set is high, because a model can often be fitted well to a
+limited number of training examples. At the same time, the performance
+on the testing set will be poor, because the model trained on such a
+limited number of training examples will not generalize well to unseen
+data in the testing set. As the training set size increases, the
+performance of the model on the training set will decrease. It becomes
+more difficult for the model to find a good fit through all the training
+examples. Also, the model will be trained on a more representative
+portion of training examples, making it generalize better to unseen
+data. This can be observed by the increasin testing set performance.</p>
+<p>The learning curve can help us in diagnosing bias and variance
+problems with our classifier which will provide guidance on how to
+further improve our model. We can observe high variance (overfitting) in
+a prediction model if it performs well on the training set, but poorly
+on the testing set (Figure 2). Adding additional data is a common
+approach to counteract high variance. From the learning curve it becomes
+apparent, that adding additional data may improve performance on the
+testing set a little further, as the learning curve has not yet
+plateaued and, thus, the model is not saturated yet. Therefore, adding
+more data will decrease the gap between training set and testing set,
+which is the main indicator for a high variance problem.</p>
+<div class="float">
+<img src="data:application/octet-stream;base64,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" alt="Prediction model suffering from high variance." />
+<div class="figcaption">Prediction model suffering from high
+variance.</div>
+</div>
+<p>Furthermore, we can observe high bias (underfitting) if a prediction
+model performs poorly on the training set as well as on the testing set
+(Figure 3). The learning curves of training set and testing set have
+flattened on a low performance with only a small gap in between them.
+Adding additional data will in this case have little to no impact on the
+model performance. Choosing another prediction algorithm that can find
+more complex (for example non-linear) relationships in the data may be
+an alternative approach to consider in this high bias situation.</p>
+<div class="float">
+<img src="data:application/octet-stream;base64,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" alt="Prediction model suffering from high bias." />
+<div class="figcaption">Prediction model suffering from high bias.</div>
+</div>
+</div>
+<div id="creating-the-learning-curve" class="section level1">
+<h1>Creating the learning curve</h1>
+<p>Use the <a href="https://github.com/OHDSI/PatientLevelPrediction"><code>PatientLevelPrediction</code></a>
+package to create a <code>plpData</code> object . Alternatively, you can
+make use of the data simulator. The following code snippet creates data
+for 12000 patients.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">data</span>(simulationProfile)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>sampleSize <span class="ot">&lt;-</span> <span class="dv">12000</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>plpData <span class="ot">&lt;-</span> <span class="fu">simulatePlpData</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  plpDataSimulationProfile,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">n =</span> sampleSize,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">42</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>)</span></code></pre></div>
+<p>Specify the population settings (this does additional exclusions such
+as requiring minimum prior observation or no prior outcome as well as
+specifying the time-at-risk period to enable labels to be created):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>populationSettings <span class="ot">&lt;-</span> <span class="fu">createStudyPopulationSettings</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="at">binary =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="at">firstExposureOnly =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  <span class="at">washoutPeriod =</span> <span class="dv">0</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="at">removeSubjectsWithPriorOutcome =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="at">priorOutcomeLookback =</span> <span class="dv">99999</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>  <span class="at">requireTimeAtRisk =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  <span class="at">minTimeAtRisk =</span> <span class="dv">0</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  <span class="at">riskWindowStart =</span> <span class="dv">0</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="at">riskWindowEnd =</span> <span class="dv">365</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  <span class="at">verbosity =</span> <span class="st">&quot;INFO&quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>)</span></code></pre></div>
+<p>Specify the prediction algorithm to be used.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Use LASSO logistic regression</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>modelSettings <span class="ot">&lt;-</span> <span class="fu">setLassoLogisticRegression</span>()</span></code></pre></div>
+<p>Specify the split settings and a sequence of training set fractions
+(these over ride the splitSetting trainFraction). Alternatively, instead
+of <code>trainFractions</code>, you can provide a sequence of training
+events (<code>trainEvents</code>) instead of the training set fractions.
+This is recommended, because our research has shown that number of
+events is the important determinant of model performance. Make sure that
+your training set contains the number of events specified.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>splitSettings <span class="ot">&lt;-</span> <span class="fu">createDefaultSplitSetting</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="at">testFraction =</span> <span class="fl">0.2</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;stratified&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="at">splitSeed =</span> <span class="dv">1000</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>trainFractions <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.8</span>, <span class="fl">0.1</span>) <span class="co"># Create eight training set fractions</span></span></code></pre></div>
+<p>Create the learning curve object.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>learningCurve <span class="ot">&lt;-</span> <span class="fu">createLearningCurve</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">plpData =</span> plpData,</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">outcomeId =</span> <span class="dv">2</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="at">modelSettings =</span> modelSettings,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="at">saveDirectory =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;learningCurve&quot;</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="at">analysisId =</span> <span class="st">&quot;learningCurve&quot;</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="at">populationSettings =</span> populationSettings,</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  <span class="at">splitSettings =</span> splitSettings,</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  <span class="at">trainFractions =</span> trainFractions,</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>  <span class="at">trainEvents =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  <span class="at">preprocessSettings =</span> <span class="fu">createPreprocessSettings</span>(</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    <span class="at">minFraction =</span> <span class="fl">0.001</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    <span class="at">normalize =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>  ),</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  <span class="at">executeSettings =</span> <span class="fu">createExecuteSettings</span>(</span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>    <span class="at">runSplitData =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>    <span class="at">runSampleData =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>    <span class="at">runFeatureEngineering =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>    <span class="at">runPreprocessData =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>    <span class="at">runModelDevelopment =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>    <span class="at">runCovariateSummary =</span> <span class="cn">FALSE</span></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>  )</span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>)</span></code></pre></div>
+<p>Plot the learning curve object (Figure 4). Specify one of the
+available metrics: <code>AUROC</code>, <code>AUPRC</code>,
+<code>sBrier</code>. Moreover, you can specify what metric to put on the
+abscissa, number of <code>observations</code> or number of
+<code>events</code>. We recommend the latter, because
+<code>events</code> are determinant of model performance and allow you
+to better compare learning curves across different prediction problems
+and databases.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">plotLearningCurve</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  learningCurve,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">&quot;AUROC&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="at">abscissa =</span> <span class="st">&quot;events&quot;</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="at">plotTitle =</span> <span class="st">&quot;Learning Curve&quot;</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="at">plotSubtitle =</span> <span class="st">&quot;AUROC performance&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="float">
+<img src="data:application/octet-stream;base64,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" alt="Learning curve plot." />
+<div class="figcaption">Learning curve plot.</div>
+</div>
+</div>
+<div id="parallel-processing" class="section level1">
+<h1>Parallel processing</h1>
+<p>The learning curve object can be created in parallel, which can
+reduce computation time significantly. Whether to run the code in
+parallel or not is specified using the <code>parallel</code> input.
+Currently this functionality is only available for LASSO logistic
+regression and gradient boosting machines. Depending on the number of
+parallel workers it may require a significant amount of memory. We
+advise to use the parallelized learning curve function for parameter
+search and exploratory data analysis.</p>
+<p>When running in parrallel, R will find the number of available
+processing cores automatically and register the required parallel
+backend. Alternatively, you can provide the number of cores you wish to
+use via the <code>cores</code> input.</p>
+</div>
+<div id="demo" class="section level1">
+<h1>Demo</h1>
+<p>We have added a demo of the learningcurve:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Show all demos in our package:</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">demo</span>(<span class="at">package =</span> <span class="st">&quot;PatientLevelPrediction&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Run the learning curve</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">demo</span>(<span class="st">&quot;LearningCurveDemo&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PatientLevelPrediction&quot;</span>)</span></code></pre></div>
+<p>Do note that running this demo can take a considerable amount of time
+(15 min on Quad core running in parallel)!</p>
+</div>
+<div id="publication" class="section level1">
+<h1>Publication</h1>
+<p>A publication titled ‘How little data do we need for patient-level
+prediction?’ uses the learning curve functionality in this package and
+can be accessed at <a href="https://doi.org/10.1016/j.ijmedinf.2022.104762" class="uri">https://doi.org/10.1016/j.ijmedinf.2022.104762</a>.</p>
+</div>
+<div id="acknowledgments" class="section level1">
+<h1>Acknowledgments</h1>
+<p>Considerable work has been dedicated to provide the
+<code>PatientLevelPrediction</code> package.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;PatientLevelPrediction&quot;</span>)</span></code></pre></div>
+<pre><code>## To cite PatientLevelPrediction in publications use:
+## 
+##   Reps JM, Schuemie MJ, Suchard MA, Ryan PB, Rijnbeek P (2018). &quot;Design
+##   and implementation of a standardized framework to generate and
+##   evaluate patient-level prediction models using observational
+##   healthcare data.&quot; _Journal of the American Medical Informatics
+##   Association_, *25*(8), 969-975.
+##   &lt;https://doi.org/10.1093/jamia/ocy032&gt;.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Article{,
+##     author = {J. M. Reps and M. J. Schuemie and M. A. Suchard and P. B. Ryan and P. Rijnbeek},
+##     title = {Design and implementation of a standardized framework to generate and evaluate patient-level prediction models using observational healthcare data},
+##     journal = {Journal of the American Medical Informatics Association},
+##     volume = {25},
+##     number = {8},
+##     pages = {969-975},
+##     year = {2018},
+##     url = {https://doi.org/10.1093/jamia/ocy032},
+##   }</code></pre>
+<p><strong>Please reference this paper if you use the PLP Package in
+your work:</strong></p>
+<p><a href="https://dx.doi.org/10.1093/jamia/ocy032">Reps JM, Schuemie
+MJ, Suchard MA, Ryan PB, Rijnbeek PR. Design and implementation of a
+standardized framework to generate and evaluate patient-level prediction
+models using observational healthcare data. J Am Med Inform Assoc.
+2018;25(8):969-975.</a></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

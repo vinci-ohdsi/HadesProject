@@ -1,0 +1,44 @@
+cleanIncremental        Removes csv files from folders that have not
+                        been marked as completed and removes the record
+                        of the execution file
+cleanNonIncremental     Removes csv files from the execution folder as
+                        there should be no csv files when running in
+                        non-incremental model
+computeDechallengeRechallengeAnalyses
+                        Compute dechallenge rechallenge study
+computeRechallengeFailCaseSeriesAnalyses
+                        Compute fine the subjects that fail the
+                        dechallenge rechallenge study
+computeTimeToEventAnalyses
+                        Compute time to event study
+createAggregateCovariateSettings
+                        Create aggregate covariate study settings
+createCharacterizationSettings
+                        Create the settings for a large scale
+                        characterization study
+createCharacterizationTables
+                        Create the results tables to store
+                        characterization results into a database
+createDechallengeRechallengeSettings
+                        Create dechallenge rechallenge study settings
+createDuringCovariateSettings
+                        Create during covariate settings
+createSqliteDatabase    Create an sqlite database connection
+createTimeToEventSettings
+                        Create time to event study settings
+exampleOmopConnectionDetails
+                        create a connection detail for an example GI
+                        Bleed dataset from Eunomia
+getDbDuringCovariateData
+                        Extracts covariates that occur during a cohort
+insertResultsToDatabase
+                        Upload the results into a result database
+loadCharacterizationSettings
+                        Load the characterization settings previously
+                        saved as a json file
+runCharacterizationAnalyses
+                        execute a large-scale characterization study
+saveCharacterizationSettings
+                        Save the characterization settings as a json
+viewCharacterization    viewCharacterization - Interactively view the
+                        characterization results

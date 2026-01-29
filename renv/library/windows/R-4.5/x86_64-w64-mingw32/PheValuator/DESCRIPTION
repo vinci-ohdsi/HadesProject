@@ -1,0 +1,31 @@
+Package: PheValuator
+Type: Package
+Title: Rapid Phenotype Evaluation
+Version: 2.2.15
+Author: Joel N. Swerdel
+Maintainer: Joel N. Swerdel <jswerdel@its.jnj.com>
+Description: A package for evaluating phenotype algorithms.  The package develops a diagnostic prediction model using a set of noisy positives and noisy negatives.  It can then apply the model to a large cohort to create a set of subjects each with a predicted probability for the health outcome of interest.  This cohort can then be used to evaluate phenotype algorithms through the calculation of the necessary performance characteristics - sensitivity, specificity, and positive and negative preditive value.
+License: Apache License 2.0
+VignetteBuilder: knitr
+Depends: R (>= 3.2.2), DatabaseConnector, PatientLevelPrediction (>= 6.0.4),
+    FeatureExtraction (>= 2.1.5)
+Imports: SqlRender (>= 1.5.2), dplyr (>= 0.7.8), methods, ParallelLogger,
+    tibble
+Suggests: knitr, rmarkdown, ROhdsiWebApi, shiny, shinydashboard, DT, htmltools,
+    qpdf, testthat, Eunomia, CohortGenerator, withr
+URL: https://ohdsi.github.io/PheValuator, https://github.com/OHDSI/PheValuator
+BugReports: https://github.com/OHDSI/PheValuator/issues
+RoxygenNote: 7.3.2
+Encoding: UTF-8
+Built: R 4.5.2; ; 2026-01-29 04:52:56 UTC; windows
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: PheValuator
+RemoteUsername: ohdsi
+RemoteRef: v2.2.15
+GithubHost: api.github.com
+GithubRepo: PheValuator
+GithubUsername: ohdsi
+GithubRef: v2.2.15
+Remotes: ohdsi/PatientLevelPrediction, ohdsi/FeatureExtraction,
+    ohdsi/ROhdsiWebApi, ohdsi/Eunomia, ohdsi/CohortGenerator

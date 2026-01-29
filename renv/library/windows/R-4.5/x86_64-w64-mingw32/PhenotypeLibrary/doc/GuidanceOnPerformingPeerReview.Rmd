@@ -1,0 +1,62 @@
+---
+title: "Guidance on performing peer review"
+author: "Gowtham A. Rao"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    number_sections: no
+    toc: no  
+  pdf_document: 
+    toc: no     
+vignette: >
+  %\VignetteIndexEntry{Guidance on performing peer review}
+  %\VignetteEncoding{UTF-8}    
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(
+  cache = FALSE,
+  comment = "#>",
+  error = FALSE,
+  tidy = FALSE
+)
+```
+
+# [PhenotypeLibrary](https://github.com/OHDSI/PhenotypeLibrary) & [HADES](https://ohdsi.github.io/Hades/)
+*This document is a DRAFT guidance.*
+
+If you accept an invitation to perform a peer review on a cohort definition submitted to the OHDSI Phenotype Library, please review this guidance document. 
+
+## Note 
+- OHDSI subscribes to open-peer review.
+- Reviewers are invited from a pool of volunteers via the OHDSI Phenotype Development and Evaluation Workgroup. More than one reviewer may be asked to perform a peer review. All reviewers' review and identity will be open. 
+- You may perform a live or asynchronous review. A live review may be done in the OHDSI Phenotype Development and Evaluation Workgroup, where it will be video recorded and archived. An asynchronous review is a written review done as a forum post in the original thread started by the submitter on forums.ohdsi.org.
+- Anyone in the community may engage in the conversation and provide input on both the contribution and the review.
+
+## Levels of Peer Review
+The workgroup lead or designee moderator will interpret your review and assign a level of confidence to the submission. The levels are incremental, meaning a definition that has level 3 status should have also met levels 2, 1, and 0.
+
+### Level 0
+All cohorts in this level have passed the minimum submission requirements detailed [here](https://ohdsi.github.io/PhenotypeLibrary/articles/ValidityChecksForCohortDefinitions.html). They are now ready for peer review. If rejected, the cohorts will remain in Level 0, with a withdrawn = TRUE status.
+
+### Level 1
+These cohorts have completed at least one peer review, accepted based on a high-level summary of the evaluation contributed by the submitter. This level is the lowest level of review; we expect > 90% of definitions that have passed Level 0 to pass Level 1 review.
+
+### Level 2
+These cohorts have completed at least one peer review, accepted by the reviewer. Acceptance requires:
+- Independent review of Cohort Diagnostics (and PheValuator when available) from the submitter.
+- Verification that errors such as sensitivity errors, specificity errors, and date misclassification errors are discussed and observed.
+- Independent evaluation for errors by reviewing submitted materials.
+- A recommendation to accept the definition with known errors.
+
+### Level 3
+A peer reviewer has reviewed the definition and independently performed an evaluation on a new data source, accepting the definition with known errors. The second reviewer should use a data source not part of the original submission for the review. See [evaluation guidance](https://ohdsi.github.io/PhenotypeLibrary/articles/ValidityChecksForCohortDefinitions.html).
+
+### Level 4
+The cohort definition has been used in multiple studies, publications, or workshops, and there is a general consensus that it is well-adopted. Its performance characteristics have been stable in different types of data sources. The definition has been referenced and used by others, and the output is considered high quality.
+
+
+
+
+
