@@ -520,14 +520,14 @@
     },
     "VaTools": {
       "Package": "VaTools",
-      "Version": "0.5.0",
+      "Version": "0.5.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "vinci-ohdsi",
       "RemoteRepo": "VaTools",
       "RemoteRef": "develop",
-      "RemoteSha": "82c474953be176da8cc3711ec05d7c58166624b1"
+      "RemoteSha": "d54ae1be275696ad7934174f143085dbe7f99175"
     },
     "abind": {
       "Package": "abind",
