@@ -17,43 +17,43 @@ jobs:
   build:
     runs-on: windows-latest
     
+    # Only run for tag refs (extra safety)
+    if: startsWith(github.ref, 'refs/tags/')
+        
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           
-      - name: Determine ref to use
-        id: ref
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.tag }}" ]; then
-            echo "ref=refs/tags/${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
-          else
-            echo "ref=${GITHUB_REF}" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Checkout selected ref
-        run: |
-          git fetch --all --tags
-          git checkout ${{ steps.ref.outputs.ref }}
-
       - name: Ensure commit is on main
         run: |
           git fetch origin main
-          if git merge-base --is-ancestor HEAD origin/main; then
-            echo "Commit is on main "
-          else
-            echo "Commit is NOT on main "
+          git merge-base --is-ancestor HEAD origin/main
+
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Commit is on main"
+          } else {
+            Write-Host "Commit is NOT on main"
             exit 1
-          fi
-
-      - name: Prepare branch and merge
+          }   
+          
+      - name: Merge tagged commit into ingest_Rv4.5
         run: |
-          git fetch origin ingest_Rv4.5
-          git checkout -B ingest_Rv4.5 origin/ingest_Rv4.5
+          # Make sure we have latest branches and tags
+          git fetch --all --tags
 
-          # Merge the selected ref (tag or commit) into the branch
-          git merge --no-commit --no-ff ${{ steps.ref.outputs.ref }}
-                  
+          # Checkout target branch
+          git checkout ingest_Rv4.5
+          git pull origin ingest_Rv4.5
+
+          # Merge the tagged commit (HEAD is already the tag commit)
+          git merge --no-commit --no-ff HEAD -m "Merge tag $env:GITHUB_REF into ingest_Rv4.5"
+
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Merge failed"
+            exit 1
+          }
+                         
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
