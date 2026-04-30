@@ -17,7 +17,7 @@
     },
     "Andromeda": {
       "Package": "Andromeda",
-      "Version": "1.1.1",
+      "Version": "1.2.0",
       "Source": "Repository",
       "Repository": "CRAN"
     },
@@ -520,14 +520,14 @@
     },
     "VaTools": {
       "Package": "VaTools",
-      "Version": "0.5.0",
+      "Version": "0.5.2",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "vinci-ohdsi",
       "RemoteRepo": "VaTools",
-      "RemoteRef": "develop",
-      "RemoteSha": "82c474953be176da8cc3711ec05d7c58166624b1"
+      "RemoteRef": "main",
+      "RemoteSha": "343b89bea56298a706f838bebf5f02e1660a1d12"
     },
     "abind": {
       "Package": "abind",
@@ -610,6 +610,12 @@
     "boot": {
       "Package": "boot",
       "Version": "1.3-32",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "brand.yml": {
+      "Package": "brand.yml",
+      "Version": "0.1.0",
       "Source": "Repository",
       "Repository": "CRAN"
     },
@@ -1798,6 +1804,12 @@
     "viridisLite": {
       "Package": "viridisLite",
       "Version": "0.4.2",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "visOmopResults": {
+      "Package": "visOmopResults",
+      "Version": "1.4.2",
       "Source": "Repository",
       "Repository": "CRAN"
     },

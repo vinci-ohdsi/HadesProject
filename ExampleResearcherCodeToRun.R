@@ -12,8 +12,8 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
   # full specification "vhacdwrb02.vha.med.va.gov" may be necessary
 )
 
-connect <- DatabaseConnector::connect(connectionDetails = connectionDetails)
-DatabaseConnector::disconnect(connect)
+connection <- DatabaseConnector::connect(connectionDetails = connectionDetails)
+DatabaseConnector::disconnect(connection)
 
 databaseName <- "ORD_Researcher_xyz" # need to change for each ORD research space
 cdmSchemaName <- "OMOPV5"
@@ -27,10 +27,10 @@ cdmDatabaseSchema <- paste(databaseName, cdmSchemaName, sep = ".")
 #   destinationSchema = cdmSchemaName)
 
 # small silly test
-connect <- DatabaseConnector::connect(connectionDetails = connectionDetails)
+connection <- DatabaseConnector::connect(connectionDetails = connectionDetails)
 sql <- SqlRender::render(
   "SELECT COUNT(*) AS subjects FROM @cdmDatabaseSchema.person;",
   cdmDatabaseSchema = cdmDatabaseSchema)
-querySql(connection = connection,
+DatabaseConnector::querySql(connection = connection,
          sql = sql)
-disconnect(connection)
+DatabaseConnector::disconnect(connection)
