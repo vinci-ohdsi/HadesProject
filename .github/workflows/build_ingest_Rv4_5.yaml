@@ -62,7 +62,13 @@ jobs:
       - name: Restore R dependencies (renv)
         run: |
           Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
-          Rscript -e "renv::restore(prompt = FALSE)"                  
+          Rscript -e "renv::restore(packages = 'renv')"
+          Rscript -e "renv::restore(prompt = FALSE)"
+          dir renv/
+          dir renv/library/
+          dir renv/library/R-4.5/
+          dir renv/library/R-4.5/x86_64-w64-mingw32/
+          
 
 #       - name: Commit and push changes
 #         run: |
@@ -71,7 +77,7 @@ jobs:
 #           git config user.email "msuchard@ucla.edu"
 # 
 #           # Stage all changes (adds, modifications, deletions)
-#           git add -A
+#           git add -f renv/library -A
 # 
 #           # Only commit if there are changes
 #           if ! git diff --cached --quiet; then
