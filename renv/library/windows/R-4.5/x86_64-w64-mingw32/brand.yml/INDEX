@@ -1,0 +1,24 @@
+as_brand_yml            Create a Brand instance from a list or
+                        character vector.
+brand_color_pluck       Extract a color value from a brand object
+brand_has               Check if a brand has a specific nested element
+brand_pluck             Extract a nested element from a brand object
+brand_sass_color        Generate Sass variables for brand colors
+brand_sass_color_palette
+                        Generate Sass variables and CSS custom
+                        properties for brand color palette
+brand_sass_defaults_bootstrap
+                        Generate Sass variables and layer for Bootstrap
+                        defaults
+brand_sass_fonts        Generate Sass variables and CSS rules for brand
+                        fonts
+brand_sass_typography   Generate Sass variables for brand typography
+brand_use_logo          Extract a logo resource from a brand
+read_brand_yml          Create a Brand instance from a Brand YAML file.
+theme_brand_flextable   Create a flextable theme using brand colors
+theme_brand_ggplot2     Create a ggplot2 theme using brand colors
+theme_brand_gt          Create a gt table theme using brand colors
+theme_brand_plotly      Create a plotly theme using brand colors
+theme_brand_thematic    Create a thematic theme using brand colors
+with_brand_yml_path     Temporarily set the 'BRAND_YML_PATH'
+                        environment variable

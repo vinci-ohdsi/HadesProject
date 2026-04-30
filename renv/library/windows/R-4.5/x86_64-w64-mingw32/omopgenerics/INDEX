@@ -1,0 +1,252 @@
+$.cdm_reference         Subset a cdm reference object.
+$<-.cdm_reference       Assign an table to a cdm reference.
+[[.cdm_reference        Subset a cdm reference object.
+[[<-.cdm_reference      Assign a table to a cdm reference.
+achillesColumns         Required columns for each of the achilles
+                        result tables
+achillesTables          Names of the tables that contain the results of
+                        achilles analyses
+addSettings             Add settings columns to a <summarised_result>
+                        object
+additionalColumns       Identify variables in additional_name column
+assertCharacter         Assert that an object is a character and
+                        fulfill certain conditions.
+assertChoice            Assert that an object is within a certain
+                        oprtions.
+assertClass             Assert that an object has a certain class.
+assertDate              Assert Date
+assertList              Assert that an object is a list.
+assertLogical           Assert that an object is a logical.
+assertNumeric           Assert that an object is a numeric.
+assertTable             Assert that an object is a table.
+assertTrue              Assert that an expression is TRUE.
+attrition               Get attrition from an object.
+attrition.cohort_table
+                        Get cohort attrition from a cohort_table
+                        object.
+bind                    Bind two or more objects of the same class.
+bind.cohort_table       Bind two or more cohort tables
+bind.summarised_result
+                        Bind two or summarised_result objects
+cdmClasses              Separate the cdm tables in classes
+cdmDisconnect           Disconnect from a cdm object.
+cdmFromTables           Create a cdm object from local tables
+cdmName                 Get the name of a cdm_reference associated
+                        object
+cdmReference            Get the 'cdm_reference' of a 'cdm_table'.
+cdmSelect               Restrict the cdm object to a subset of tables.
+cdmSource               Get the cdmSource of an object.
+cdmSourceType           Get the source type of a cdm_reference object.
+cdmTableFromSource      This is an internal developer focused function
+                        that creates a cdm_table from a table that
+                        shares the source but it is not a cdm_table.
+                        Please use insertTable if you want to insert a
+                        table to a cdm_reference object.
+cdmVersion              Get the version of an object.
+checkCohortRequirements
+                        Check whether a cohort table satisfies
+                        requirements
+cohortCodelist          Get codelist from a cohort_table object.
+cohortColumns           Required columns for a generated cohort set.
+cohortCount             Get cohort counts from a cohort_table object.
+cohortTables            Cohort tables that a cdm reference can contain
+                        in the OMOP Common Data Model.
+collect.cdm_reference   Retrieves the cdm reference into a local cdm.
+collect.cohort_table    To collect a 'cohort_table' object.
+combineStrata           Provide all combinations of strata levels.
+compute.cdm_table       Store results in a table.
+createIndexes           Create the missing indexes
+createLogFile           Create a log file
+createTableIndex        Create a table index
+dropSourceTable         Drop a table from a cdm object.
+dropTable               Drop a table from a cdm object. *[Deprecated]*
+emptyAchillesTable      Create an empty achilles table
+emptyCdmReference       Create an empty cdm_reference
+emptyCodelist           Empty 'codelist' object.
+emptyCodelistWithDetails
+                        Empty 'codelist' object.
+emptyCohortTable        Create an empty cohort_table object
+emptyConceptSetExpression
+                        Empty 'concept_set_expression' object.
+emptyOmopTable          Create an empty omop table
+emptySummarisedResult   Empty 'summarised_result' object.
+estimateTypeChoices     Choices that can be present in 'estimate_type'
+                        column.
+existingIndexes         Existing indexes in a cdm object
+expectedIndexes         Expected indexes in a cdm object
+exportCodelist          Export a codelist object.
+exportConceptSetExpression
+                        Export a concept set expression.
+exportSummarisedResult
+                        Export a summarised_result object to a csv
+                        file.
+filterAdditional        Filter the additional_name-additional_level
+                        pair in a summarised_result
+filterGroup             Filter the group_name-group_level pair in a
+                        summarised_result
+filterSettings          Filter a <summarised_result> using the settings
+filterStrata            Filter the strata_name-strata_level pair in a
+                        summarised_result
+getCohortId             Get the cohort definition id of a certain name
+getCohortName           Get the cohort name of a certain cohort
+                        definition id
+getPersonIdentifier     Get the column name with the person identifier
+                        from a table (either subject_id or person_id),
+                        it will throw an error if it contains both or
+                        neither.
+groupColumns            Identify variables in group_name column
+importCodelist          Import a codelist.
+importConceptSetExpression
+                        Import a concept set expression.
+importSummarisedResult
+                        Import a set of summarised results.
+insertCdmTo             Insert a cdm_reference object to a different
+                        source.
+insertFromSource        Convert a table that is not a cdm_table but
+                        have the same original source to a cdm_table.
+                        This Table is not meant to be used to insert
+                        tables in the cdm, please use insertTable
+                        instead.
+insertTable             Insert a table to a cdm object.
+isResultSuppressed      To check whether an object is already
+                        suppressed to a certain min cell count.
+isTableEmpty            Check if a table is empty or not
+listSourceTables        List tables that can be accessed though a cdm
+                        object.
+logMessage              Log a message to a logFile
+newAchillesTable        Create an achilles table from a cdm_table.
+newCdmReference         'cdm_reference' objects constructor
+newCdmSource            Create a cdm source object.
+newCdmTable             Create an cdm table.
+newCodelist             'codelist' object constructor
+newCodelistWithDetails
+                        'codelist' object constructor
+newCohortTable          'cohort_table' objects constructor.
+newConceptSetExpression
+                        'concept_set_expression' object constructor
+newLocalSource          A new local source for the cdm
+newOmopTable            Create an omop table from a cdm table.
+newSummarisedResult     'summarised_results' object constructor
+numberRecords           Count the number of records that a 'cdm_table'
+                        has.
+numberSubjects          Count the number of subjects that a 'cdm_table'
+                        has.
+omopColumns             Required columns that the standard tables in
+                        the OMOP Common Data Model must have.
+omopDataFolder          Check or set the OMOP_DATA_FOLDER where the
+                        OMOP related data is stored.
+omopTableFields         Return a table of omop cdm fields informations
+omopTables              Standard tables that a cdm reference can
+                        contain in the OMOP Common Data Model.
+pivotEstimates          Set estimates as columns
+print.cdm_reference     Print a CDM reference object
+print.codelist          Print a codelist
+print.codelist_with_details
+                        Print a codelist with details
+print.concept_set_expression
+                        Print a concept set expression
+readSourceTable         Read a table from the cdm_source and add it to
+                        to the cdm.
+recordCohortAttrition   Update cohort attrition.
+resultColumns           Required columns that the result tables must
+                        have.
+resultPackageVersion    Check if different packages version are used
+                        for summarise_results object
+settings                Get settings from an object.
+settings.cohort_table   Get cohort settings from a cohort_table object.
+settings.summarised_result
+                        Get settings from a summarised_result object.
+settingsColumns         Identify settings columns of a
+                        <summarised_result>
+sourceType              Get the source type of an object.
+splitAdditional         Split additional_name and additional_level
+                        columns
+splitAll                Split all pairs name-level into columns.
+splitGroup              Split group_name and group_level columns
+splitStrata             Split strata_name and strata_level columns
+statusIndexes           Status of the indexes
+strataColumns           Identify variables in strata_name column
+summariseLogFile        Summarise and extract the information of a log
+                        file into a 'summarised_result' object.
+summary.cdm_reference   Summary a cdm reference
+summary.cdm_source      Summarise a 'cdm_source' object
+summary.cohort_table    Summary a generated cohort set
+summary.summarised_result
+                        Summary a summarised_result
+suppress                Function to suppress counts in result objects
+suppress.summarised_result
+                        Function to suppress counts in result objects
+tableName               Get the table name of a 'cdm_table'.
+tableSource             Get the table source of a 'cdm_table'.
+tidy.summarised_result
+                        Turn a <summarised_result> object into a tidy
+                        tibble
+tidyColumns             Identify tidy columns of a <summarised_result>
+tmpPrefix               Create a temporary prefix for tables, that
+                        contains a unique prefix that starts with tmp.
+toSnakeCase             Convert a character vector to snake case
+transformToSummarisedResult
+                        Create a <summarised_result> object from a
+                        data.frame, given a set of specifications.
+uniqueId                Get a unique Identifier with a certain number
+                        of characters and a prefix.
+uniqueTableName         Create a unique table name
+uniteAdditional         Unite one or more columns in
+                        additional_name-additional_level format
+uniteGroup              Unite one or more columns in
+                        group_name-group_level format
+uniteStrata             Unite one or more columns in
+                        strata_name-strata_level format
+validateAchillesTable   Validate if a cdm_table is a valid achilles
+                        table.
+validateAgeGroupArgument
+                        Validate the ageGroup argument. It must be a
+                        list of two integerish numbers lower age and
+                        upper age, both of the must be greater or equal
+                        to 0 and lower age must be lower or equal to
+                        the upper age. If not named automatic names
+                        will be given in the output list.
+validateCdmArgument     Validate if an object in a valid cdm_reference.
+validateCdmTable        Validate if a table is a valid cdm_table
+                        object.
+validateCohortArgument
+                        Validate a cohort table input.
+validateCohortIdArgument
+                        Validate cohortId argument. CohortId can either
+                        be a cohort_definition_id value, a cohort_name
+                        or a tidyselect expression referinc to
+                        cohort_names. If you want to support tidyselect
+                        expressions please use the function as:
+                        'validateCohortIdArgument({{cohortId}},
+                        cohort)'.
+validateColumn          Validate whether a variable points to a certain
+                        exiting column in a table.
+validateConceptSetArgument
+                        Validate conceptSet argument. It can either be
+                        a list, a codelist, a concept set expression or
+                        a codelist with details. The output will always
+                        be a codelist.
+validateNameArgument    Validate name argument. It must be a snake_case
+                        character vector. You can add the a cdm object
+                        to check 'name' is not already used in that
+                        cdm.
+validateNameLevel       Validate if two columns are valid Name-Level
+                        pair.
+validateNameStyle       Validate 'nameStyle' argument. If any of the
+                        element in '...' has length greater than 1 it
+                        must be contained in nameStyle. Note that snake
+                        case notation is used.
+validateNewColumn       Validate a new column of a table
+validateOmopTable       Validate an omop_table
+validateResultArgument
+                        Validate if a an object is a valid
+                        'summarised_result' object.
+validateStrataArgument
+                        To validate a strata list. It makes sure that
+                        elements are unique and point to columns in
+                        table.
+validateWindowArgument
+                        Validate a window argument. It must be a list
+                        of two elements (window start and window end),
+                        both must be integerish and window start must
+                        be lower or equal than window end.

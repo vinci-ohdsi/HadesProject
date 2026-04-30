@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: Methods and Classes for the OMOP Common Data Model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body><div class="container">
+<h1> Methods and Classes for the OMOP Common Data Model
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]">
+</h1>
+<hr>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]"></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]"></a>
+</div><h2>Documentation for package &lsquo;omopgenerics&rsquo; version 1.3.7</h2>
+
+<ul><li><a href="../DESCRIPTION" type="text/plain; charset=utf-8">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+<li><a href="../NEWS.md">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="#A">A</a>
+<a href="#B">B</a>
+<a href="#C">C</a>
+<a href="#D">D</a>
+<a href="#E">E</a>
+<a href="#F">F</a>
+<a href="#G">G</a>
+<a href="#I">I</a>
+<a href="#L">L</a>
+<a href="#N">N</a>
+<a href="#O">O</a>
+<a href="#P">P</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+<a href="#T">T</a>
+<a href="#U">U</a>
+<a href="#V">V</a>
+<a href="#misc">misc</a>
+</p>
+
+
+<h2><a id="A">-- A --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="achillesColumns.html">achillesColumns</a></td>
+<td>Required columns for each of the achilles result tables</td></tr>
+<tr><td style="width: 25%;"><a href="achillesTables.html">achillesTables</a></td>
+<td>Names of the tables that contain the results of achilles analyses</td></tr>
+<tr><td style="width: 25%;"><a href="additionalColumns.html">additionalColumns</a></td>
+<td>Identify variables in additional_name column</td></tr>
+<tr><td style="width: 25%;"><a href="addSettings.html">addSettings</a></td>
+<td>Add settings columns to a &lt;summarised_result&gt; object</td></tr>
+<tr><td style="width: 25%;"><a href="assertCharacter.html">assertCharacter</a></td>
+<td>Assert that an object is a character and fulfill certain conditions.</td></tr>
+<tr><td style="width: 25%;"><a href="assertChoice.html">assertChoice</a></td>
+<td>Assert that an object is within a certain oprtions.</td></tr>
+<tr><td style="width: 25%;"><a href="assertClass.html">assertClass</a></td>
+<td>Assert that an object has a certain class.</td></tr>
+<tr><td style="width: 25%;"><a href="assertDate.html">assertDate</a></td>
+<td>Assert Date</td></tr>
+<tr><td style="width: 25%;"><a href="assertList.html">assertList</a></td>
+<td>Assert that an object is a list.</td></tr>
+<tr><td style="width: 25%;"><a href="assertLogical.html">assertLogical</a></td>
+<td>Assert that an object is a logical.</td></tr>
+<tr><td style="width: 25%;"><a href="assertNumeric.html">assertNumeric</a></td>
+<td>Assert that an object is a numeric.</td></tr>
+<tr><td style="width: 25%;"><a href="assertTable.html">assertTable</a></td>
+<td>Assert that an object is a table.</td></tr>
+<tr><td style="width: 25%;"><a href="assertTrue.html">assertTrue</a></td>
+<td>Assert that an expression is TRUE.</td></tr>
+<tr><td style="width: 25%;"><a href="attrition.html">attrition</a></td>
+<td>Get attrition from an object.</td></tr>
+<tr><td style="width: 25%;"><a href="attrition.cohort_table.html">attrition.cohort_table</a></td>
+<td>Get cohort attrition from a cohort_table object.</td></tr>
+</table>
+
+<h2><a id="B">-- B --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="bind.html">bind</a></td>
+<td>Bind two or more objects of the same class.</td></tr>
+<tr><td style="width: 25%;"><a href="bind.cohort_table.html">bind.cohort_table</a></td>
+<td>Bind two or more cohort tables</td></tr>
+<tr><td style="width: 25%;"><a href="bind.summarised_result.html">bind.summarised_result</a></td>
+<td>Bind two or summarised_result objects</td></tr>
+</table>
+
+<h2><a id="C">-- C --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="cdmClasses.html">cdmClasses</a></td>
+<td>Separate the cdm tables in classes</td></tr>
+<tr><td style="width: 25%;"><a href="cdmDisconnect.html">cdmDisconnect</a></td>
+<td>Disconnect from a cdm object.</td></tr>
+<tr><td style="width: 25%;"><a href="cdmFromTables.html">cdmFromTables</a></td>
+<td>Create a cdm object from local tables</td></tr>
+<tr><td style="width: 25%;"><a href="cdmName.html">cdmName</a></td>
+<td>Get the name of a cdm_reference associated object</td></tr>
+<tr><td style="width: 25%;"><a href="cdmReference.html">cdmReference</a></td>
+<td>Get the 'cdm_reference' of a 'cdm_table'.</td></tr>
+<tr><td style="width: 25%;"><a href="cdmSelect.html">cdmSelect</a></td>
+<td>Restrict the cdm object to a subset of tables.</td></tr>
+<tr><td style="width: 25%;"><a href="cdmSource.html">cdmSource</a></td>
+<td>Get the cdmSource of an object.</td></tr>
+<tr><td style="width: 25%;"><a href="cdmSourceType.html">cdmSourceType</a></td>
+<td>Get the source type of a cdm_reference object.</td></tr>
+<tr><td style="width: 25%;"><a href="cdmTableFromSource.html">cdmTableFromSource</a></td>
+<td>This is an internal developer focused function that creates a cdm_table from a table that shares the source but it is not a cdm_table. Please use insertTable if you want to insert a table to a cdm_reference object.</td></tr>
+<tr><td style="width: 25%;"><a href="cdmVersion.html">cdmVersion</a></td>
+<td>Get the version of an object.</td></tr>
+<tr><td style="width: 25%;"><a href="checkCohortRequirements.html">checkCohortRequirements</a></td>
+<td>Check whether a cohort table satisfies requirements</td></tr>
+<tr><td style="width: 25%;"><a href="cohortCodelist.html">cohortCodelist</a></td>
+<td>Get codelist from a cohort_table object.</td></tr>
+<tr><td style="width: 25%;"><a href="cohortColumns.html">cohortColumns</a></td>
+<td>Required columns for a generated cohort set.</td></tr>
+<tr><td style="width: 25%;"><a href="cohortCount.html">cohortCount</a></td>
+<td>Get cohort counts from a cohort_table object.</td></tr>
+<tr><td style="width: 25%;"><a href="cohortTables.html">cohortTables</a></td>
+<td>Cohort tables that a cdm reference can contain in the OMOP Common Data Model.</td></tr>
+<tr><td style="width: 25%;"><a href="collect.cdm_reference.html">collect.cdm_reference</a></td>
+<td>Retrieves the cdm reference into a local cdm.</td></tr>
+<tr><td style="width: 25%;"><a href="collect.cohort_table.html">collect.cohort_table</a></td>
+<td>To collect a 'cohort_table' object.</td></tr>
+<tr><td style="width: 25%;"><a href="combineStrata.html">combineStrata</a></td>
+<td>Provide all combinations of strata levels.</td></tr>
+<tr><td style="width: 25%;"><a href="compute.cdm_table.html">compute.cdm_table</a></td>
+<td>Store results in a table.</td></tr>
+<tr><td style="width: 25%;"><a href="createIndexes.html">createIndexes</a></td>
+<td>Create the missing indexes</td></tr>
+<tr><td style="width: 25%;"><a href="createLogFile.html">createLogFile</a></td>
+<td>Create a log file</td></tr>
+<tr><td style="width: 25%;"><a href="createTableIndex.html">createTableIndex</a></td>
+<td>Create a table index</td></tr>
+</table>
+
+<h2><a id="D">-- D --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="dropSourceTable.html">dropSourceTable</a></td>
+<td>Drop a table from a cdm object.</td></tr>
+<tr><td style="width: 25%;"><a href="dropTable.html">dropTable</a></td>
+<td>Drop a table from a cdm object. *[Deprecated]*</td></tr>
+</table>
+
+<h2><a id="E">-- E --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="emptyAchillesTable.html">emptyAchillesTable</a></td>
+<td>Create an empty achilles table</td></tr>
+<tr><td style="width: 25%;"><a href="emptyCdmReference.html">emptyCdmReference</a></td>
+<td>Create an empty cdm_reference</td></tr>
+<tr><td style="width: 25%;"><a href="emptyCodelist.html">emptyCodelist</a></td>
+<td>Empty 'codelist' object.</td></tr>
+<tr><td style="width: 25%;"><a href="emptyCodelistWithDetails.html">emptyCodelistWithDetails</a></td>
+<td>Empty 'codelist' object.</td></tr>
+<tr><td style="width: 25%;"><a href="emptyCohortTable.html">emptyCohortTable</a></td>
+<td>Create an empty cohort_table object</td></tr>
+<tr><td style="width: 25%;"><a href="emptyConceptSetExpression.html">emptyConceptSetExpression</a></td>
+<td>Empty 'concept_set_expression' object.</td></tr>
+<tr><td style="width: 25%;"><a href="emptyOmopTable.html">emptyOmopTable</a></td>
+<td>Create an empty omop table</td></tr>
+<tr><td style="width: 25%;"><a href="emptySummarisedResult.html">emptySummarisedResult</a></td>
+<td>Empty 'summarised_result' object.</td></tr>
+<tr><td style="width: 25%;"><a href="estimateTypeChoices.html">estimateTypeChoices</a></td>
+<td>Choices that can be present in 'estimate_type' column.</td></tr>
+<tr><td style="width: 25%;"><a href="existingIndexes.html">existingIndexes</a></td>
+<td>Existing indexes in a cdm object</td></tr>
+<tr><td style="width: 25%;"><a href="expectedIndexes.html">expectedIndexes</a></td>
+<td>Expected indexes in a cdm object</td></tr>
+<tr><td style="width: 25%;"><a href="exportCodelist.html">exportCodelist</a></td>
+<td>Export a codelist object.</td></tr>
+<tr><td style="width: 25%;"><a href="exportConceptSetExpression.html">exportConceptSetExpression</a></td>
+<td>Export a concept set expression.</td></tr>
+<tr><td style="width: 25%;"><a href="exportSummarisedResult.html">exportSummarisedResult</a></td>
+<td>Export a summarised_result object to a csv file.</td></tr>
+</table>
+
+<h2><a id="F">-- F --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="filterAdditional.html">filterAdditional</a></td>
+<td>Filter the additional_name-additional_level pair in a summarised_result</td></tr>
+<tr><td style="width: 25%;"><a href="filterGroup.html">filterGroup</a></td>
+<td>Filter the group_name-group_level pair in a summarised_result</td></tr>
+<tr><td style="width: 25%;"><a href="filterSettings.html">filterSettings</a></td>
+<td>Filter a &lt;summarised_result&gt; using the settings</td></tr>
+<tr><td style="width: 25%;"><a href="filterStrata.html">filterStrata</a></td>
+<td>Filter the strata_name-strata_level pair in a summarised_result</td></tr>
+</table>
+
+<h2><a id="G">-- G --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="getCohortId.html">getCohortId</a></td>
+<td>Get the cohort definition id of a certain name</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortName.html">getCohortName</a></td>
+<td>Get the cohort name of a certain cohort definition id</td></tr>
+<tr><td style="width: 25%;"><a href="getPersonIdentifier.html">getPersonIdentifier</a></td>
+<td>Get the column name with the person identifier from a table (either subject_id or person_id), it will throw an error if it contains both or neither.</td></tr>
+<tr><td style="width: 25%;"><a href="groupColumns.html">groupColumns</a></td>
+<td>Identify variables in group_name column</td></tr>
+</table>
+
+<h2><a id="I">-- I --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="importCodelist.html">importCodelist</a></td>
+<td>Import a codelist.</td></tr>
+<tr><td style="width: 25%;"><a href="importConceptSetExpression.html">importConceptSetExpression</a></td>
+<td>Import a concept set expression.</td></tr>
+<tr><td style="width: 25%;"><a href="importSummarisedResult.html">importSummarisedResult</a></td>
+<td>Import a set of summarised results.</td></tr>
+<tr><td style="width: 25%;"><a href="insertCdmTo.html">insertCdmTo</a></td>
+<td>Insert a cdm_reference object to a different source.</td></tr>
+<tr><td style="width: 25%;"><a href="insertFromSource.html">insertFromSource</a></td>
+<td>Convert a table that is not a cdm_table but have the same original source to a cdm_table. This Table is not meant to be used to insert tables in the cdm, please use insertTable instead.</td></tr>
+<tr><td style="width: 25%;"><a href="insertTable.html">insertTable</a></td>
+<td>Insert a table to a cdm object.</td></tr>
+<tr><td style="width: 25%;"><a href="isResultSuppressed.html">isResultSuppressed</a></td>
+<td>To check whether an object is already suppressed to a certain min cell count.</td></tr>
+<tr><td style="width: 25%;"><a href="isTableEmpty.html">isTableEmpty</a></td>
+<td>Check if a table is empty or not</td></tr>
+</table>
+
+<h2><a id="L">-- L --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="listSourceTables.html">listSourceTables</a></td>
+<td>List tables that can be accessed though a cdm object.</td></tr>
+<tr><td style="width: 25%;"><a href="logMessage.html">logMessage</a></td>
+<td>Log a message to a logFile</td></tr>
+</table>
+
+<h2><a id="N">-- N --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="newAchillesTable.html">newAchillesTable</a></td>
+<td>Create an achilles table from a cdm_table.</td></tr>
+<tr><td style="width: 25%;"><a href="newCdmReference.html">newCdmReference</a></td>
+<td>'cdm_reference' objects constructor</td></tr>
+<tr><td style="width: 25%;"><a href="newCdmSource.html">newCdmSource</a></td>
+<td>Create a cdm source object.</td></tr>
+<tr><td style="width: 25%;"><a href="newCdmTable.html">newCdmTable</a></td>
+<td>Create an cdm table.</td></tr>
+<tr><td style="width: 25%;"><a href="newCodelist.html">newCodelist</a></td>
+<td>'codelist' object constructor</td></tr>
+<tr><td style="width: 25%;"><a href="newCodelistWithDetails.html">newCodelistWithDetails</a></td>
+<td>'codelist' object constructor</td></tr>
+<tr><td style="width: 25%;"><a href="newCohortTable.html">newCohortTable</a></td>
+<td>'cohort_table' objects constructor.</td></tr>
+<tr><td style="width: 25%;"><a href="newConceptSetExpression.html">newConceptSetExpression</a></td>
+<td>'concept_set_expression' object constructor</td></tr>
+<tr><td style="width: 25%;"><a href="newLocalSource.html">newLocalSource</a></td>
+<td>A new local source for the cdm</td></tr>
+<tr><td style="width: 25%;"><a href="newOmopTable.html">newOmopTable</a></td>
+<td>Create an omop table from a cdm table.</td></tr>
+<tr><td style="width: 25%;"><a href="newSummarisedResult.html">newSummarisedResult</a></td>
+<td>'summarised_results' object constructor</td></tr>
+<tr><td style="width: 25%;"><a href="numberRecords.html">numberRecords</a></td>
+<td>Count the number of records that a 'cdm_table' has.</td></tr>
+<tr><td style="width: 25%;"><a href="numberSubjects.html">numberSubjects</a></td>
+<td>Count the number of subjects that a 'cdm_table' has.</td></tr>
+</table>
+
+<h2><a id="O">-- O --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="omopColumns.html">omopColumns</a></td>
+<td>Required columns that the standard tables in the OMOP Common Data Model must have.</td></tr>
+<tr><td style="width: 25%;"><a href="omopDataFolder.html">omopDataFolder</a></td>
+<td>Check or set the OMOP_DATA_FOLDER where the OMOP related data is stored.</td></tr>
+<tr><td style="width: 25%;"><a href="omopTableFields.html">omopTableFields</a></td>
+<td>Return a table of omop cdm fields informations</td></tr>
+<tr><td style="width: 25%;"><a href="omopTables.html">omopTables</a></td>
+<td>Standard tables that a cdm reference can contain in the OMOP Common Data Model.</td></tr>
+</table>
+
+<h2><a id="P">-- P --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="pivotEstimates.html">pivotEstimates</a></td>
+<td>Set estimates as columns</td></tr>
+<tr><td style="width: 25%;"><a href="print.cdm_reference.html">print.cdm_reference</a></td>
+<td>Print a CDM reference object</td></tr>
+<tr><td style="width: 25%;"><a href="print.codelist.html">print.codelist</a></td>
+<td>Print a codelist</td></tr>
+<tr><td style="width: 25%;"><a href="print.codelist_with_details.html">print.codelist_with_details</a></td>
+<td>Print a codelist with details</td></tr>
+<tr><td style="width: 25%;"><a href="print.concept_set_expression.html">print.concept_set_expression</a></td>
+<td>Print a concept set expression</td></tr>
+</table>
+
+<h2><a id="R">-- R --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="readSourceTable.html">readSourceTable</a></td>
+<td>Read a table from the cdm_source and add it to to the cdm.</td></tr>
+<tr><td style="width: 25%;"><a href="recordCohortAttrition.html">recordCohortAttrition</a></td>
+<td>Update cohort attrition.</td></tr>
+<tr><td style="width: 25%;"><a href="resultColumns.html">resultColumns</a></td>
+<td>Required columns that the result tables must have.</td></tr>
+<tr><td style="width: 25%;"><a href="resultPackageVersion.html">resultPackageVersion</a></td>
+<td>Check if different packages version are used for summarise_results object</td></tr>
+</table>
+
+<h2><a id="S">-- S --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="settings.html">settings</a></td>
+<td>Get settings from an object.</td></tr>
+<tr><td style="width: 25%;"><a href="settings.cohort_table.html">settings.cohort_table</a></td>
+<td>Get cohort settings from a cohort_table object.</td></tr>
+<tr><td style="width: 25%;"><a href="settings.summarised_result.html">settings.summarised_result</a></td>
+<td>Get settings from a summarised_result object.</td></tr>
+<tr><td style="width: 25%;"><a href="settingsColumns.html">settingsColumns</a></td>
+<td>Identify settings columns of a &lt;summarised_result&gt;</td></tr>
+<tr><td style="width: 25%;"><a href="sourceType.html">sourceType</a></td>
+<td>Get the source type of an object.</td></tr>
+<tr><td style="width: 25%;"><a href="splitAdditional.html">splitAdditional</a></td>
+<td>Split additional_name and additional_level columns</td></tr>
+<tr><td style="width: 25%;"><a href="splitAll.html">splitAll</a></td>
+<td>Split all pairs name-level into columns.</td></tr>
+<tr><td style="width: 25%;"><a href="splitGroup.html">splitGroup</a></td>
+<td>Split group_name and group_level columns</td></tr>
+<tr><td style="width: 25%;"><a href="splitStrata.html">splitStrata</a></td>
+<td>Split strata_name and strata_level columns</td></tr>
+<tr><td style="width: 25%;"><a href="statusIndexes.html">statusIndexes</a></td>
+<td>Status of the indexes</td></tr>
+<tr><td style="width: 25%;"><a href="strataColumns.html">strataColumns</a></td>
+<td>Identify variables in strata_name column</td></tr>
+<tr><td style="width: 25%;"><a href="summariseLogFile.html">summariseLogFile</a></td>
+<td>Summarise and extract the information of a log file into a 'summarised_result' object.</td></tr>
+<tr><td style="width: 25%;"><a href="summary.cdm_reference.html">summary.cdm_reference</a></td>
+<td>Summary a cdm reference</td></tr>
+<tr><td style="width: 25%;"><a href="summary.cdm_source.html">summary.cdm_source</a></td>
+<td>Summarise a 'cdm_source' object</td></tr>
+<tr><td style="width: 25%;"><a href="summary.cohort_table.html">summary.cohort_table</a></td>
+<td>Summary a generated cohort set</td></tr>
+<tr><td style="width: 25%;"><a href="summary.summarised_result.html">summary.summarised_result</a></td>
+<td>Summary a summarised_result</td></tr>
+<tr><td style="width: 25%;"><a href="suppress.html">suppress</a></td>
+<td>Function to suppress counts in result objects</td></tr>
+<tr><td style="width: 25%;"><a href="suppress.summarised_result.html">suppress.summarised_result</a></td>
+<td>Function to suppress counts in result objects</td></tr>
+</table>
+
+<h2><a id="T">-- T --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="tableName.html">tableName</a></td>
+<td>Get the table name of a 'cdm_table'.</td></tr>
+<tr><td style="width: 25%;"><a href="tableSource.html">tableSource</a></td>
+<td>Get the table source of a 'cdm_table'.</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.summarised_result.html">tidy.summarised_result</a></td>
+<td>Turn a &lt;summarised_result&gt; object into a tidy tibble</td></tr>
+<tr><td style="width: 25%;"><a href="tidyColumns.html">tidyColumns</a></td>
+<td>Identify tidy columns of a &lt;summarised_result&gt;</td></tr>
+<tr><td style="width: 25%;"><a href="tmpPrefix.html">tmpPrefix</a></td>
+<td>Create a temporary prefix for tables, that contains a unique prefix that starts with tmp.</td></tr>
+<tr><td style="width: 25%;"><a href="toSnakeCase.html">toSnakeCase</a></td>
+<td>Convert a character vector to snake case</td></tr>
+<tr><td style="width: 25%;"><a href="transformToSummarisedResult.html">transformToSummarisedResult</a></td>
+<td>Create a &lt;summarised_result&gt; object from a data.frame, given a set of specifications.</td></tr>
+</table>
+
+<h2><a id="U">-- U --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="uniqueId.html">uniqueId</a></td>
+<td>Get a unique Identifier with a certain number of characters and a prefix.</td></tr>
+<tr><td style="width: 25%;"><a href="uniqueTableName.html">uniqueTableName</a></td>
+<td>Create a unique table name</td></tr>
+<tr><td style="width: 25%;"><a href="uniteAdditional.html">uniteAdditional</a></td>
+<td>Unite one or more columns in additional_name-additional_level format</td></tr>
+<tr><td style="width: 25%;"><a href="uniteGroup.html">uniteGroup</a></td>
+<td>Unite one or more columns in group_name-group_level format</td></tr>
+<tr><td style="width: 25%;"><a href="uniteStrata.html">uniteStrata</a></td>
+<td>Unite one or more columns in strata_name-strata_level format</td></tr>
+</table>
+
+<h2><a id="V">-- V --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="validateAchillesTable.html">validateAchillesTable</a></td>
+<td>Validate if a cdm_table is a valid achilles table.</td></tr>
+<tr><td style="width: 25%;"><a href="validateAgeGroupArgument.html">validateAgeGroupArgument</a></td>
+<td>Validate the ageGroup argument. It must be a list of two integerish numbers lower age and upper age, both of the must be greater or equal to 0 and lower age must be lower or equal to the upper age. If not named automatic names will be given in the output list.</td></tr>
+<tr><td style="width: 25%;"><a href="validateCdmArgument.html">validateCdmArgument</a></td>
+<td>Validate if an object in a valid cdm_reference.</td></tr>
+<tr><td style="width: 25%;"><a href="validateCdmTable.html">validateCdmTable</a></td>
+<td>Validate if a table is a valid cdm_table object.</td></tr>
+<tr><td style="width: 25%;"><a href="validateCohortArgument.html">validateCohortArgument</a></td>
+<td>Validate a cohort table input.</td></tr>
+<tr><td style="width: 25%;"><a href="validateCohortIdArgument.html">validateCohortIdArgument</a></td>
+<td>Validate cohortId argument. CohortId can either be a cohort_definition_id value, a cohort_name or a tidyselect expression referinc to cohort_names. If you want to support tidyselect expressions please use the function as: 'validateCohortIdArgument({{cohortId}}, cohort)'.</td></tr>
+<tr><td style="width: 25%;"><a href="validateColumn.html">validateColumn</a></td>
+<td>Validate whether a variable points to a certain exiting column in a table.</td></tr>
+<tr><td style="width: 25%;"><a href="validateConceptSetArgument.html">validateConceptSetArgument</a></td>
+<td>Validate conceptSet argument. It can either be a list, a codelist, a concept set expression or a codelist with details. The output will always be a codelist.</td></tr>
+<tr><td style="width: 25%;"><a href="validateNameArgument.html">validateNameArgument</a></td>
+<td>Validate name argument. It must be a snake_case character vector. You can add the a cdm object to check 'name' is not already used in that cdm.</td></tr>
+<tr><td style="width: 25%;"><a href="validateNameLevel.html">validateNameLevel</a></td>
+<td>Validate if two columns are valid Name-Level pair.</td></tr>
+<tr><td style="width: 25%;"><a href="validateNameStyle.html">validateNameStyle</a></td>
+<td>Validate 'nameStyle' argument. If any of the element in '...' has length greater than 1 it must be contained in nameStyle. Note that snake case notation is used.</td></tr>
+<tr><td style="width: 25%;"><a href="validateNewColumn.html">validateNewColumn</a></td>
+<td>Validate a new column of a table</td></tr>
+<tr><td style="width: 25%;"><a href="validateOmopTable.html">validateOmopTable</a></td>
+<td>Validate an omop_table</td></tr>
+<tr><td style="width: 25%;"><a href="validateResultArgument.html">validateResultArgument</a></td>
+<td>Validate if a an object is a valid 'summarised_result' object.</td></tr>
+<tr><td style="width: 25%;"><a href="validateStrataArgument.html">validateStrataArgument</a></td>
+<td>To validate a strata list. It makes sure that elements are unique and point to columns in table.</td></tr>
+<tr><td style="width: 25%;"><a href="validateWindowArgument.html">validateWindowArgument</a></td>
+<td>Validate a window argument. It must be a list of two elements (window start and window end), both must be integerish and window start must be lower or equal than window end.</td></tr>
+</table>
+
+<h2><a id="misc">-- misc --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="cash-.cdm_reference.html">$.cdm_reference</a></td>
+<td>Subset a cdm reference object.</td></tr>
+<tr><td style="width: 25%;"><a href="cash-set-.cdm_reference.html">$&lt;-.cdm_reference</a></td>
+<td>Assign an table to a cdm reference.</td></tr>
+<tr><td style="width: 25%;"><a href="sub-sub-.cdm_reference.html">[[.cdm_reference</a></td>
+<td>Subset a cdm reference object.</td></tr>
+<tr><td style="width: 25%;"><a href="sub-subset-.cdm_reference.html">[[&lt;-.cdm_reference</a></td>
+<td>Assign a table to a cdm reference.</td></tr>
+</table>
+</div></body></html>
