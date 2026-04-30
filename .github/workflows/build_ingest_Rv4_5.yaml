@@ -1,0 +1,82 @@
+name: Build ingest branch on version tag in main
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (optional, e.g. v1.2.3)'
+        required: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Determine ref to use
+        id: ref
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.tag }}" ]; then
+            echo "ref=refs/tags/${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+          else
+            echo "ref=${GITHUB_REF}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout selected ref
+        run: |
+          git fetch --all --tags
+          git checkout ${{ steps.ref.outputs.ref }}
+
+      - name: Ensure commit is on main
+        run: |
+          git fetch origin main
+          if git merge-base --is-ancestor HEAD origin/main; then
+            echo "Commit is on main "
+          else
+            echo "Commit is NOT on main "
+            exit 1
+          fi
+
+      - name: Prepare branch and merge
+        run: |
+          git fetch origin ingest_Rv4.5
+          git checkout -B ingest_Rv4.5 origin/ingest_Rv4.5
+
+          # Merge the selected ref (tag or commit) into the branch
+          git merge --no-commit --no-ff ${{ steps.ref.outputs.ref }}
+                  
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.5'
+
+      - name: Restore R dependencies (renv)
+        run: |
+          Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
+          Rscript -e "renv::restore(prompt = FALSE)"                  
+
+#       - name: Commit and push changes
+#         run: |
+#           # Configure git identity for the bot
+#           git config user.name "Marc A. Suchard [github bot]"
+#           git config user.email "msuchard@ucla.edu"
+# 
+#           # Stage all changes (adds, modifications, deletions)
+#           git add -A
+# 
+#           # Only commit if there are changes
+#           if ! git diff --cached --quiet; then
+#             git commit -m "Update generated files after merge ${{ steps.ref.outputs.ref }}"
+#             git push origin ingest_Rv4.5
+#           else
+#             echo "No changes to commit"
+#           fi
