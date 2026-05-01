@@ -8,7 +8,6 @@ batchTest               Apply a boolean test to batches of data in an
 copyAndromeda           Copy Andromeda
 createIndex             Create an index on one or more columns in an
                         Andromeda table
-flushAndromeda          Flush changes to disk
 getAndromedaTempDiskSpace
                         Get the available disk space in Andromeda temp
 groupApply              Apply a function to groups of data in an

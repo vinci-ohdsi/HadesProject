@@ -1,59 +1,9 @@
-Andromeda 1.2.0
-===============
-
-Changes:
-
-- Explicitly settings DuckDB's `temp_directory` to the Andromeda temp folder to avoid running out of space in an undefined temp location.
-
-- Set default memory limit to 20% instead of 80% of system memory to avoid out-of-memory errors when there are multiple Andromeda objects in memory.
-
-- `flushAndromeda()` now also evicts the cache by default, and is called after appending or creating a table from another Andromeda table.
-
-- The `length()` and `names()` method no longer throw an error when the Andromeda object is no longer valid, but just return 0 and an empty vector, respectively. This is to avoid error messages caused by RStudio querying the object.
-
-
-Andromeda 1.1.1
-===============
-
-Bugfixes:
-
-- Disabling DuckDB progress bar to avoid mysterious crashes and hangs.
-
-
-Andromeda 1.1.0
-===============
-
-Changes:
-
-- Leveraging DuckDB for faster assigns and copy operations.
-
-- Added `flushAndromeda()` function.
-
-- Added `andromedaThreads` option to control the maximum number of threads Andromeda is allowed to use.
-
-Bugfixes:
-
-- Calling `flushAndromeda()` before copying entire Andromeda (`copyAndromeda()`) or just a table (`[[]]<-` operator) to avoid segfault.
-
-- Switch from `zip::unzip()` to `utils::unzip()` to avoid 'mtimes' errors.
-
-
-Andromeda 1.0.0
-===============
-
-Changes
-
-- Switch backend from SQLite to DuckDb for greater performance in terms of speed and disk space.
-
-- Added `andromedaMemoryLimit` option to control the maximum amount of memory Andromeda is allowed to use (in GB).
-
-
 Andromeda 0.6.7
 ===============
 
 Bugfixes
 
-- Fix `isAndromedaTable()` when table belongs to descendant of Andromeda.
+- Fix `isAndromedaTable()` when table belongs to descendant of Andromda.
 
 
 Andromeda 0.6.6
