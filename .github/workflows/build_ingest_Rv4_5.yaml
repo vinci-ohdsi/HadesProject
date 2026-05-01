@@ -59,10 +59,9 @@ jobs:
           Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
           Rscript -e "renv::restore(packages = 'renv')"
           Rscript -e "renv::restore(prompt = FALSE)"
-          dir renv/
-          dir renv/library/
-          dir renv/library/R-4.5/
-          dir renv/library/R-4.5/x86_64-w64-mingw32/
+          dir renv/library/windows/
+          dir renv/library/windows/R-4.5/
+          dir renv/library/windows/R-4.5/x86_64-w64-mingw32/
           
 
 #       - name: Commit and push changes
