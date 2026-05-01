@@ -59,11 +59,13 @@ jobs:
           Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
           Rscript -e "renv::restore(packages = 'renv')"          
           Rscript -e "renv::restore(prompt = FALSE)"
+          # Clean
+          Remove-Item "renv/library/windows/R-4.5/x86_64-w64-mingw32/.renv-backup*" -Recurse -Force                   
           # Report some diagnostics (should really run unit-tests)
           Rscript -e "renv::diagnostics()"
           Rscript -e "Sys.getenv('JAVA_HOME')"
           Rscript -e "Sys.getenv('DATABASECONNECTOR_JAR_FOLDER')"
-                   
+                              
       - name: Commit and push changes
         run: |
           # Configure git identity for the bot
