@@ -57,26 +57,26 @@ jobs:
       - name: Restore R dependencies (renv)
         run: |
           Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
-          Rscript -e "renv::restore(packages = 'renv')"
+          Rscript -e "renv::restore(packages = 'renv')"          
           Rscript -e "renv::restore(prompt = FALSE)"
-          dir renv/library/windows/
-          dir renv/library/windows/R-4.5/
-          dir renv/library/windows/R-4.5/x86_64-w64-mingw32/
-          
+          # Report some diagnostics (should really run unit-tests)
+          Rscript -e "renv::diagnostics()"
+          Rscript -e "Sys.getenv('JAVA_HOME')"
+          Rscript -e "Sys.getenv('DATABASECONNECTOR_JAR_FOLDER')"
+                   
+      - name: Commit and push changes
+        run: |
+          # Configure git identity for the bot
+          git config user.name "Marc A. Suchard [github bot]"
+          git config user.email "msuchard@ucla.edu"
 
-#       - name: Commit and push changes
-#         run: |
-#           # Configure git identity for the bot
-#           git config user.name "Marc A. Suchard [github bot]"
-#           git config user.email "msuchard@ucla.edu"
-# 
-#           # Stage all changes (adds, modifications, deletions)
-#           git add -f renv/library -A
-# 
-#           # Only commit if there are changes
-#           if ! git diff --cached --quiet; then
-#             git commit -m "Update generated files after merge ${{ steps.ref.outputs.ref }}"
-#             git push origin ingest_Rv4.5
-#           else
-#             echo "No changes to commit"
-#           fi
+          # Stage all changes (adds, modifications, deletions)
+          git add -f renv/library -A
+
+          # Only commit if there are changes
+          if ! git diff --cached --quiet; then
+            git commit -m "Update generated files after merge ${{ steps.ref.outputs.ref }}"
+            git push origin ingest_Rv4.5
+          else
+            echo "No changes to commit"
+          fi
