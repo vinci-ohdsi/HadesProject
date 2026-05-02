@@ -11,6 +11,10 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: bash
     
     # Only run for tag refs (extra safety)
     if: startsWith(github.ref, 'refs/tags/')
@@ -25,12 +29,12 @@ jobs:
           git fetch origin main
           git merge-base --is-ancestor HEAD origin/main
 
-          if ($LASTEXITCODE -eq 0) {
-            Write-Host "Commit is on main"
-          } else {
-            Write-Host "Commit is NOT on main"
+          if [ $? -eq 0 ]; then
+            echo "Commit is on main"
+          else
+            echo "Commit is NOT on main"
             exit 1
-          }   
+          fi   
           
       - name: Merge tagged commit into ingest_Rv4.5
         run: |
@@ -42,12 +46,12 @@ jobs:
           git pull origin ingest_Rv4.5
 
           # Merge the tagged commit (HEAD is already the tag commit)
-          git merge --no-commit --no-ff HEAD -m "Merge tag $env:GITHUB_REF into ingest_Rv4.5"
+          git merge --no-commit --no-ff HEAD -m "Merge tag $GITHUB_REF into ingest_Rv4.5"
 
-          if ($LASTEXITCODE -ne 0) {
-            Write-Host "Merge failed"
+          if [ $? -ne 0 ]; then
+            echo "Merge failed"
             exit 1
-          }
+          fi
                          
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -60,7 +64,7 @@ jobs:
           Rscript -e "renv::restore(packages = 'renv')"          
           Rscript -e "renv::restore(prompt = FALSE)"
           # Clean
-          Remove-Item "renv/library/windows/R-4.5/x86_64-w64-mingw32/.renv-backup*" -Recurse -Force                   
+          rm -rf renv/library/windows/R-4.5/x86_64-w64-mingw32/.renv-backup*
           # Report some diagnostics (should really run unit-tests)
           Rscript -e "renv::diagnostics()"
           Rscript -e "Sys.getenv('JAVA_HOME')"
@@ -76,10 +80,9 @@ jobs:
           git add -f renv/library -A
           
           # Only commit if there are changes
-          git diff --cached --quiet
-          if ($LASTEXITCODE -ne 0) {
+          if ! git diff --cached --quiet; then
             git commit -m "Update generated files after merge ${{ steps.ref.outputs.ref }}"
             git push origin ingest_Rv4.5
-          } else {
-            Write-Host "No changes to commit"
-          }          
+          else
+            echo "No changes to commit"
+          fi
