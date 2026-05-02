@@ -1,0 +1,94 @@
+name: Build ingest branch on version tag in main
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    strategy:
+      matrix:
+        config:
+          - branch: ingest_Rv4.5
+            r_version: '4.5'
+    
+    # Only run for tag refs (extra safety)
+    if: startsWith(github.ref, 'refs/tags/')
+        
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Ensure commit is on main
+        run: |
+          git fetch origin main
+          git merge-base --is-ancestor HEAD origin/main
+
+          if [ $? -eq 0 ]; then
+            echo "Commit is on main"
+          else
+            echo "Commit is NOT on main"
+            exit 1
+          fi   
+          
+      - name: Merge tagged commit into target branch
+        run: |
+          # Make sure we have latest branches and tags
+          git fetch --all --tags
+
+          # Checkout target branch
+          git checkout ${{ matrix.config.branch }}
+          git pull origin ${{ matrix.config.branch }}
+
+          # Merge the tagged commit (HEAD is already the tag commit)
+          git merge --no-commit --no-ff HEAD -m "Merge tag $GITHUB_REF into ${{ matrix.config.branch }}"
+
+          if [ $? -ne 0 ]; then
+            echo "Merge failed"
+            exit 1
+          fi
+                         
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r_version }}
+
+      - name: Restore R dependencies (renv)
+        run: |
+          Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
+          Rscript -e "renv::restore(packages = 'renv')"          
+          Rscript -e "renv::restore(prompt = FALSE)"
+          # Clean
+          rm -rf renv/library/windows/R-${{ matrix.config.r_version }}/x86_64-w64-mingw32/.renv-backup*
+          # Report some diagnostics (should really run unit-tests)
+          Rscript -e "renv::diagnostics()"
+          Rscript -e "Sys.getenv('JAVA_HOME')"
+          Rscript -e "Sys.getenv('DATABASECONNECTOR_JAR_FOLDER')"
+                              
+      - name: Commit and push changes
+        run: |
+          # Configure git identity for the bot
+          git config user.name "Marc A. Suchard [github bot]"
+          git config user.email "msuchard@ucla.edu"
+
+          # Stage all changes (adds, modifications, deletions)
+          git add -f renv/library -A
+          
+          # Only commit if there are changes
+          if ! git diff --cached --quiet; then
+            git commit -m "Update generated files after merge ${{ steps.ref.outputs.ref }}"
+            git push origin ${{ matrix.config.branch }}
+          else
+            echo "No changes to commit"
+          fi
