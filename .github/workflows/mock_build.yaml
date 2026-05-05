@@ -1,0 +1,73 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # trigger on version tags
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag (e.g., v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+      name:
+        description: 'Release name'
+        required: true
+        default: 'My Release'      
+
+jobs:
+  build:
+    runs-on: ${{ matrix.config.os }}
+    
+    strategy:      
+      matrix:
+        config:
+          - {os: windows-latest, r: 'release'}    
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}            
+      
+#       - uses: r-lib/actions/setup-tinytex@v2
+# 
+#       - uses: r-lib/actions/setup-pandoc@v2
+      
+      - name: Restore renv environment
+        run: |
+          cat <<EOF > .Renviron
+          # hello
+          # there
+          EOF
+          Rscript -e "install.packages('renv'); renv::restore()"
+                       
+      - name: Download asset
+        run: |
+          curl -L -o file.zip \
+          https://github.com/vinci-ohdsi/jdk8/releases/download/v1.0.0/file.zip         
+
+#       - uses: r-lib/actions/setup-r-dependencies@v2
+#         with:
+#           extra-packages: any::rcmdcheck
+#           needs: check
+# 
+#       - uses: r-lib/actions/check-r-package@v2
+#         with:
+#           args: 'c("--no-manual", "--as-cran")'
+#           build_args: 'c("--compact-vignettes=both")'
+#           error-on: '"warning"'
+#           check-dir: '"check"'
+# 
+#       - name: Build zip
+#         run: |
+#           mkdir dist
+#           zip -r dist/my-app.zip .
+# 
+#       - name: Create Release and Upload Asset
+#         uses: softprops/action-gh-release@v2
+#         with:
+#           tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+#           name: ${{ github.event_name == 'workflow_dispatch' && inputs.name || github.ref_name }}
+#           files: dist/my-app.zip
