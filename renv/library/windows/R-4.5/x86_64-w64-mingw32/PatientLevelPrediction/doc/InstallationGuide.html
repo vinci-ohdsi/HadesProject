@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Jenna Reps, Peter R. Rijnbeek, Egill Fridgeirsson" />
+
+<meta name="date" content="2025-07-25" />
+
+<title>Patient-Level Prediction Installation Guide</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Patient-Level Prediction Installation
+Guide</h1>
+<h4 class="author">Jenna Reps, Peter R. Rijnbeek, Egill
+Fridgeirsson</h4>
+<h4 class="date">2025-07-25</h4>
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This vignette describes how you need to install the Observational
+Health Data Science and Informatics (OHDSI) <a href="https://github.com/OHDSI/PatientLevelPrediction"><code>PatientLevelPrediction</code></a>
+package under Windows, Mac, and Linux.</p>
+</div>
+<div id="software-prerequisites" class="section level1">
+<h1>Software Prerequisites</h1>
+<div id="windows-users" class="section level2">
+<h2>Windows Users</h2>
+<p>Under Windows the OHDSI Patient Level Prediction (PLP) package
+requires installing:</p>
+<ul>
+<li>R (<a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> ) - (R &gt;= 4.0.0, but
+latest is recommended)</li>
+<li>Rstudio (<a href="https://posit.co/" class="uri">https://posit.co/</a> )</li>
+<li>Java</li>
+<li>RTools (<a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>)</li>
+</ul>
+</div>
+<div id="maclinux-users" class="section level2">
+<h2>Mac/Linux Users</h2>
+<p>Under Mac and Linux the OHDSI Patient Level Prediction (PLP) package
+requires installing:</p>
+<ul>
+<li>R (<a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> ) - (R &gt;= 4.0.0, but
+latest is recommended)</li>
+<li>Rstudio (<a href="https://posit.co/" class="uri">https://posit.co/</a> )</li>
+<li>Java</li>
+<li>Xcode command line tools(run in terminal: xcode-select –install)
+[MAC USERS ONLY]</li>
+</ul>
+</div>
+</div>
+<div id="installing-the-package" class="section level1">
+<h1>Installing the Package</h1>
+<p>The preferred way to install the package is by using
+<code>remotes</code>, which will automatically install the latest
+release and all the latest dependencies.</p>
+<p>If you do not want the official release you could install the
+bleeding edge version of the package (latest develop branch).</p>
+<p>Note that the latest develop branch could contain bugs, please report
+them to us if you experience problems.</p>
+<div id="installing-patientlevelprediction-using-remotes" class="section level2">
+<h2>Installing PatientLevelPrediction using remotes</h2>
+<p>To install using <code>remotes</code> run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;OHDSI/PatientLevelPrediction&quot;</span>)</span></code></pre></div>
+<p>When installing make sure to close any other Rstudio sessions that
+are using <code>PatientLevelPrediction</code> or any dependency. Keeping
+Rstudio sessions open can cause locks that prevent the package
+installing.</p>
+</div>
+</div>
+<div id="creating-python-reticulate-environment" class="section level1">
+<h1>Creating Python Reticulate Environment</h1>
+<p>Many of the classifiers in the <code>PatientLevelPrediction</code>
+use a Python backend. To set up a python environment run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(PatientLevelPrediction)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">install_miniconda</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">configurePython</span>(<span class="at">envname =</span> <span class="st">&quot;r-reticulate&quot;</span>, <span class="at">envtype =</span> <span class="st">&quot;conda&quot;</span>)</span></code></pre></div>
+</div>
+<div id="installation-issues" class="section level1">
+<h1>Installation issues</h1>
+<p>Installation issues need to be posted in our issue tracker: <a href="https://github.com/OHDSI/PatientLevelPrediction/issues" class="uri">https://github.com/OHDSI/PatientLevelPrediction/issues</a></p>
+<p>The list below provides solutions for some common issues:</p>
+<ol style="list-style-type: decimal">
+<li><p>If you have an error when trying to install a package in R saying
+<strong>‘Dependancy X not available …’</strong> then this can sometimes
+be fixed by running <code>install.packages(&#39;X&#39;)</code> and then once
+that completes trying to reinstall the package that had the
+error.</p></li>
+<li><p>I have found that using the github <code>remotes</code> to
+install packages can be impacted if you have <strong>multiple R
+sessions</strong> open as one session with a library open can cause the
+library to be locked and this can prevent an install of a package that
+depends on that library.</p></li>
+</ol>
+<div id="common-issues" class="section level2">
+<h2>Common issues</h2>
+<div id="python-environment-maclinux-users" class="section level3">
+<h3>python environment Mac/linux users:</h3>
+<p>to make sure R uses the r-reticulate python environment you may need
+to edit your .Rprofile with the location of the python binary for the
+PLP environment. Edit the .Rprofile by running:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_profile</span>()</span></code></pre></div>
+<p>and add</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">PATH =</span> <span class="fu">paste</span>(<span class="st">&quot;your python bin location&quot;</span>, <span class="fu">Sys.getenv</span>(<span class="st">&quot;PATH&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;:&quot;</span>))</span></code></pre></div>
+<p>to the file then save. Where your python bin location is the location
+returned by</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">conda_list</span>()</span></code></pre></div>
+<p>e.g., My PLP virtual environment location was
+/anaconda3/envs/PLP/bin/python so I added:<br />
+Sys.setenv(PATH = paste(“/anaconda3/envs/PLP/bin”, Sys.getenv(“PATH”),
+sep=“:”))</p>
+</div>
+</div>
+</div>
+<div id="acknowledgments" class="section level1">
+<h1>Acknowledgments</h1>
+<p>Considerable work has been dedicated to provide the
+<code>PatientLevelPrediction</code> package.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;PatientLevelPrediction&quot;</span>)</span></code></pre></div>
+<pre><code>## To cite PatientLevelPrediction in publications use:
+## 
+##   Reps JM, Schuemie MJ, Suchard MA, Ryan PB, Rijnbeek P (2018). &quot;Design
+##   and implementation of a standardized framework to generate and
+##   evaluate patient-level prediction models using observational
+##   healthcare data.&quot; _Journal of the American Medical Informatics
+##   Association_, *25*(8), 969-975.
+##   &lt;https://doi.org/10.1093/jamia/ocy032&gt;.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Article{,
+##     author = {J. M. Reps and M. J. Schuemie and M. A. Suchard and P. B. Ryan and P. Rijnbeek},
+##     title = {Design and implementation of a standardized framework to generate and evaluate patient-level prediction models using observational healthcare data},
+##     journal = {Journal of the American Medical Informatics Association},
+##     volume = {25},
+##     number = {8},
+##     pages = {969-975},
+##     year = {2018},
+##     url = {https://doi.org/10.1093/jamia/ocy032},
+##   }</code></pre>
+<p><strong>Please reference this paper if you use the PLP Package in
+your work:</strong></p>
+<p><a href="https://dx.doi.org/10.1093/jamia/ocy032">Reps JM, Schuemie
+MJ, Suchard MA, Ryan PB, Rijnbeek PR. Design and implementation of a
+standardized framework to generate and evaluate patient-level prediction
+models using observational healthcare data. J Am Med Inform Assoc.
+2018;25(8):969-975.</a></p>
+<p>This work is supported in part through the National Science
+Foundation grant IIS 1251151.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

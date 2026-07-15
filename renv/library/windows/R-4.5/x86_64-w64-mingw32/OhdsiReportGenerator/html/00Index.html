@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: Observational Health Data Sciences and Informatics Report
+Generator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body><div class="container">
+<h1> Observational Health Data Sciences and Informatics Report
+Generator
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]">
+</h1>
+<hr>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]"></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]"></a>
+</div><h2>Documentation for package &lsquo;OhdsiReportGenerator&rsquo; version 2.0.0</h2>
+
+<ul><li><a href="../DESCRIPTION" type="text/plain; charset=utf-8">DESCRIPTION file</a>.</li>
+<li><a href="../NEWS.md">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="OhdsiReportGenerator.html">OhdsiReportGenerator-package</a></td>
+<td>OhdsiReportGenerator</td></tr>
+<tr><td style="width: 25%;"><a href="addTarColumn.html">addTarColumn</a></td>
+<td>addTarColumn</td></tr>
+<tr><td style="width: 25%;"><a href="createPredictionReport.html">createPredictionReport</a></td>
+<td>createPredictionReport</td></tr>
+<tr><td style="width: 25%;"><a href="formatBinaryCovariateName.html">formatBinaryCovariateName</a></td>
+<td>formatBinaryCovariateName</td></tr>
+<tr><td style="width: 25%;"><a href="generateFullReport.html">generateFullReport</a></td>
+<td>generateFullReport</td></tr>
+<tr><td style="width: 25%;"><a href="generatePresentation.html">generatePresentation</a></td>
+<td>generatePresentation</td></tr>
+<tr><td style="width: 25%;"><a href="generatePresentationMultiple.html">generatePresentationMultiple</a></td>
+<td>generatePresentationMultiple</td></tr>
+<tr><td style="width: 25%;"><a href="generateSummaryPredictionReport.html">generateSummaryPredictionReport</a></td>
+<td>generateSummaryPredictionReport</td></tr>
+<tr><td style="width: 25%;"><a href="getBinaryCaseSeries.html">getBinaryCaseSeries</a></td>
+<td>A function to extract case series characterization results</td></tr>
+<tr><td style="width: 25%;"><a href="getBinaryRiskFactors.html">getBinaryRiskFactors</a></td>
+<td>A function to extract non-case and case binary characterization results</td></tr>
+<tr><td style="width: 25%;"><a href="getCaseBinaryFeatures.html">getCaseBinaryFeatures</a></td>
+<td>Extract aggregate statistics of binary feature analysis IDs of interest for cases</td></tr>
+<tr><td style="width: 25%;"><a href="getCaseContinuousFeatures.html">getCaseContinuousFeatures</a></td>
+<td>Extract aggregate statistics of continuous feature analysis IDs of interest for targets</td></tr>
+<tr><td style="width: 25%;"><a href="getCaseCounts.html">getCaseCounts</a></td>
+<td>Extract the outcome cohort counts result</td></tr>
+<tr><td style="width: 25%;"><a href="getCaseTargetBinaryFeatures.html">getCaseTargetBinaryFeatures</a></td>
+<td>Extract aggregate statistics of binary feature analysis IDs of interest for targets</td></tr>
+<tr><td style="width: 25%;"><a href="getCaseTargetCounts.html">getCaseTargetCounts</a></td>
+<td>Extract the target cohort counts result</td></tr>
+<tr><td style="width: 25%;"><a href="getCharacterizationCohortBinary.html">getCharacterizationCohortBinary</a></td>
+<td>A function to extract cohort aggregate binary feature characterization results</td></tr>
+<tr><td style="width: 25%;"><a href="getCharacterizationCohortContinuous.html">getCharacterizationCohortContinuous</a></td>
+<td>A function to extract cohort aggregate continuous feature characterization results</td></tr>
+<tr><td style="width: 25%;"><a href="getCharacterizationDemographics.html">getCharacterizationDemographics</a></td>
+<td>Extract the binary age groups for the cases and targets</td></tr>
+<tr><td style="width: 25%;"><a href="getCharacterizationOutcomes.html">getCharacterizationOutcomes</a></td>
+<td>A function to extract the outcomes found in characterization</td></tr>
+<tr><td style="width: 25%;"><a href="getCharacterizationTargets.html">getCharacterizationTargets</a></td>
+<td>A function to extarct the targets found in characterization</td></tr>
+<tr><td style="width: 25%;"><a href="getCmDiagnosticsData.html">getCmDiagnosticsData</a></td>
+<td>Extract the cohort method diagostic results</td></tr>
+<tr><td style="width: 25%;"><a href="getCMEstimation.html">getCMEstimation</a></td>
+<td>Extract the cohort method results</td></tr>
+<tr><td style="width: 25%;"><a href="getCmMetaEstimation.html">getCmMetaEstimation</a></td>
+<td>Extract the cohort method meta analysis results</td></tr>
+<tr><td style="width: 25%;"><a href="getCmNegativeControlEstimates.html">getCmNegativeControlEstimates</a></td>
+<td>Extract the cohort method negative controls</td></tr>
+<tr><td style="width: 25%;"><a href="getCmOutcomes.html">getCmOutcomes</a></td>
+<td>A function to extract the outcomes found in cohort method</td></tr>
+<tr><td style="width: 25%;"><a href="getCmPropensityModel.html">getCmPropensityModel</a></td>
+<td>Extract the cohort method model</td></tr>
+<tr><td style="width: 25%;"><a href="getCmTable.html">getCmTable</a></td>
+<td>Extract the cohort method table specified</td></tr>
+<tr><td style="width: 25%;"><a href="getCmTargets.html">getCmTargets</a></td>
+<td>A function to extract the targets found in cohort method</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortCounts.html">getCohortCounts</a></td>
+<td>Extract the cohort counds</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortDefinitions.html">getCohortDefinitions</a></td>
+<td>Extract the cohort definition details</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortInclusionRules.html">getCohortInclusionRules</a></td>
+<td>Extract the cohort inclusion rules</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortInclusionStats.html">getCohortInclusionStats</a></td>
+<td>Extract the cohort inclusion stats</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortInclusionSummary.html">getCohortInclusionSummary</a></td>
+<td>Extract the cohort inclusion summary</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortMeta.html">getCohortMeta</a></td>
+<td>Extract the cohort meta</td></tr>
+<tr><td style="width: 25%;"><a href="getCohortSubsetDefinitions.html">getCohortSubsetDefinitions</a></td>
+<td>Extract the cohort subset definition details</td></tr>
+<tr><td style="width: 25%;"><a href="getContinuousCaseSeries.html">getContinuousCaseSeries</a></td>
+<td>A function to extract case series continuous feature characterization results</td></tr>
+<tr><td style="width: 25%;"><a href="getContinuousRiskFactors.html">getContinuousRiskFactors</a></td>
+<td>A function to extract non-case and case continuous characterization results</td></tr>
+<tr><td style="width: 25%;"><a href="getDatabaseDetails.html">getDatabaseDetails</a></td>
+<td>Extract the database used in the analyses</td></tr>
+<tr><td style="width: 25%;"><a href="getDechallengeRechallenge.html">getDechallengeRechallenge</a></td>
+<td>Extract the dechallenge rechallenge results</td></tr>
+<tr><td style="width: 25%;"><a href="getDechallengeRechallengeFails.html">getDechallengeRechallengeFails</a></td>
+<td>A function to extract the failed dechallenge-rechallenge cases</td></tr>
+<tr><td style="width: 25%;"><a href="getExampleConnectionDetails.html">getExampleConnectionDetails</a></td>
+<td>create a connection detail for an example OHDSI results database</td></tr>
+<tr><td style="width: 25%;"><a href="getFullPredictionPerformances.html">getFullPredictionPerformances</a></td>
+<td>Extract the model performances per evaluation</td></tr>
+<tr><td style="width: 25%;"><a href="getIncidenceOutcomes.html">getIncidenceOutcomes</a></td>
+<td>A function to extract the outcomes found in incidence</td></tr>
+<tr><td style="width: 25%;"><a href="getIncidenceRates.html">getIncidenceRates</a></td>
+<td>Extract the cohort incidence result</td></tr>
+<tr><td style="width: 25%;"><a href="getIncidenceTargets.html">getIncidenceTargets</a></td>
+<td>A function to extract the targets found in incidence</td></tr>
+<tr><td style="width: 25%;"><a href="getOutcomeTable.html">getOutcomeTable</a></td>
+<td>Extract the outcome cohorts and where they are used in the analyses.</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionAggregateTopPredictors.html">getPredictionAggregateTopPredictors</a></td>
+<td>Extract the top N predictors across a set of models</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionCohorts.html">getPredictionCohorts</a></td>
+<td>Extract a complete set of cohorts used in the prediction results</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionCovariates.html">getPredictionCovariates</a></td>
+<td>Extract covariate summary details</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionDiagnostics.html">getPredictionDiagnostics</a></td>
+<td>Extract the model design diagnostics for a specific development database</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionDiagnosticTable.html">getPredictionDiagnosticTable</a></td>
+<td>Extract specific diagnostic table</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionHyperParamSearch.html">getPredictionHyperParamSearch</a></td>
+<td>Extract hyper parameters details</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionIntercept.html">getPredictionIntercept</a></td>
+<td>Extract model interception (for logistic regression)</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionLift.html">getPredictionLift</a></td>
+<td>Extract model lift at given model sensitivity</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionModelDesigns.html">getPredictionModelDesigns</a></td>
+<td>Extract the model designs from the prediction results</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionOutcomes.html">getPredictionOutcomes</a></td>
+<td>A function to extract the outcomes found in prediction</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionPerformances.html">getPredictionPerformances</a></td>
+<td>Extract the model performances</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionPerformanceTable.html">getPredictionPerformanceTable</a></td>
+<td>Extract specific results table</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionTargets.html">getPredictionTargets</a></td>
+<td>A function to extarct the targets found in prediction</td></tr>
+<tr><td style="width: 25%;"><a href="getPredictionTopPredictors.html">getPredictionTopPredictors</a></td>
+<td>Extract the top N predictors per model</td></tr>
+<tr><td style="width: 25%;"><a href="getSccsDiagnosticsData.html">getSccsDiagnosticsData</a></td>
+<td>Extract the self controlled case series (sccs) diagostic results</td></tr>
+<tr><td style="width: 25%;"><a href="getSccsEstimation.html">getSccsEstimation</a></td>
+<td>Extract the self controlled case series (sccs) results</td></tr>
+<tr><td style="width: 25%;"><a href="getSccsMetaEstimation.html">getSccsMetaEstimation</a></td>
+<td>Extract the self controlled case series (sccs) meta analysis results</td></tr>
+<tr><td style="width: 25%;"><a href="getSccsModel.html">getSccsModel</a></td>
+<td>Extract the SCCS model table</td></tr>
+<tr><td style="width: 25%;"><a href="getSccsNegativeControlEstimates.html">getSccsNegativeControlEstimates</a></td>
+<td>Extract the SCCS negative controls</td></tr>
+<tr><td style="width: 25%;"><a href="getSccsOutcomes.html">getSccsOutcomes</a></td>
+<td>A function to extract the outcomes found in self controlled case series</td></tr>
+<tr><td style="width: 25%;"><a href="getSccsTable.html">getSccsTable</a></td>
+<td>Extract the SCCS table specified</td></tr>
+<tr><td style="width: 25%;"><a href="getSccsTargets.html">getSccsTargets</a></td>
+<td>A function to extract the targets found in self controlled case series</td></tr>
+<tr><td style="width: 25%;"><a href="getSccsTimeToEvent.html">getSccsTimeToEvent</a></td>
+<td>Extract the SCCS time-to-event</td></tr>
+<tr><td style="width: 25%;"><a href="getTargetBinaryFeatures.html">getTargetBinaryFeatures</a></td>
+<td>Extract aggregate statistics of binary feature analysis IDs of interest for targets (ignoring excluding people with prior outcome)</td></tr>
+<tr><td style="width: 25%;"><a href="getTargetContinuousFeatures.html">getTargetContinuousFeatures</a></td>
+<td>Extract aggregate statistics of continuous feature analysis IDs of interest for targets</td></tr>
+<tr><td style="width: 25%;"><a href="getTargetTable.html">getTargetTable</a></td>
+<td>Extract the target cohorts and where they are used in the analyses.</td></tr>
+<tr><td style="width: 25%;"><a href="getTimeToEvent.html">getTimeToEvent</a></td>
+<td>Extract the time to event result</td></tr>
+<tr><td style="width: 25%;"><a href="kableDark.html">kableDark</a></td>
+<td>output a nicely formatted html table</td></tr>
+<tr><td style="width: 25%;"><a href="OhdsiReportGenerator.html">OhdsiReportGenerator</a></td>
+<td>OhdsiReportGenerator</td></tr>
+<tr><td style="width: 25%;"><a href="plotAgeDistributions.html">plotAgeDistributions</a></td>
+<td>Plots the age distributions using the binary age groups</td></tr>
+<tr><td style="width: 25%;"><a href="plotCmEstimates.html">plotCmEstimates</a></td>
+<td>Plots the cohort method results for one analysis</td></tr>
+<tr><td style="width: 25%;"><a href="plotSccsEstimates.html">plotSccsEstimates</a></td>
+<td>Plots the self controlled case series results for one analysis</td></tr>
+<tr><td style="width: 25%;"><a href="plotSexDistributions.html">plotSexDistributions</a></td>
+<td>Plots the sex distributions using the sex features</td></tr>
+<tr><td style="width: 25%;"><a href="printReactable.html">printReactable</a></td>
+<td>prints a reactable in a quarto document</td></tr>
+<tr><td style="width: 25%;"><a href="processCohorts.html">processCohorts</a></td>
+<td>Extract the cohort parents and children cohorts (cohorts derieved from the parent cohort)</td></tr>
+<tr><td style="width: 25%;"><a href="removeSpaces.html">removeSpaces</a></td>
+<td>removeSpaces</td></tr>
+</table>
+</div></body></html>

@@ -1,0 +1,34 @@
+barPlot                 Create a bar plot visualisation from a
+                        <summarised_result> object
+boxPlot                 Create a box plot visualisation from a
+                        <summarised_result> object
+customiseText           Apply styling to text or column names
+data                    List of mock results
+emptyPlot               Returns an empty plot
+emptyTable              Returns an empty table
+formatEstimateName      Formats estimate_name and estimate_value column
+formatEstimateValue     Formats the estimate_value column
+formatHeader            Create a header for gt and flextable objects
+formatMinCellCount      To indicate which was the minimum cell counts
+                        where estimates have been suppressed.
+formatTable             Creates a flextable or gt object from a
+                        dataframe
+mockSummarisedResult    A <summarised_result> object filled with mock
+                        data
+plotColumns             Columns for the plot functions
+plotStyle               Pre-defined styles are available for plots
+plotType                Supported plot types
+scatterPlot             Create a scatter plot visualisation from a
+                        <summarised_result> object
+setGlobalPlotOptions    Set format options for all subsequent plots
+setGlobalTableOptions   Set format options for all subsequent tables
+tableColumns            Columns for the table functions
+tableOptions            Additional table formatting options for
+                        'visOmopTable()' and 'visTable()'
+tableStyle              Pre-defined styles are available for tables
+tableType               Supported table classes
+themeVisOmop            Apply a pre-defined visOmopResults theme to a
+                        ggplot
+visOmopTable            Generate a formatted table from a
+                        <summarised_result>
+visTable                Generate a formatted table from a <data.table>

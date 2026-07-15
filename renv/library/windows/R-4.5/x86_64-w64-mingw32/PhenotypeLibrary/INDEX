@@ -1,0 +1,6 @@
+getPhenotypeLog         Get phenotype log
+getPlCohortDefinitionSet
+                        Get a cohort definition set
+getPlConceptDefinitionSet
+                        Get conceptSets in cohorts
+listPhenotypes          Deprecated. List all phenotypes in the library.

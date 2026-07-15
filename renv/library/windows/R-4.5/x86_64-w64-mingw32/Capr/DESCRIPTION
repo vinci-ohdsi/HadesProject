@@ -1,0 +1,33 @@
+Package: Capr
+Title: Cohort Definition Application Programming
+Version: 2.1.0
+Authors@R: c( person("Martin", "Lavallee", , "martin.lavallee@boehringer-ingelheim.com", role = c("aut", "cre")), person("Adam", "Black", , "black@ohdsi.org", role = c("aut")), person("Katy", "Sadowski", , "sadowski@ohdsi.org", role = c("ctb")) )
+Description: Provides a programming language for defining cohort definitions in R to use in studies for Observational  Health Data Sciences and Informatics (OHDSI). The functions in 'Capr' allow for the programmatic creation of  OHDSI concept sets and cohorts that can be serialized to 'OHDSI' compatible 'json' files or to 'OHDSI-SQL'.  'Capr' functions can be used to create, save, and load component parts to a cohort definition allowing  R programmers to easily reuse cohort logic. 'Capr' provides tools to create a large number of OHDSI cohorts  while also helping bridge the gap between human readable descriptions of clinical phenotypes and their computational implementation.
+License: Apache License (>= 2)
+URL: https://ohdsi.github.io/Capr/, https://github.com/OHDSI/Capr/
+BugReports: https://github.com/OHDSI/Capr/issues/
+Encoding: UTF-8
+RoxygenNote: 7.3.2
+Depends: R (>= 4.2.0)
+Imports: jsonlite, methods, purrr (>= 1.0.1), rlang, dplyr, tidyr, checkmate,
+    tibble, readr, stringr, glue, cli, digest, fs, lubridate, DBI,
+    DatabaseConnector, SqlRender, generics, CirceR
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Collate: 'Capr.R' 'conceptSet.R' 'attributes-concept.R'
+    'attributes-dateAdjustment.R' 'attributes-logic.R' 'query.R' 'window.R'
+    'criteria.R' 'attributes-nested.R' 'attributes-op.R' 'exit.R' 'cohort.R'
+    'collectCodesetId.R'
+Author: Martin Lavallee [aut, cre], Adam Black [aut], Katy Sadowski [ctb]
+Maintainer: Martin Lavallee <martin.lavallee@boehringer-ingelheim.com>
+Built: R 4.5.2; ; 2026-01-29 04:26:32 UTC; windows
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: Capr
+RemoteUsername: ohdsi
+RemoteRef: v2.1.0
+GithubHost: api.github.com
+GithubRepo: Capr
+GithubUsername: ohdsi
+GithubRef: v2.1.0

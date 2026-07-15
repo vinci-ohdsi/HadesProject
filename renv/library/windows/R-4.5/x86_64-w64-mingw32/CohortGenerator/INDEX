@@ -1,0 +1,87 @@
+CohortSubsetDefinition
+                        Cohort Subset Definition
+CohortSubsetOperator    Cohort Subset Operator
+DemographicSubsetOperator
+                        Demographic Subset Operator
+LimitSubsetOperator     Limit Subset Operator
+SubsetCohortWindow      Time Window For Cohort Subset Operator
+SubsetOperator          Abstract base class for subsets.
+addCohortSubsetDefinition
+                        Add cohort subset definition to a cohort
+                        definition set
+checkAndFixCohortDefinitionSetDataTypes
+                        Check if a cohort definition set is using the
+                        proper data types
+computeChecksum         Computes the checksum for a value
+createCohortSubset      A definition of subset functions to be applied
+                        to a set of cohorts
+createCohortSubsetDefinition
+                        Create Subset Definition
+createCohortTables      Create cohort tables
+createDemographicSubset
+                        Create createDemographicSubset Subset
+createEmptyCohortDefinitionSet
+                        Create an empty cohort definition set
+createEmptyNegativeControlOutcomeCohortSet
+                        Create an empty negative control outcome cohort
+                        set
+createLimitSubset       Create Limit Subset
+createResultsDataModel
+                        Create the results data model tables on a
+                        database server.
+createSubsetCohortWindow
+                        A definition of subset functions to be applied
+                        to a set of cohorts
+dropCohortStatsTables   Drop cohort statistics tables
+exportCohortStatsTables
+                        Export the cohort statistics tables to the file
+                        system
+generateCohortSet       Generate a set of cohorts
+generateNegativeControlOutcomeCohorts
+                        Generate a set of negative control outcome
+                        cohorts
+getCohortCounts         Count the cohort(s)
+getCohortDefinitionSet
+                        Get a cohort definition set
+getCohortInclusionRules
+                        Get Cohort Inclusion Rules from a cohort
+                        definition set
+getCohortStats          Get Cohort Inclusion Stats Table Data
+getCohortTableNames     Used to get a list of cohort table names to use
+                        when creating the cohort tables
+getDataMigrator         Get database migrations instance
+getRequiredTasks        Get a list of tasks required when running in
+                        incremental mode
+getResultsDataModelSpecifications
+                        Get specifications for CohortGenerator results
+                        data model
+getSubsetDefinitions    Get cohort subset definitions from a cohort
+                        definition set
+insertInclusionRuleNames
+                        Used to insert the inclusion rule names from a
+                        cohort definition set when generating cohorts
+                        that include cohort statistics
+isCamelCase             Used to check if a string is in lower camel
+                        case
+isCohortDefinitionSet   Is the data.frame a cohort definition set?
+isFormattedForDatabaseUpload
+                        Is the data.frame formatted for uploading to a
+                        database?
+isSnakeCase             Used to check if a string is in snake case
+isTaskRequired          Is a task required when running in incremental
+                        mode
+migrateDataModel        Migrate Data model
+readCsv                 Used to read a .csv file
+recordTasksDone         Record a task as complete
+runCohortGeneration     Run a cohort generation and export results
+sampleCohortDefinitionSet
+                        Sample Cohort Definition Set
+saveCohortDefinitionSet
+                        Save the cohort definition set to the file
+                        system
+saveCohortSubsetDefinition
+                        Save cohort subset definitions to json
+saveIncremental         Used in incremental mode to save values to a
+                        file
+uploadResults           Upload results to the database server.
+writeCsv                Used to write a .csv file

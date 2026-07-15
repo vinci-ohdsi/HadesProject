@@ -1,0 +1,7 @@
+buildKnn                Build a K-nearest neighbor (KNN) classifier
+buildKnnFromPlpData     Build a K-nearest neighbor (KNN) classifier
+                        from a plpData object
+predictKnn              Predict using a K-nearest neighbor (KNN)
+                        classifier
+predictKnnUsingPlpData
+                        Create predictive probabilities using KNN.

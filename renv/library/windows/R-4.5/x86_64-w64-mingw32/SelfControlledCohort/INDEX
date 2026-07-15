@@ -1,0 +1,19 @@
+createExposureOutcome   Create exposure-outcome combinations.
+createRunSelfControlledCohortArgs
+                        Create a parameter object for the function
+                        runSelfControlledCohort
+createSccAnalysis       Create a SelfControlledCohort analysis
+                        specification
+getSccRiskWindowStats   Get Self-Controlled Cohort Risk Window
+                        Statistics
+loadExposureOutcomeList
+                        Load a list of exposureOutcome from file
+loadSccAnalysisList     Load a list of sccAnalysis from file
+runSccAnalyses          Run a list of analyses
+runSccRiskWindows       Run Self-Controlled Cohort Risk Windows
+runSelfControlledCohort
+                        Run self-controlled cohort
+saveExposureOutcomeList
+                        Save a list of exposureOutcome to file
+saveSccAnalysisList     Save a list of sccAnalysis to file
+summarizeAnalyses       Create a summary report of the analyses

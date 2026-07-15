@@ -17,9 +17,8 @@
     },
     "Andromeda": {
       "Package": "Andromeda",
-      "Version": "1.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN"
+      "Version": "0.6.7",
+      "Source": "Repository"
     },
     "BeastJar": {
       "Package": "BeastJar",

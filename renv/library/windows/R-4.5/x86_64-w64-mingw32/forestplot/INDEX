@@ -1,0 +1,32 @@
+HRQoL                   Regression coefficients and confidence
+                        intervals from HRQoL study
+assertAndRetrieveTidyValue
+                        Retriever of 'tidyselect'
+dfHRQoL                 Regression coefficients and confidence
+                        intervals from HRQoL study
+forestplot              Draws a forest plot
+forestplot-package      Package description
+fpColors                A function for the color elements used in
+                        forestplot()
+fpDrawNormalCI          Draw standard confidence intervals
+fpLegend                A function for the legend used in forestplot()
+fpShapesGp              A function for graphical parameters of the
+                        shapes used in 'forestplot()'
+fpTxtGp                 Get font settings for forestplot
+fp_add_lines            Adds a line to the graph
+fp_decorate_graph       Decorate the graph
+fp_insert_row           Insert/append rows into forestplot
+fp_set_style            Set the style of the graph
+fp_set_zebra_style      Decorate the plot with a zebra pattern
+fp_txt_italic           Text styling
+getTicks                Ticks for plot axis
+prDefaultGp             Construct default parameters from arguments
+                        that may include missing arguments
+prGetShapeGp            A function to extract graphical parameters from
+                        a fpShapesGp object
+prMergeGp               A function to merge two sets of graphical
+                        parameters
+prepAlign               Prepares graph position
+prepGraphPositions      Prepares graph position
+prepGridMargins         Convert margins to viewport npc margins
+safeLoadPackage         Safely loads package

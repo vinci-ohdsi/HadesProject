@@ -1,0 +1,40 @@
+Package: Strategus
+Type: Package
+Title: Coordinate and Execute OHDSI HADES Modules
+Version: 1.4.1
+Date: 2025-09-08
+Authors@R: c( person("Anthony", "Sena", email = "sena@ohdsi.org", role = c("aut", "cre")), person("Martijn", "Schuemie", email = "schuemie@ohdsi.org", role = c("aut")), person("Jamie", "Gilbert", role = c("aut")), person("Observational Health Data Science and Informatics", role = c("cph")) )
+Maintainer: Anthony Sena <sena@ohdsi.org>
+Description: Coordinate and execute large scale analytics using OHDSI Health Analytics Data-to-Evidence Suite (HADES) (<https://ohdsi.github.io/Hades/>)  modules.
+Depends: R (>= 4.2.0), CohortGenerator (>= 0.11.0), DatabaseConnector (>=
+    6.2.3), R6
+Imports: checkmate, cli, digest, dplyr, methods, ParallelLogger (>= 3.1.0),
+    purrr, ResultModelManager (>= 0.5.8), rlang, SqlRender (>= 1.18.0)
+Suggests: Characterization, CirceR, CohortDiagnostics (>= 3.4.0),
+    CohortIncidence, CohortMethod, Cyclops (>= 3.6.0), Eunomia,
+    EvidenceSynthesis (>= 1.0.0), FeatureExtraction, fs, knitr,
+    PatientLevelPrediction (>= 6.5.0), readr, rmarkdown, RSQLite,
+    SelfControlledCaseSeries (>= 6.0.0), testthat (>= 3.0.0), TreatmentPatterns
+    (>= 3.1.0), withr
+License: Apache License 2.0
+VignetteBuilder: knitr
+URL: https://ohdsi.github.io/Strategus, https://github.com/OHDSI/Strategus
+BugReports: https://github.com/OHDSI/Strategus/issues
+NeedsCompilation: no
+RoxygenNote: 7.3.2
+Roxygen: list(markdown = TRUE)
+Encoding: UTF-8
+Language: en-US
+Config/testthat/edition: 3
+Author: Anthony Sena [aut, cre], Martijn Schuemie [aut], Jamie Gilbert [aut], Observational Health Data Science and Informatics [cph]
+Built: R 4.5.2; ; 2026-01-29 05:07:17 UTC; windows
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: Strategus
+RemoteUsername: ohdsi
+RemoteRef: v1.4.1
+GithubHost: api.github.com
+GithubRepo: Strategus
+GithubUsername: ohdsi
+GithubRef: v1.4.1
+Remotes: ohdsi/CohortDiagnostics, ohdsi/CohortIncidence, ohdsi/CohortMethod

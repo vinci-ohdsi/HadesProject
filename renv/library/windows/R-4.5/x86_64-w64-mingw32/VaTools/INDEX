@@ -1,0 +1,4 @@
+createCohorts           Create the exposure cohorts
+createStandardCdmSchema
+                        Create standard CDM schema
+getCohortNames          getCohortNames

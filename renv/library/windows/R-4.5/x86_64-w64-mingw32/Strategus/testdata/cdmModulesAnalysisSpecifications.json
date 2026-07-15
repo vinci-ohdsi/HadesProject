@@ -1,0 +1,1829 @@
+{
+  "sharedResources": [
+    {
+      "cohortDefinitions": [
+        {
+          "cohortId": 1,
+          "cohortName": "Celecoxib",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"Celecoxib\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"140587\",\r\n              \"CONCEPT_ID\": 1118084,\r\n              \"CONCEPT_NAME\": \"celecoxib\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugEra\": {\r\n          \"CodesetId\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 0,\r\n      \"PostDays\": 0\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"All\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"All\"\r\n  },\r\n  \"InclusionRules\": [],\r\n  \"EndStrategy\": {\r\n    \"CustomEra\": {\r\n      \"DrugCodesetId\": 0,\r\n      \"GapDays\": 30,\r\n      \"Offset\": 0\r\n    }\r\n  },\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 0\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}\r\n"
+        },
+        {
+          "cohortId": 2,
+          "cohortName": "Diclofenac",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"Diclofenac\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"3355\",\r\n              \"CONCEPT_ID\": 1124300,\r\n              \"CONCEPT_NAME\": \"diclofenac\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugEra\": {\r\n          \"CodesetId\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 0,\r\n      \"PostDays\": 0\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"All\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"All\"\r\n  },\r\n  \"InclusionRules\": [],\r\n  \"EndStrategy\": {\r\n    \"CustomEra\": {\r\n      \"DrugCodesetId\": 0,\r\n      \"GapDays\": 30,\r\n      \"Offset\": 0\r\n    }\r\n  },\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 0\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}\r\n"
+        },
+        {
+          "cohortId": 3,
+          "cohortName": "GI bleed",
+          "cohortDefinition": "{\r\n\t\"cdmVersionRange\" : \">=5.0.0\",\r\n\t\"PrimaryCriteria\" : {\r\n\t\t\"CriteriaList\" : [\r\n\t\t\t{\r\n\t\t\t\t\"ConditionOccurrence\" : {\r\n\t\t\t\t\t\"CodesetId\" : 0,\r\n\t\t\t\t\t\"ConditionTypeExclude\" : false\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"ObservationWindow\" : {\r\n\t\t\t\"PriorDays\" : 0,\r\n\t\t\t\"PostDays\" : 0\r\n\t\t},\r\n\t\t\"PrimaryCriteriaLimit\" : {\r\n\t\t\t\"Type\" : \"All\"\r\n\t\t}\r\n\t},\r\n\t\"ConceptSets\" : [\r\n\t\t{\r\n\t\t\t\"id\" : 0,\r\n\t\t\t\"name\" : \"GI bleed\",\r\n\t\t\t\"expression\" : {\r\n\t\t\t\t\"items\" : [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"concept\" : {\r\n\t\t\t\t\t\t\t\"CONCEPT_ID\" : 192671,\r\n\t\t\t\t\t\t\t\"CONCEPT_NAME\" : \"Gastrointestinal hemorrhage\",\r\n\t\t\t\t\t\t\t\"STANDARD_CONCEPT\" : \"S\",\r\n\t\t\t\t\t\t\t\"STANDARD_CONCEPT_CAPTION\" : \"Standard\",\r\n\t\t\t\t\t\t\t\"INVALID_REASON\" : \"V\",\r\n\t\t\t\t\t\t\t\"INVALID_REASON_CAPTION\" : \"Valid\",\r\n\t\t\t\t\t\t\t\"CONCEPT_CODE\" : \"74474003\",\r\n\t\t\t\t\t\t\t\"DOMAIN_ID\" : \"Condition\",\r\n\t\t\t\t\t\t\t\"VOCABULARY_ID\" : \"SNOMED\",\r\n\t\t\t\t\t\t\t\"CONCEPT_CLASS_ID\" : \"Clinical Finding\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"isExcluded\" : false,\r\n\t\t\t\t\t\t\"includeDescendants\" : true,\r\n\t\t\t\t\t\t\"includeMapped\" : false\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t}\r\n\t\t}\r\n\t],\r\n\t\"QualifiedLimit\" : {\r\n\t\t\"Type\" : \"First\"\r\n\t},\r\n\t\"ExpressionLimit\" : {\r\n\t\t\"Type\" : \"First\"\r\n\t},\r\n\t\"InclusionRules\" : [],\r\n\t\"EndStrategy\" : {\r\n\t\t\"DateOffset\" : {\r\n\t\t\t\"DateField\" : \"StartDate\",\r\n\t\t\t\"Offset\" : 0\r\n\t\t}\r\n\t},\r\n\t\"CensoringCriteria\" : [],\r\n\t\"CollapseSettings\" : {\r\n\t\t\"CollapseType\" : \"ERA\",\r\n\t\t\"EraPad\" : 0\r\n\t},\r\n\t\"CensorWindow\" : {}\r\n}"
+        },
+        {
+          "cohortId": 4,
+          "cohortName": "Acetaminophen",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"[MVK] Acetaminophen\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"161\",\r\n              \"CONCEPT_ID\": 1125315,\r\n              \"CONCEPT_NAME\": \"acetaminophen\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            },\r\n            \"includeDescendants\": true\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugExposure\": {\r\n          \"CodesetId\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 0,\r\n      \"PostDays\": 0\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"First\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"InclusionRules\": [],\r\n  \"EndStrategy\": {\r\n    \"CustomEra\": {\r\n      \"DrugCodesetId\": 0,\r\n      \"GapDays\": 0,\r\n      \"Offset\": 0\r\n    }\r\n  },\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 30\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}"
+        },
+        {
+          "cohortId": 5,
+          "cohortName": "Amoxicillin",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"[MVK] Amoxicillin\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"723\",\r\n              \"CONCEPT_ID\": 1713332,\r\n              \"CONCEPT_NAME\": \"amoxicillin\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            },\r\n            \"includeDescendants\": true\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugExposure\": {\r\n          \"CodesetId\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 0,\r\n      \"PostDays\": 0\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"First\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"InclusionRules\": [],\r\n  \"EndStrategy\": {\r\n    \"CustomEra\": {\r\n      \"DrugCodesetId\": 0,\r\n      \"GapDays\": 0,\r\n      \"Offset\": 0\r\n    }\r\n  },\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 30\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}"
+        },
+        {
+          "cohortId": 6,
+          "cohortName": "Aspirin",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"[MVK] Aspirin\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"1191\",\r\n              \"CONCEPT_ID\": 1112807,\r\n              \"CONCEPT_NAME\": \"aspirin\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            },\r\n            \"includeDescendants\": true\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugExposure\": {\r\n          \"CodesetId\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 0,\r\n      \"PostDays\": 0\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"First\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"InclusionRules\": [],\r\n  \"EndStrategy\": {\r\n    \"CustomEra\": {\r\n      \"DrugCodesetId\": 0,\r\n      \"GapDays\": 0,\r\n      \"Offset\": 0\r\n    }\r\n  },\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 30\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}"
+        },
+        {
+          "cohortId": 7,
+          "cohortName": "Clavulanate",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"[MVK] Clavulanate\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"48203\",\r\n              \"CONCEPT_ID\": 1759842,\r\n              \"CONCEPT_NAME\": \"clavulanate\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            },\r\n            \"includeDescendants\": true\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugExposure\": {\r\n          \"CodesetId\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 0,\r\n      \"PostDays\": 0\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"First\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"InclusionRules\": [],\r\n  \"EndStrategy\": {\r\n    \"CustomEra\": {\r\n      \"DrugCodesetId\": 0,\r\n      \"GapDays\": 0,\r\n      \"Offset\": 0\r\n    }\r\n  },\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 30\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}"
+        },
+        {
+          "cohortId": 8,
+          "cohortName": "Death",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"[MVK] Death\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Event\",\r\n              \"CONCEPT_CODE\": \"419620001\",\r\n              \"CONCEPT_ID\": 4306655,\r\n              \"CONCEPT_NAME\": \"Death\",\r\n              \"DOMAIN_ID\": \"Observation\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"SNOMED\",\r\n              \"VALID_START_DATE\": \"1900-01-31\",\r\n              \"VALID_END_DATE\": \"2099-12-31\"\r\n            },\r\n            \"includeDescendants\": true\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugExposure\": {\r\n          \"CodesetId\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 0,\r\n      \"PostDays\": 0\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"First\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"InclusionRules\": [],\r\n  \"EndStrategy\": {\r\n    \"CustomEra\": {\r\n      \"DrugCodesetId\": 0,\r\n      \"GapDays\": 0,\r\n      \"Offset\": 0\r\n    }\r\n  },\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 30\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}"
+        },
+        {
+          "cohortId": 9,
+          "cohortName": "Doxylamine",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"[MVK] Doxylamine\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"3642\",\r\n              \"CONCEPT_ID\": 738818,\r\n              \"CONCEPT_NAME\": \"doxylamine\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            },\r\n            \"includeDescendants\": true\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugExposure\": {\r\n          \"CodesetId\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 0,\r\n      \"PostDays\": 0\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"First\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"InclusionRules\": [],\r\n  \"EndStrategy\": {\r\n    \"CustomEra\": {\r\n      \"DrugCodesetId\": 0,\r\n      \"GapDays\": 0,\r\n      \"Offset\": 0\r\n    }\r\n  },\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 30\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}"
+        },
+        {
+          "cohortId": 10,
+          "cohortName": "PenicillinV",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"[MVK] Penicillin V\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"7984\",\r\n              \"CONCEPT_ID\": 1729720,\r\n              \"CONCEPT_NAME\": \"penicillin V\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            },\r\n            \"includeDescendants\": true\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugExposure\": {\r\n          \"CodesetId\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 0,\r\n      \"PostDays\": 0\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"First\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"InclusionRules\": [],\r\n  \"EndStrategy\": {\r\n    \"CustomEra\": {\r\n      \"DrugCodesetId\": 0,\r\n      \"GapDays\": 0,\r\n      \"Offset\": 0\r\n    }\r\n  },\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 30\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}"
+        },
+        {
+          "cohortId": 11,
+          "cohortName": "ViralSinusitis",
+          "cohortDefinition": "{\r\n  \"ConceptSets\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"[MVK] Viral Sinusitis diagnosis\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Clinical Finding\",\r\n              \"CONCEPT_CODE\": \"444814009\",\r\n              \"CONCEPT_ID\": 40481087,\r\n              \"CONCEPT_NAME\": \"Viral sinusitis\",\r\n              \"DOMAIN_ID\": \"Condition\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"SNOMED\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"[MVK] Viral Sinusistis drugs\",\r\n      \"expression\": {\r\n        \"items\": [\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"161\",\r\n              \"CONCEPT_ID\": 1125315,\r\n              \"CONCEPT_NAME\": \"acetaminophen\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"723\",\r\n              \"CONCEPT_ID\": 1713332,\r\n              \"CONCEPT_NAME\": \"amoxicillin\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"1191\",\r\n              \"CONCEPT_ID\": 1112807,\r\n              \"CONCEPT_NAME\": \"aspirin\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"48203\",\r\n              \"CONCEPT_ID\": 1759842,\r\n              \"CONCEPT_NAME\": \"clavulanate\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"7984\",\r\n              \"CONCEPT_ID\": 1729720,\r\n              \"CONCEPT_NAME\": \"penicillin V\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"3642\",\r\n              \"CONCEPT_ID\": 738818,\r\n              \"CONCEPT_NAME\": \"doxylamine\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"3642\",\r\n              \"CONCEPT_ID\": 738818,\r\n              \"CONCEPT_NAME\": \"doxylamine\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"3289\",\r\n              \"CONCEPT_ID\": 1119510,\r\n              \"CONCEPT_NAME\": \"dextromethorphan\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"5640\",\r\n              \"CONCEPT_ID\": 1177480,\r\n              \"CONCEPT_NAME\": \"ibuprofen\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"140587\",\r\n              \"CONCEPT_ID\": 1118084,\r\n              \"CONCEPT_NAME\": \"celecoxib\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Ingredient\",\r\n              \"CONCEPT_CODE\": \"7258\",\r\n              \"CONCEPT_ID\": 1115008,\r\n              \"CONCEPT_NAME\": \"naproxen\",\r\n              \"DOMAIN_ID\": \"Drug\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"RxNorm\"\r\n            }\r\n          },\r\n          {\r\n            \"concept\": {\r\n              \"CONCEPT_CLASS_ID\": \"Event\",\r\n              \"CONCEPT_CODE\": \"419620001\",\r\n              \"CONCEPT_ID\": 4306655,\r\n              \"CONCEPT_NAME\": \"Death\",\r\n              \"DOMAIN_ID\": \"Observation\",\r\n              \"INVALID_REASON\": \"V\",\r\n              \"INVALID_REASON_CAPTION\": \"Valid\",\r\n              \"STANDARD_CONCEPT\": \"S\",\r\n              \"STANDARD_CONCEPT_CAPTION\": \"Standard\",\r\n              \"VOCABULARY_ID\": \"SNOMED\",\r\n              \"VALID_START_DATE\": \"2006-01-31\",\r\n              \"VALID_END_DATE\": \"2099-12-31\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ],\r\n  \"PrimaryCriteria\": {\r\n    \"CriteriaList\": [\r\n      {\r\n        \"DrugEra\": {\r\n          \"CodesetId\": 1\r\n        }\r\n      }\r\n    ],\r\n    \"ObservationWindow\": {\r\n      \"PriorDays\": 365,\r\n      \"PostDays\": 1095\r\n    },\r\n    \"PrimaryCriteriaLimit\": {\r\n      \"Type\": \"First\"\r\n    }\r\n  },\r\n  \"QualifiedLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"ExpressionLimit\": {\r\n    \"Type\": \"First\"\r\n  },\r\n  \"InclusionRules\": [\r\n    {\r\n      \"name\": \"Viral Sinusitis diagnosis\",\r\n      \"expression\": {\r\n        \"Type\": \"ALL\",\r\n        \"CriteriaList\": [\r\n          {\r\n            \"Criteria\": {\r\n              \"ConditionOccurrence\": {\r\n                \"CodesetId\": 0\r\n              }\r\n            },\r\n            \"StartWindow\": {\r\n              \"Start\": {\r\n                \"Coeff\": -1\r\n              },\r\n              \"End\": {\r\n                \"Coeff\": 1\r\n              },\r\n              \"UseEventEnd\": false\r\n            },\r\n            \"IgnoreObservationPeriod\": true,\r\n            \"Occurrence\": {\r\n              \"Type\": 2,\r\n              \"Count\": 1\r\n            }\r\n          }\r\n        ],\r\n        \"DemographicCriteriaList\": [],\r\n        \"Groups\": []\r\n      }\r\n    },\r\n    {\r\n      \"name\": \"Index year\",\r\n      \"expression\": {\r\n        \"Type\": \"ALL\",\r\n        \"CriteriaList\": [],\r\n        \"DemographicCriteriaList\": [\r\n          {\r\n            \"OccurrenceStartDate\": {\r\n              \"Value\": \"1949-12-31\",\r\n              \"Op\": \"gt\"\r\n            }\r\n          }\r\n        ],\r\n        \"Groups\": []\r\n      }\r\n    }\r\n  ],\r\n  \"CensoringCriteria\": [],\r\n  \"CollapseSettings\": {\r\n    \"CollapseType\": \"ERA\",\r\n    \"EraPad\": 0\r\n  },\r\n  \"CensorWindow\": {},\r\n  \"cdmVersionRange\": \">=5.0.0\"\r\n}"
+        }
+      ],
+      "subsetDefs": [
+        "{\n  \"name\": \"age 18 to 64\",\n  \"definitionId\": 1,\n  \"subsetOperators\": [\n    {\n      \"name\": \"Age 18 to 64\",\n      \"subsetType\": \"DemographicSubsetOperator\",\n      \"ageMin\": 18,\n      \"ageMax\": 64\n    }\n  ],\n  \"packageVersion\": \"0.12.0\",\n  \"identifierExpression\": \"targetId * 1000 + definitionId\",\n  \"operatorNameConcatString\": \", \",\n  \"subsetCohortNameTemplate\": \"@baseCohortName - @subsetDefinitionName @operatorNames\"\n}",
+        "{\n  \"name\": \"first event with 365 prior obs\",\n  \"definitionId\": 2,\n  \"subsetOperators\": [\n    {\n      \"name\": \"first event with 365 prior obs\",\n      \"subsetType\": \"LimitSubsetOperator\",\n      \"priorTime\": 365,\n      \"followUpTime\": 0,\n      \"minimumCohortDuration\": 0,\n      \"limitTo\": \"firstEver\"\n    }\n  ],\n  \"packageVersion\": \"0.12.0\",\n  \"identifierExpression\": \"targetId * 1000 + definitionId\",\n  \"operatorNameConcatString\": \", \",\n  \"subsetCohortNameTemplate\": \"@baseCohortName - @subsetDefinitionName @operatorNames\"\n}",
+        "{\n  \"name\": \"age 18 to 64 and first event with 365 prior obs\",\n  \"definitionId\": 3,\n  \"subsetOperators\": [\n    {\n      \"name\": \"Age 18 to 64\",\n      \"subsetType\": \"DemographicSubsetOperator\",\n      \"ageMin\": 18,\n      \"ageMax\": 64\n    },\n    {\n      \"name\": \"first event with 365 prior obs\",\n      \"subsetType\": \"LimitSubsetOperator\",\n      \"priorTime\": 365,\n      \"followUpTime\": 0,\n      \"minimumCohortDuration\": 0,\n      \"limitTo\": \"firstEver\"\n    }\n  ],\n  \"packageVersion\": \"0.12.0\",\n  \"identifierExpression\": \"targetId * 1000 + definitionId\",\n  \"operatorNameConcatString\": \", \",\n  \"subsetCohortNameTemplate\": \"@baseCohortName - @subsetDefinitionName @operatorNames\"\n}"
+      ],
+      "cohortSubsets": [
+        {
+          "cohortId": 1001,
+          "subsetId": 1,
+          "targetCohortId": 1
+        },
+        {
+          "cohortId": 2001,
+          "subsetId": 1,
+          "targetCohortId": 2
+        },
+        {
+          "cohortId": 1002,
+          "subsetId": 2,
+          "targetCohortId": 1
+        },
+        {
+          "cohortId": 2002,
+          "subsetId": 2,
+          "targetCohortId": 2
+        },
+        {
+          "cohortId": 1003,
+          "subsetId": 3,
+          "targetCohortId": 1
+        },
+        {
+          "cohortId": 2003,
+          "subsetId": 3,
+          "targetCohortId": 2
+        }
+      ],
+      "attr_class": ["CohortDefinitionSharedResources", "SharedResources"]
+    },
+    {
+      "negativeControlOutcomes": {
+        "negativeControlOutcomeCohortSet": [
+          {
+            "cohortId": "10037",
+            "cohortName": "Concussion with loss of consciousness",
+            "outcomeConceptId": "  375671"
+          },
+          {
+            "cohortId": "10038",
+            "cohortName": "Child attention deficit disorder",
+            "outcomeConceptId": "  440086"
+          },
+          {
+            "cohortId": "10039",
+            "cohortName": "Urinary tract infection caused by Escherichia coli",
+            "outcomeConceptId": " 4116491"
+          },
+          {
+            "cohortId": "10040",
+            "cohortName": "Anemia",
+            "outcomeConceptId": "  439777"
+          },
+          {
+            "cohortId": "10041",
+            "cohortName": "Coronary arteriosclerosis",
+            "outcomeConceptId": "  317576"
+          },
+          {
+            "cohortId": "10042",
+            "cohortName": "Cardiac arrest",
+            "outcomeConceptId": "  321042"
+          },
+          {
+            "cohortId": "10043",
+            "cohortName": "Atrial fibrillation",
+            "outcomeConceptId": "  313217"
+          },
+          {
+            "cohortId": "10044",
+            "cohortName": "Alzheimer's disease",
+            "outcomeConceptId": "  378419"
+          },
+          {
+            "cohortId": "10046",
+            "cohortName": "Viral sinusitis",
+            "outcomeConceptId": "40481087"
+          },
+          {
+            "cohortId": "10047",
+            "cohortName": "Myocardial infarction",
+            "outcomeConceptId": " 4329847"
+          },
+          {
+            "cohortId": "10048",
+            "cohortName": "Acute bacterial sinusitis",
+            "outcomeConceptId": " 4294548"
+          },
+          {
+            "cohortId": "10049",
+            "cohortName": "Polyp of colon",
+            "outcomeConceptId": " 4285898"
+          }
+        ],
+        "occurrenceType": "first",
+        "detectOnDescendants": true
+      },
+      "attr_class": ["NegativeControlOutcomeSharedResources", "SharedResources"]
+    }
+  ],
+  "moduleSpecifications": [
+    {
+      "module": "CohortGeneratorModule",
+      "settings": {
+        "generateStats": true
+      },
+      "attr_class": ["ModuleSpecifications", "CohortGeneratorModuleSpecifications"]
+    },
+    {
+      "module": "CohortDiagnosticsModule",
+      "settings": {
+        "runInclusionStatistics": true,
+        "runIncludedSourceConcepts": true,
+        "runOrphanConcepts": true,
+        "runTimeSeries": false,
+        "runVisitContext": true,
+        "runBreakdownIndexEvents": true,
+        "runIncidenceRate": true,
+        "runCohortRelationship": true,
+        "runTemporalCohortCharacterization": true,
+        "temporalCovariateSettings": {
+          "temporal": true,
+          "temporalSequence": false,
+          "DemographicsGender": true,
+          "DemographicsAge": true,
+          "DemographicsAgeGroup": true,
+          "DemographicsRace": true,
+          "DemographicsEthnicity": true,
+          "DemographicsIndexYear": true,
+          "DemographicsIndexMonth": true,
+          "DemographicsPriorObservationTime": true,
+          "DemographicsPostObservationTime": true,
+          "DemographicsTimeInCohort": true,
+          "DemographicsIndexYearMonth": true,
+          "ConditionOccurrence": true,
+          "ConditionEraStart": true,
+          "ConditionEraOverlap": true,
+          "ConditionEraGroupOverlap": true,
+          "DrugEraStart": true,
+          "DrugEraGroupOverlap": true,
+          "ProcedureOccurrence": true,
+          "DeviceExposure": true,
+          "Measurement": true,
+          "MeasurementRangeGroup": true,
+          "MeasurementValueAsConcept": true,
+          "Observation": true,
+          "ObservationValueAsConcept": true,
+          "CharlsonIndex": true,
+          "Dcsi": true,
+          "Chads2": true,
+          "Chads2Vasc": true,
+          "temporalStartDays": [-9999, -365, -180, -30, -365, -30, 0, 1, 31, -9999],
+          "temporalEndDays": [0, 0, 0, 0, -31, -1, 0, 30, 365, 9999],
+          "includedCovariateConceptIds": [],
+          "addDescendantsToInclude": false,
+          "excludedCovariateConceptIds": [],
+          "addDescendantsToExclude": false,
+          "includedCovariateIds": [],
+          "attr_class": "covariateSettings",
+          "attr_fun": "getDbDefaultCovariateData"
+        },
+        "minCharacterizationMean": 0.01,
+        "irWashoutPeriod": 0
+      },
+      "attr_class": ["ModuleSpecifications", "CohortDiagnosticsModuleSpecifications"]
+    },
+    {
+      "module": "CharacterizationModule",
+      "settings": {
+        "analysis": {
+          "timeToEventSettings": [
+            {
+              "targetIds": [1, 2, 1001, 2001],
+              "outcomeIds": 3,
+              "attr_class": "timeToEventSettings"
+            }
+          ],
+          "dechallengeRechallengeSettings": [
+            {
+              "targetCohortDefinitionIds": [1, 2, 1001, 2001],
+              "outcomeCohortDefinitionIds": 3,
+              "dechallengeStopInterval": 30,
+              "dechallengeEvaluationWindow": 30,
+              "attr_class": "dechallengeRechallengeSettings"
+            }
+          ],
+          "aggregateCovariateSettings": [
+            {
+              "targetIds": [1, 2, 1001, 2001],
+              "minPriorObservation": 365,
+              "outcomeIds": 3,
+              "outcomeWashoutDays": 365,
+              "riskWindowStart": 1,
+              "startAnchor": "cohort start",
+              "riskWindowEnd": 0,
+              "endAnchor": "cohort end",
+              "covariateSettings": [
+                {
+                  "temporal": false,
+                  "temporalSequence": false,
+                  "DemographicsGender": true,
+                  "DemographicsAge": true,
+                  "DemographicsAgeGroup": true,
+                  "DemographicsRace": true,
+                  "DemographicsEthnicity": true,
+                  "DemographicsIndexYear": true,
+                  "DemographicsIndexMonth": true,
+                  "DemographicsPriorObservationTime": true,
+                  "DemographicsPostObservationTime": true,
+                  "DemographicsTimeInCohort": true,
+                  "ConditionGroupEraLongTerm": true,
+                  "ConditionGroupEraShortTerm": true,
+                  "DrugGroupEraLongTerm": true,
+                  "DrugGroupEraShortTerm": true,
+                  "DrugGroupEraOverlapping": true,
+                  "ProcedureOccurrenceLongTerm": true,
+                  "ProcedureOccurrenceShortTerm": true,
+                  "DeviceExposureLongTerm": true,
+                  "DeviceExposureShortTerm": true,
+                  "MeasurementLongTerm": true,
+                  "MeasurementShortTerm": true,
+                  "ObservationLongTerm": true,
+                  "ObservationShortTerm": true,
+                  "VisitConceptCountLongTerm": true,
+                  "VisitConceptCountShortTerm": true,
+                  "longTermStartDays": -365,
+                  "mediumTermStartDays": -180,
+                  "shortTermStartDays": -30,
+                  "endDays": 0,
+                  "includedCovariateConceptIds": [],
+                  "addDescendantsToInclude": false,
+                  "excludedCovariateConceptIds": [],
+                  "addDescendantsToExclude": false,
+                  "includedCovariateIds": [],
+                  "attr_class": "covariateSettings",
+                  "attr_fun": "getDbDefaultCovariateData"
+                }
+              ],
+              "caseCovariateSettings": {
+                "temporal": false,
+                "temporalSequence": false,
+                "ConditionGroupEraDuring": true,
+                "DrugGroupEraDuring": true,
+                "ProcedureOccurrenceDuring": true,
+                "DeviceExposureDuring": true,
+                "MeasurementDuring": true,
+                "ObservationDuring": true,
+                "VisitConceptCountDuring": true,
+                "includedCovariateConceptIds": [],
+                "addDescendantsToInclude": false,
+                "excludedCovariateConceptIds": [],
+                "addDescendantsToExclude": false,
+                "includedCovariateIds": [],
+                "attr_class": "covariateSettings",
+                "attr_fun": "Characterization::getDbDuringCovariateData"
+              },
+              "casePreTargetDuration": 365,
+              "casePostOutcomeDuration": 365,
+              "extractNonCaseCovariates": true,
+              "attr_class": "aggregateCovariateSettings"
+            },
+            {
+              "targetIds": [1, 2, 1001, 2001],
+              "minPriorObservation": 365,
+              "outcomeIds": 3,
+              "outcomeWashoutDays": 365,
+              "riskWindowStart": 1,
+              "startAnchor": "cohort start",
+              "riskWindowEnd": 365,
+              "endAnchor": "cohort end",
+              "covariateSettings": [
+                {
+                  "temporal": false,
+                  "temporalSequence": false,
+                  "DemographicsGender": true,
+                  "DemographicsAge": true,
+                  "DemographicsAgeGroup": true,
+                  "DemographicsRace": true,
+                  "DemographicsEthnicity": true,
+                  "DemographicsIndexYear": true,
+                  "DemographicsIndexMonth": true,
+                  "DemographicsPriorObservationTime": true,
+                  "DemographicsPostObservationTime": true,
+                  "DemographicsTimeInCohort": true,
+                  "ConditionGroupEraLongTerm": true,
+                  "ConditionGroupEraShortTerm": true,
+                  "DrugGroupEraLongTerm": true,
+                  "DrugGroupEraShortTerm": true,
+                  "DrugGroupEraOverlapping": true,
+                  "ProcedureOccurrenceLongTerm": true,
+                  "ProcedureOccurrenceShortTerm": true,
+                  "DeviceExposureLongTerm": true,
+                  "DeviceExposureShortTerm": true,
+                  "MeasurementLongTerm": true,
+                  "MeasurementShortTerm": true,
+                  "ObservationLongTerm": true,
+                  "ObservationShortTerm": true,
+                  "VisitConceptCountLongTerm": true,
+                  "VisitConceptCountShortTerm": true,
+                  "longTermStartDays": -365,
+                  "mediumTermStartDays": -180,
+                  "shortTermStartDays": -30,
+                  "endDays": 0,
+                  "includedCovariateConceptIds": [],
+                  "addDescendantsToInclude": false,
+                  "excludedCovariateConceptIds": [],
+                  "addDescendantsToExclude": false,
+                  "includedCovariateIds": [],
+                  "attr_class": "covariateSettings",
+                  "attr_fun": "getDbDefaultCovariateData"
+                }
+              ],
+              "caseCovariateSettings": {
+                "temporal": false,
+                "temporalSequence": false,
+                "ConditionGroupEraDuring": true,
+                "DrugGroupEraDuring": true,
+                "ProcedureOccurrenceDuring": true,
+                "DeviceExposureDuring": true,
+                "MeasurementDuring": true,
+                "ObservationDuring": true,
+                "VisitConceptCountDuring": true,
+                "includedCovariateConceptIds": [],
+                "addDescendantsToInclude": false,
+                "excludedCovariateConceptIds": [],
+                "addDescendantsToExclude": false,
+                "includedCovariateIds": [],
+                "attr_class": "covariateSettings",
+                "attr_fun": "Characterization::getDbDuringCovariateData"
+              },
+              "casePreTargetDuration": 365,
+              "casePostOutcomeDuration": 365,
+              "extractNonCaseCovariates": true,
+              "attr_class": "aggregateCovariateSettings"
+            }
+          ],
+          "attr_class": "characterizationSettings"
+        },
+        "minCharacterizationMean": 0.01
+      },
+      "attr_class": ["ModuleSpecifications", "CharacterizationModuleSpecifications"]
+    },
+    {
+      "module": "CohortIncidenceModule",
+      "settings": {
+        "irDesign": {
+          "targetDefs": [
+            {
+              "id": 1,
+              "name": "Celecoxib"
+            },
+            {
+              "id": 2,
+              "name": "Diclofenac"
+            },
+            {
+              "id": 1001,
+              "name": "Celecoxib Age 18-64"
+            },
+            {
+              "id": 2001,
+              "name": "Diclofenac Age 18-64"
+            }
+          ],
+          "outcomeDefs": [
+            {
+              "id": 1,
+              "name": "GI bleed",
+              "cohortId": 3,
+              "cleanWindow": 9999
+            }
+          ],
+          "timeAtRiskDefs": [
+            {
+              "id": 1,
+              "start": {
+                "dateField": "start",
+                "offset": 0
+              },
+              "end": {
+                "dateField": "end",
+                "offset": 0
+              }
+            },
+            {
+              "id": 2,
+              "start": {
+                "dateField": "start",
+                "offset": 0
+              },
+              "end": {
+                "dateField": "start",
+                "offset": 365
+              }
+            }
+          ],
+          "analysisList": [
+            {
+              "targets": [1, 2, 1001, 2001],
+              "outcomes": 1,
+              "tars": [1, 2]
+            }
+          ],
+          "strataSettings": {
+            "byAge": false,
+            "byGender": true,
+            "byYear": true
+          }
+        }
+      },
+      "attr_class": ["ModuleSpecifications", "CohortIncidenceModuleSpecifications"]
+    },
+    {
+      "module": "TreatmentPatternsModule",
+      "settings": {
+        "cohorts": [
+          {
+            "cohortId": 11,
+            "cohortName": "ViralSinusitis",
+            "type": "target"
+          },
+          {
+            "cohortId": 1,
+            "cohortName": "Celecoxib",
+            "type": "event"
+          },
+          {
+            "cohortId": 2,
+            "cohortName": "Diclofenac",
+            "type": "event"
+          },
+          {
+            "cohortId": 3,
+            "cohortName": "GI bleed",
+            "type": "event"
+          },
+          {
+            "cohortId": 4,
+            "cohortName": "Acetaminophen",
+            "type": "event"
+          },
+          {
+            "cohortId": 5,
+            "cohortName": "Amoxicillin",
+            "type": "event"
+          },
+          {
+            "cohortId": 6,
+            "cohortName": "Aspirin",
+            "type": "event"
+          },
+          {
+            "cohortId": 7,
+            "cohortName": "Clavulanate",
+            "type": "event"
+          },
+          {
+            "cohortId": 9,
+            "cohortName": "Doxylamine",
+            "type": "event"
+          },
+          {
+            "cohortId": 10,
+            "cohortName": "PenicillinV",
+            "type": "event"
+          },
+          {
+            "cohortId": 1001,
+            "cohortName": "Celecoxib - age 18 to 64 Age 18 to 64",
+            "type": "event"
+          },
+          {
+            "cohortId": 2001,
+            "cohortName": "Diclofenac - age 18 to 64 Age 18 to 64",
+            "type": "event"
+          },
+          {
+            "cohortId": 1002,
+            "cohortName": "Celecoxib - first event with 365 prior obs first event with 365 prior obs",
+            "type": "event"
+          },
+          {
+            "cohortId": 2002,
+            "cohortName": "Diclofenac - first event with 365 prior obs first event with 365 prior obs",
+            "type": "event"
+          },
+          {
+            "cohortId": 1003,
+            "cohortName": "Celecoxib - age 18 to 64 and first event with 365 prior obs Age 18 to 64, first event with 365 prior obs",
+            "type": "event"
+          },
+          {
+            "cohortId": 2003,
+            "cohortName": "Diclofenac - age 18 to 64 and first event with 365 prior obs Age 18 to 64, first event with 365 prior obs",
+            "type": "event"
+          },
+          {
+            "cohortId": 8,
+            "cohortName": "Death",
+            "type": "exit"
+          }
+        ],
+        "minEraDuration": 7,
+        "eraCollapseSize": 14,
+        "combinationWindow": 7,
+        "minPostCombinationDuration": 7,
+        "filterTreatments": "First",
+        "maxPathLength": 5,
+        "ageWindow": 5,
+        "minCellCount": 1,
+        "censorType": "minCellCount",
+        "overlapMethod": "truncate",
+        "concatTargets": true,
+        "startAnchor": "startDate",
+        "windowStart": 0,
+        "endAnchor": "endDate",
+        "windowEnd": 0
+      },
+      "attr_class": ["ModuleSpecifications", "TreatmentPatternsModuleSpecifications"]
+    },
+    {
+      "module": "CohortMethodModule",
+      "settings": {
+        "cmAnalysisList": [
+          {
+            "analysisId": 1,
+            "description": "No matching, simple outcome model",
+            "getDbCohortMethodDataArgs": {
+              "studyStartDate": "",
+              "studyEndDate": "",
+              "firstExposureOnly": true,
+              "removeDuplicateSubjects": "remove all",
+              "restrictToCommonPeriod": false,
+              "washoutPeriod": 183,
+              "maxCohortSize": 100000,
+              "covariateSettings": {
+                "temporal": false,
+                "temporalSequence": false,
+                "DemographicsGender": true,
+                "DemographicsAgeGroup": true,
+                "DemographicsRace": true,
+                "DemographicsEthnicity": true,
+                "DemographicsIndexYear": true,
+                "DemographicsIndexMonth": true,
+                "ConditionGroupEraLongTerm": true,
+                "ConditionGroupEraShortTerm": true,
+                "DrugGroupEraLongTerm": true,
+                "DrugGroupEraShortTerm": true,
+                "DrugGroupEraOverlapping": true,
+                "ProcedureOccurrenceLongTerm": true,
+                "ProcedureOccurrenceShortTerm": true,
+                "DeviceExposureLongTerm": true,
+                "DeviceExposureShortTerm": true,
+                "MeasurementLongTerm": true,
+                "MeasurementShortTerm": true,
+                "MeasurementRangeGroupLongTerm": true,
+                "MeasurementRangeGroupShortTerm": true,
+                "MeasurementValueAsConceptLongTerm": true,
+                "MeasurementValueAsConceptShortTerm": true,
+                "ObservationLongTerm": true,
+                "ObservationShortTerm": true,
+                "ObservationValueAsConceptLongTerm": true,
+                "ObservationValueAsConceptShortTerm": true,
+                "CharlsonIndex": true,
+                "Dcsi": true,
+                "Chads2": true,
+                "Chads2Vasc": true,
+                "includedCovariateConceptIds": [],
+                "includedCovariateIds": [],
+                "addDescendantsToInclude": false,
+                "excludedCovariateConceptIds": [],
+                "addDescendantsToExclude": true,
+                "shortTermStartDays": -30,
+                "mediumTermStartDays": -180,
+                "endDays": 0,
+                "longTermStartDays": -365,
+                "attr_class": "covariateSettings",
+                "attr_fun": "getDbDefaultCovariateData"
+              },
+              "attr_class": "args"
+            },
+            "createStudyPopArgs": {
+              "firstExposureOnly": false,
+              "restrictToCommonPeriod": false,
+              "washoutPeriod": 0,
+              "removeDuplicateSubjects": "keep all",
+              "removeSubjectsWithPriorOutcome": true,
+              "priorOutcomeLookback": 99999,
+              "minDaysAtRisk": 1,
+              "maxDaysAtRisk": 99999,
+              "riskWindowStart": 0,
+              "startAnchor": "cohort start",
+              "riskWindowEnd": 365,
+              "endAnchor": "cohort end",
+              "censorAtNewRiskWindow": false,
+              "attr_class": "args"
+            },
+            "fitOutcomeModelArgs": {
+              "modelType": "cox",
+              "stratified": false,
+              "useCovariates": false,
+              "inversePtWeighting": false,
+              "profileBounds": [-2.3026, 2.3026],
+              "prior": {
+                "priorType": "laplace",
+                "variance": 1,
+                "exclude": null,
+                "graph": null,
+                "neighborhood": null,
+                "useCrossValidation": true,
+                "forceIntercept": false,
+                "attr_class": "cyclopsPrior"
+              },
+              "control": {
+                "maxIterations": 1000,
+                "tolerance": 2e-07,
+                "convergenceType": "gradient",
+                "autoSearch": true,
+                "fold": 10,
+                "lowerLimit": 0.01,
+                "upperLimit": 20,
+                "gridSteps": 10,
+                "minCVData": 100,
+                "cvRepetitions": 10,
+                "noiseLevel": "quiet",
+                "threads": 1,
+                "seed": 1,
+                "resetCoefficients": true,
+                "startingVariance": 0.01,
+                "useKKTSwindle": false,
+                "tuneSwindle": 10,
+                "selectorType": "auto",
+                "initialBound": 2,
+                "maxBoundCount": 5,
+                "algorithm": "ccd",
+                "doItAll": true,
+                "syncCV": false,
+                "attr_class": "cyclopsControl"
+              },
+              "attr_class": "args"
+            },
+            "attr_class": "cmAnalysis"
+          },
+          {
+            "analysisId": 2,
+            "description": "Matching on ps and covariates, simple outcomeModel",
+            "getDbCohortMethodDataArgs": {
+              "studyStartDate": "",
+              "studyEndDate": "",
+              "firstExposureOnly": true,
+              "removeDuplicateSubjects": "remove all",
+              "restrictToCommonPeriod": false,
+              "washoutPeriod": 183,
+              "maxCohortSize": 100000,
+              "covariateSettings": {
+                "temporal": false,
+                "temporalSequence": false,
+                "DemographicsGender": true,
+                "DemographicsAgeGroup": true,
+                "DemographicsRace": true,
+                "DemographicsEthnicity": true,
+                "DemographicsIndexYear": true,
+                "DemographicsIndexMonth": true,
+                "ConditionGroupEraLongTerm": true,
+                "ConditionGroupEraShortTerm": true,
+                "DrugGroupEraLongTerm": true,
+                "DrugGroupEraShortTerm": true,
+                "DrugGroupEraOverlapping": true,
+                "ProcedureOccurrenceLongTerm": true,
+                "ProcedureOccurrenceShortTerm": true,
+                "DeviceExposureLongTerm": true,
+                "DeviceExposureShortTerm": true,
+                "MeasurementLongTerm": true,
+                "MeasurementShortTerm": true,
+                "MeasurementRangeGroupLongTerm": true,
+                "MeasurementRangeGroupShortTerm": true,
+                "MeasurementValueAsConceptLongTerm": true,
+                "MeasurementValueAsConceptShortTerm": true,
+                "ObservationLongTerm": true,
+                "ObservationShortTerm": true,
+                "ObservationValueAsConceptLongTerm": true,
+                "ObservationValueAsConceptShortTerm": true,
+                "CharlsonIndex": true,
+                "Dcsi": true,
+                "Chads2": true,
+                "Chads2Vasc": true,
+                "includedCovariateConceptIds": [],
+                "includedCovariateIds": [],
+                "addDescendantsToInclude": false,
+                "excludedCovariateConceptIds": [],
+                "addDescendantsToExclude": true,
+                "shortTermStartDays": -30,
+                "mediumTermStartDays": -180,
+                "endDays": 0,
+                "longTermStartDays": -365,
+                "attr_class": "covariateSettings",
+                "attr_fun": "getDbDefaultCovariateData"
+              },
+              "attr_class": "args"
+            },
+            "createStudyPopArgs": {
+              "firstExposureOnly": false,
+              "restrictToCommonPeriod": false,
+              "washoutPeriod": 0,
+              "removeDuplicateSubjects": "keep all",
+              "removeSubjectsWithPriorOutcome": true,
+              "priorOutcomeLookback": 99999,
+              "minDaysAtRisk": 1,
+              "maxDaysAtRisk": 99999,
+              "riskWindowStart": 0,
+              "startAnchor": "cohort start",
+              "riskWindowEnd": 365,
+              "endAnchor": "cohort end",
+              "censorAtNewRiskWindow": false,
+              "attr_class": "args"
+            },
+            "createPsArgs": {
+              "maxCohortSizeForFitting": 250000,
+              "errorOnHighCorrelation": true,
+              "stopOnError": false,
+              "prior": {
+                "priorType": "laplace",
+                "variance": 1,
+                "exclude": 0,
+                "graph": null,
+                "neighborhood": null,
+                "useCrossValidation": true,
+                "forceIntercept": false,
+                "attr_class": "cyclopsPrior"
+              },
+              "control": {
+                "maxIterations": 1000,
+                "tolerance": 1e-06,
+                "convergenceType": "gradient",
+                "autoSearch": true,
+                "fold": 10,
+                "lowerLimit": 0.01,
+                "upperLimit": 20,
+                "gridSteps": 10,
+                "minCVData": 100,
+                "cvRepetitions": 1,
+                "noiseLevel": "silent",
+                "threads": 1,
+                "seed": null,
+                "resetCoefficients": false,
+                "startingVariance": -1,
+                "useKKTSwindle": false,
+                "tuneSwindle": 10,
+                "selectorType": "auto",
+                "initialBound": 2,
+                "maxBoundCount": 5,
+                "algorithm": "ccd",
+                "doItAll": true,
+                "syncCV": false,
+                "attr_class": "cyclopsControl"
+              },
+              "estimator": "att",
+              "attr_class": "args"
+            },
+            "matchOnPsArgs": {
+              "caliper": 0.2,
+              "caliperScale": "standardized logit",
+              "maxRatio": 1,
+              "allowReverseMatch": false,
+              "attr_class": "args"
+            },
+            "computeSharedCovariateBalanceArgs": {
+              "maxCohortSize": 250000,
+              "attr_class": "args"
+            },
+            "computeCovariateBalanceArgs": {
+              "maxCohortSize": 250000,
+              "covariateFilter": {
+                "label": ["Age group", "Gender: female", "Race", "Ethnicity", "Medical history: General", "Medical history: Cardiovascular disease", "Medical history: Neoplasms", "Medication use", "Charlson comorbidity index", "CHADS2Vasc", "DCSI"],
+                "analysisId": [3, 1, 4, 5, 210, 210, 210, 410, 901, 904, 902],
+                "covariateIds": [null, "8532001", null, null, "4006969210,438409210,4212540210,255573210,201606210,4182210210,440383210,201820210,318800210,192671210,439727210,432867210,316866210,4104000210,433736210,80180210,255848210,140168210,4030518210,80809210,435783210,4279309210,81893210,81902210,197494210,4134440210", "313217210,381591210,317576210,321588210,316139210,4185932210,321052210,440417210,444247210", "4044013210,432571210,40481902210,443392210,4112853210,4180790210,443388210,197508210,200962210", "21601782410,21602796410,21604686410,21604389410,21603932410,21601387410,21602028410,21600960410,21601664410,21601744410,21601461410,21600046410,21603248410,21600712410,21603890410,21601853410,21604254410,21604489410,21604752410", "1901", "1904", "1902"],
+                "attr_class": ["spec_tbl_df", "tbl_df", "tbl", "data.frame"],
+                "attr_row.names": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                "attr_spec": {
+                  "cols": {
+                    "label": [],
+                    "analysisId": [],
+                    "covariateIds": []
+                  },
+                  "default": [],
+                  "delim": ","
+                },
+                "attr_problems": {}
+              },
+              "attr_class": "args"
+            },
+            "fitOutcomeModelArgs": {
+              "modelType": "cox",
+              "stratified": false,
+              "useCovariates": false,
+              "inversePtWeighting": false,
+              "profileBounds": [-2.3026, 2.3026],
+              "prior": {
+                "priorType": "laplace",
+                "variance": 1,
+                "exclude": null,
+                "graph": null,
+                "neighborhood": null,
+                "useCrossValidation": true,
+                "forceIntercept": false,
+                "attr_class": "cyclopsPrior"
+              },
+              "control": {
+                "maxIterations": 1000,
+                "tolerance": 2e-07,
+                "convergenceType": "gradient",
+                "autoSearch": true,
+                "fold": 10,
+                "lowerLimit": 0.01,
+                "upperLimit": 20,
+                "gridSteps": 10,
+                "minCVData": 100,
+                "cvRepetitions": 10,
+                "noiseLevel": "quiet",
+                "threads": 1,
+                "seed": 1,
+                "resetCoefficients": true,
+                "startingVariance": 0.01,
+                "useKKTSwindle": false,
+                "tuneSwindle": 10,
+                "selectorType": "auto",
+                "initialBound": 2,
+                "maxBoundCount": 5,
+                "algorithm": "ccd",
+                "doItAll": true,
+                "syncCV": false,
+                "attr_class": "cyclopsControl"
+              },
+              "attr_class": "args"
+            },
+            "attr_class": "cmAnalysis"
+          }
+        ],
+        "targetComparatorOutcomesList": [
+          {
+            "targetId": 1002,
+            "comparatorId": 2002,
+            "outcomes": [
+              {
+                "outcomeId": 10037,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10038,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10039,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10040,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10041,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10042,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10043,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10044,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10046,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10047,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10048,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10049,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 3,
+                "outcomeOfInterest": true,
+                "trueEffectSize": null,
+                "attr_class": "outcome"
+              }
+            ],
+            "excludedCovariateConceptIds": [1118084, 1124300],
+            "attr_class": "targetComparatorOutcomes"
+          },
+          {
+            "targetId": 1003,
+            "comparatorId": 2003,
+            "outcomes": [
+              {
+                "outcomeId": 10037,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10038,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10039,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10040,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10041,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10042,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10043,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10044,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10046,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10047,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10048,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 10049,
+                "outcomeOfInterest": false,
+                "trueEffectSize": 1,
+                "priorOutcomeLookback": 5,
+                "attr_class": "outcome"
+              },
+              {
+                "outcomeId": 3,
+                "outcomeOfInterest": true,
+                "trueEffectSize": null,
+                "attr_class": "outcome"
+              }
+            ],
+            "excludedCovariateConceptIds": [1118084, 1124300],
+            "attr_class": "targetComparatorOutcomes"
+          }
+        ],
+        "refitPsForEveryOutcome": false,
+        "refitPsForEveryStudyPopulation": false,
+        "cmDiagnosticThresholds": {
+          "mdrrThreshold": "Inf",
+          "easeThreshold": 0.6,
+          "sdmThreshold": 0.1,
+          "equipoiseThreshold": 0.2,
+          "generalizabilitySdmThreshold": 1,
+          "attr_class": "CmDiagnosticThresholds"
+        }
+      },
+      "attr_class": ["ModuleSpecifications", "CohortMethodModuleSpecifications"]
+    },
+    {
+      "module": "SelfControlledCaseSeriesModule",
+      "settings": {
+        "sccsAnalysesSpecifications": {
+          "controlType": "outcome",
+          "sccsDiagnosticThresholds": {
+            "eventExposureDependenceNullBounds": [0.8, 1.25],
+            "eventObservationDependenceNullBounds": [0.5, 2],
+            "rareOutcomeMaxPrevalence": 0.1,
+            "timeTrendMaxRatio": 1.1,
+            "easeThreshold": 0.25,
+            "mdrrThreshold": 10
+          },
+          "combineDataFetchAcrossOutcomes": false,
+          "analysesToExclude": null,
+          "exposuresOutcomeList": [
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": null,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 3
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10037
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10038
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10039
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10040
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10041
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10042
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10043
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10044
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10046
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10047
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10048
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 1
+                }
+              ],
+              "outcomeId": 10049
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": null,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 3
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10037
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10038
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10039
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10040
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10041
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10042
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10043
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10044
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10046
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10047
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10048
+            },
+            {
+              "nestingCohortId": null,
+              "exposures": [
+                {
+                  "trueEffectSize": 1,
+                  "exposureIdRef": "exposureId",
+                  "exposureId": 2
+                }
+              ],
+              "outcomeId": 10049
+            }
+          ],
+          "sccsAnalysisList": [
+            {
+              "fitSccsModelArgs": {
+                "profileBounds": [-2.3026, 2.3026],
+                "profileGrid": null,
+                "control": {
+                  "maxIterations": 1000,
+                  "tolerance": 1e-06,
+                  "convergenceType": "gradient",
+                  "autoSearch": true,
+                  "fold": 10,
+                  "lowerLimit": 0.01,
+                  "upperLimit": 20,
+                  "gridSteps": 10,
+                  "minCVData": 100,
+                  "cvRepetitions": 1,
+                  "noiseLevel": "quiet",
+                  "threads": 1,
+                  "seed": 1,
+                  "resetCoefficients": true,
+                  "startingVariance": 0.1,
+                  "useKKTSwindle": false,
+                  "tuneSwindle": 10,
+                  "selectorType": "byPid",
+                  "initialBound": 2,
+                  "maxBoundCount": 5,
+                  "algorithm": "ccd",
+                  "doItAll": true,
+                  "syncCV": false
+                },
+                "prior": {
+                  "priorType": "laplace",
+                  "variance": 1,
+                  "exclude": null,
+                  "graph": null,
+                  "neighborhood": null,
+                  "useCrossValidation": true,
+                  "forceIntercept": false
+                }
+              },
+              "createIntervalDataArgs": {
+                "eventDependentObservation": false,
+                "endOfObservationEraLength": 30,
+                "minCasesForTimeCovariates": 100000,
+                "calendarTimeCovariateSettings": {
+                  "computeConfidenceIntervals": false,
+                  "allowRegularization": true,
+                  "calendarTimeKnots": 5
+                },
+                "seasonalityCovariateSettings": {
+                  "computeConfidenceIntervals": false,
+                  "allowRegularization": true,
+                  "seasonKnots": 5
+                },
+                "ageCovariateSettings": null,
+                "eraCovariateSettings": [
+                  {
+                    "preExposure": true,
+                    "exposureOfInterest": false,
+                    "profileLikelihood": false,
+                    "allowRegularization": false,
+                    "firstOccurrenceOnly": false,
+                    "endAnchor": "era start",
+                    "end": -1,
+                    "startAnchor": "era start",
+                    "start": -30,
+                    "stratifyById": false,
+                    "label": "Pre-exposure",
+                    "excludeEraIds": null,
+                    "includeEraIds": "exposureId"
+                  },
+                  {
+                    "preExposure": false,
+                    "exposureOfInterest": true,
+                    "profileLikelihood": true,
+                    "allowRegularization": false,
+                    "firstOccurrenceOnly": false,
+                    "endAnchor": "era end",
+                    "end": 365,
+                    "startAnchor": "era start",
+                    "start": 0,
+                    "stratifyById": false,
+                    "label": "Main",
+                    "excludeEraIds": null,
+                    "includeEraIds": "exposureId"
+                  }
+                ]
+              },
+              "createStudyPopulationArgs": {
+                "restrictTimeToEraId": null,
+                "genderConceptIds": null,
+                "maxAge": null,
+                "minAge": 18,
+                "naivePeriod": 365,
+                "firstOutcomeOnly": false
+              },
+              "getDbSccsDataArgs": {
+                "customCovariateIds": null,
+                "exposureIds": "exposureId",
+                "maxCasesPerOutcome": 1000000,
+                "studyEndDates": null,
+                "studyStartDates": null,
+                "deleteCovariatesSmallCount": 0,
+                "nestingCohortId": null
+              },
+              "description": "SCCS 18+",
+              "analysisId": 1
+            }
+          ]
+        }
+      },
+      "attr_class": ["ModuleSpecifications", "SelfControlledCaseSeriesModuleSpecifications"]
+    },
+    {
+      "module": "PatientLevelPredictionModule",
+      "settings": {
+        "modelDesignList": [
+          {
+            "targetId": 1002,
+            "outcomeId": 3,
+            "restrictPlpDataSettings": {
+              "studyStartDate": "",
+              "studyEndDate": "",
+              "firstExposureOnly": false,
+              "washoutPeriod": 0,
+              "sampleSize": null,
+              "attr_class": "restrictPlpDataSettings"
+            },
+            "covariateSettings": {
+              "temporal": false,
+              "temporalSequence": false,
+              "DemographicsGender": true,
+              "DemographicsAgeGroup": true,
+              "DemographicsRace": true,
+              "DemographicsEthnicity": true,
+              "DemographicsIndexYear": true,
+              "DemographicsIndexMonth": true,
+              "ConditionGroupEraLongTerm": true,
+              "ConditionGroupEraShortTerm": true,
+              "DrugGroupEraLongTerm": true,
+              "DrugGroupEraShortTerm": true,
+              "DrugGroupEraOverlapping": true,
+              "ProcedureOccurrenceLongTerm": true,
+              "ProcedureOccurrenceShortTerm": true,
+              "DeviceExposureLongTerm": true,
+              "DeviceExposureShortTerm": true,
+              "MeasurementLongTerm": true,
+              "MeasurementShortTerm": true,
+              "MeasurementRangeGroupLongTerm": true,
+              "MeasurementRangeGroupShortTerm": true,
+              "MeasurementValueAsConceptLongTerm": true,
+              "MeasurementValueAsConceptShortTerm": true,
+              "ObservationLongTerm": true,
+              "ObservationShortTerm": true,
+              "ObservationValueAsConceptLongTerm": true,
+              "ObservationValueAsConceptShortTerm": true,
+              "CharlsonIndex": true,
+              "Dcsi": true,
+              "Chads2": true,
+              "Chads2Vasc": true,
+              "includedCovariateConceptIds": [],
+              "includedCovariateIds": [],
+              "addDescendantsToInclude": false,
+              "excludedCovariateConceptIds": [],
+              "addDescendantsToExclude": false,
+              "shortTermStartDays": -30,
+              "mediumTermStartDays": -180,
+              "endDays": 0,
+              "longTermStartDays": -365,
+              "attr_class": "covariateSettings",
+              "attr_fun": "getDbDefaultCovariateData"
+            },
+            "populationSettings": {
+              "binary": true,
+              "includeAllOutcomes": true,
+              "firstExposureOnly": false,
+              "washoutPeriod": 0,
+              "removeSubjectsWithPriorOutcome": true,
+              "priorOutcomeLookback": 99999,
+              "requireTimeAtRisk": true,
+              "minTimeAtRisk": 1,
+              "riskWindowStart": 1,
+              "startAnchor": "cohort start",
+              "riskWindowEnd": 365,
+              "endAnchor": "cohort start",
+              "restrictTarToCohortEnd": false,
+              "attr_class": "populationSettings"
+            },
+            "sampleSettings": [
+              {
+                "numberOutcomestoNonOutcomes": 1,
+                "sampleSeed": 1,
+                "attr_class": "sampleSettings",
+                "attr_fun": "sameData"
+              }
+            ],
+            "featureEngineeringSettings": [
+              {
+                "attr_class": "featureEngineeringSettings",
+                "attr_fun": "sameData"
+              }
+            ],
+            "preprocessSettings": {
+              "minFraction": 0.001,
+              "normalize": true,
+              "removeRedundancy": true,
+              "attr_class": "preprocessSettings"
+            },
+            "modelSettings": {
+              "fitFunction": "fitCyclopsModel",
+              "param": {
+                "priorParams": {
+                  "priorType": "laplace",
+                  "forceIntercept": false,
+                  "variance": 0.01,
+                  "exclude": 0
+                },
+                "includeCovariateIds": null,
+                "upperLimit": 20,
+                "lowerLimit": 0.01,
+                "priorCoefs": null,
+                "attr_settings": {
+                  "priorfunction": "Cyclops::createPrior",
+                  "selectorType": "byPid",
+                  "crossValidationInPrior": true,
+                  "modelType": "logistic",
+                  "addIntercept": true,
+                  "useControl": true,
+                  "seed": 93739120,
+                  "name": "Lasso Logistic Regression",
+                  "threads": -1,
+                  "tolerance": 2e-06,
+                  "cvRepetitions": 1,
+                  "maxIterations": 3000
+                },
+                "attr_modelType": "binary",
+                "attr_saveType": "RtoJson"
+              },
+              "attr_class": "modelSettings"
+            },
+            "splitSettings": {
+              "test": 0.25,
+              "train": 0.75,
+              "seed": 95791,
+              "nfold": 3,
+              "attr_class": "splitSettings",
+              "attr_fun": "randomSplitter"
+            },
+            "executeSettings": {
+              "runSplitData": true,
+              "runSampleData": false,
+              "runfeatureEngineering": false,
+              "runPreprocessData": true,
+              "runModelDevelopment": true,
+              "runCovariateSummary": true,
+              "attr_class": "executeSettings"
+            },
+            "attr_class": "modelDesign"
+          },
+          {
+            "targetId": 1003,
+            "outcomeId": 3,
+            "restrictPlpDataSettings": {
+              "studyStartDate": "",
+              "studyEndDate": "",
+              "firstExposureOnly": false,
+              "washoutPeriod": 0,
+              "sampleSize": null,
+              "attr_class": "restrictPlpDataSettings"
+            },
+            "covariateSettings": {
+              "temporal": false,
+              "temporalSequence": false,
+              "DemographicsGender": true,
+              "DemographicsAgeGroup": true,
+              "DemographicsRace": true,
+              "DemographicsEthnicity": true,
+              "DemographicsIndexYear": true,
+              "DemographicsIndexMonth": true,
+              "ConditionGroupEraLongTerm": true,
+              "ConditionGroupEraShortTerm": true,
+              "DrugGroupEraLongTerm": true,
+              "DrugGroupEraShortTerm": true,
+              "DrugGroupEraOverlapping": true,
+              "ProcedureOccurrenceLongTerm": true,
+              "ProcedureOccurrenceShortTerm": true,
+              "DeviceExposureLongTerm": true,
+              "DeviceExposureShortTerm": true,
+              "MeasurementLongTerm": true,
+              "MeasurementShortTerm": true,
+              "MeasurementRangeGroupLongTerm": true,
+              "MeasurementRangeGroupShortTerm": true,
+              "MeasurementValueAsConceptLongTerm": true,
+              "MeasurementValueAsConceptShortTerm": true,
+              "ObservationLongTerm": true,
+              "ObservationShortTerm": true,
+              "ObservationValueAsConceptLongTerm": true,
+              "ObservationValueAsConceptShortTerm": true,
+              "CharlsonIndex": true,
+              "Dcsi": true,
+              "Chads2": true,
+              "Chads2Vasc": true,
+              "includedCovariateConceptIds": [],
+              "includedCovariateIds": [],
+              "addDescendantsToInclude": false,
+              "excludedCovariateConceptIds": [],
+              "addDescendantsToExclude": false,
+              "shortTermStartDays": -30,
+              "mediumTermStartDays": -180,
+              "endDays": 0,
+              "longTermStartDays": -365,
+              "attr_class": "covariateSettings",
+              "attr_fun": "getDbDefaultCovariateData"
+            },
+            "populationSettings": {
+              "binary": true,
+              "includeAllOutcomes": true,
+              "firstExposureOnly": false,
+              "washoutPeriod": 0,
+              "removeSubjectsWithPriorOutcome": true,
+              "priorOutcomeLookback": 99999,
+              "requireTimeAtRisk": true,
+              "minTimeAtRisk": 1,
+              "riskWindowStart": 1,
+              "startAnchor": "cohort start",
+              "riskWindowEnd": 365,
+              "endAnchor": "cohort start",
+              "restrictTarToCohortEnd": false,
+              "attr_class": "populationSettings"
+            },
+            "sampleSettings": [
+              {
+                "numberOutcomestoNonOutcomes": 1,
+                "sampleSeed": 1,
+                "attr_class": "sampleSettings",
+                "attr_fun": "sameData"
+              }
+            ],
+            "featureEngineeringSettings": [
+              {
+                "attr_class": "featureEngineeringSettings",
+                "attr_fun": "sameData"
+              }
+            ],
+            "preprocessSettings": {
+              "minFraction": 0.001,
+              "normalize": true,
+              "removeRedundancy": true,
+              "attr_class": "preprocessSettings"
+            },
+            "modelSettings": {
+              "fitFunction": "fitCyclopsModel",
+              "param": {
+                "priorParams": {
+                  "priorType": "laplace",
+                  "forceIntercept": false,
+                  "variance": 0.01,
+                  "exclude": 0
+                },
+                "includeCovariateIds": null,
+                "upperLimit": 20,
+                "lowerLimit": 0.01,
+                "priorCoefs": null,
+                "attr_settings": {
+                  "priorfunction": "Cyclops::createPrior",
+                  "selectorType": "byPid",
+                  "crossValidationInPrior": true,
+                  "modelType": "logistic",
+                  "addIntercept": true,
+                  "useControl": true,
+                  "seed": 46144016,
+                  "name": "Lasso Logistic Regression",
+                  "threads": -1,
+                  "tolerance": 2e-06,
+                  "cvRepetitions": 1,
+                  "maxIterations": 3000
+                },
+                "attr_modelType": "binary",
+                "attr_saveType": "RtoJson"
+              },
+              "attr_class": "modelSettings"
+            },
+            "splitSettings": {
+              "test": 0.25,
+              "train": 0.75,
+              "seed": 47715,
+              "nfold": 3,
+              "attr_class": "splitSettings",
+              "attr_fun": "randomSplitter"
+            },
+            "executeSettings": {
+              "runSplitData": true,
+              "runSampleData": false,
+              "runfeatureEngineering": false,
+              "runPreprocessData": true,
+              "runModelDevelopment": true,
+              "runCovariateSummary": true,
+              "attr_class": "executeSettings"
+            },
+            "attr_class": "modelDesign"
+          }
+        ]
+      },
+      "attr_class": ["ModuleSpecifications", "PatientLevelPredictionModuleSpecifications"]
+    }
+  ],
+  "attr_class": "AnalysisSpecifications"
+}
