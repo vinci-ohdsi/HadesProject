@@ -44,7 +44,11 @@ jobs:
       - name: Ensure source commit is on main
         run: |
           git fetch origin main --tags
-          git rev-parse "${{ steps.src.outputs.source_ref }}" >/dev/null 2>&1
+          git rev-parse "${{ steps.src.outputs.source_ref }}" >/dev/null 2>&1 || {
+            echo "Invalid ref: ${{ steps.src.outputs.source_ref }}"
+            exit 1
+          }
+          
           SOURCE_SHA="$(git rev-parse "${{ steps.src.outputs.source_ref }}^{commit}")"
 
           if git merge-base --is-ancestor "$SOURCE_SHA" origin/main; then
