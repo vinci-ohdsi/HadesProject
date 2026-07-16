@@ -60,6 +60,10 @@ jobs:
 
       - name: Merge source ref into ingest_Rv4.5
         run: |
+          # Configure git identity for the bot
+          git config user.name "Marc A. Suchard [github bot]"
+          git config user.email "msuchard@ucla.edu"
+          
           git fetch --all --tags
           SOURCE_SHA="$(git rev-parse "${{ steps.src.outputs.source_ref }}^{commit}")"
 
@@ -88,11 +92,7 @@ jobs:
           Rscript -e "Sys.getenv('DATABASECONNECTOR_JAR_FOLDER')"
 
       - name: Commit and push changes
-        run: |
-          # Configure git identity for the bot
-          git config user.name "Marc A. Suchard [github bot]"
-          git config user.email "msuchard@ucla.edu"
-
+        run: |         
           # Stage all changes (adds, modifications, deletions)
           git add -f renv/library -A
           
