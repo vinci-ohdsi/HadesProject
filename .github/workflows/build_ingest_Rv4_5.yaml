@@ -7,6 +7,12 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      ref_to_merge:
+        description: 'Tag or commit SHA to merge into ingest_Rv4.5 (e.g. v4.5.99 or abc1234)'
+        required: true
+        type: string
 
 jobs:
   build:
@@ -15,44 +21,49 @@ jobs:
     defaults:
       run:
         shell: bash
-    
-    # Only run for tag refs (extra safety)
-    if: startsWith(github.ref, 'refs/tags/')
-        
+
+    # Allow either tag-push runs or manual dispatch runs
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
-      - name: Ensure commit is on main
-        run: |
-          git fetch origin main
-          git merge-base --is-ancestor HEAD origin/main
 
-          if [ $? -eq 0 ]; then
-            echo "Commit is on main"
+      - name: Resolve source ref
+        id: src
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            SOURCE_REF="${{ github.event.inputs.ref_to_merge }}"
           else
-            echo "Commit is NOT on main"
-            exit 1
-          fi   
-          
-      - name: Merge tagged commit into ingest_Rv4.5
-        run: |
-          # Make sure we have latest branches and tags
-          git fetch --all --tags
+            SOURCE_REF="${GITHUB_REF#refs/tags/}"
+          fi
+          echo "source_ref=$SOURCE_REF" >> "$GITHUB_OUTPUT"
+          echo "Using source ref: $SOURCE_REF"
 
-          # Checkout target branch
+      - name: Ensure source commit is on main
+        run: |
+          git fetch origin main --tags
+          git rev-parse "${{ steps.src.outputs.source_ref }}" >/dev/null 2>&1
+          SOURCE_SHA="$(git rev-parse "${{ steps.src.outputs.source_ref }}^{commit}")"
+
+          if git merge-base --is-ancestor "$SOURCE_SHA" origin/main; then
+            echo "Source commit is on main"
+          else
+            echo "Source commit is NOT on main"
+            exit 1
+          fi
+
+      - name: Merge source ref into ingest_Rv4.5
+        run: |
+          git fetch --all --tags
+          SOURCE_SHA="$(git rev-parse "${{ steps.src.outputs.source_ref }}^{commit}")"
+
           git checkout ingest_Rv4.5
           git pull origin ingest_Rv4.5
 
-          # Merge the tagged commit (HEAD is already the tag commit)
-          git merge --no-commit --no-ff HEAD -m "Merge tag $GITHUB_REF into ingest_Rv4.5"
+          git merge --no-commit --no-ff "$SOURCE_SHA" -m "Merge ${{ steps.src.outputs.source_ref }} into ingest_Rv4.5"
 
-          if [ $? -ne 0 ]; then
-            echo "Merge failed"
-            exit 1
-          fi
-                         
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
@@ -61,27 +72,22 @@ jobs:
       - name: Restore R dependencies (renv)
         run: |
           Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
-          Rscript -e "renv::restore(packages = 'renv')"          
+          Rscript -e "renv::restore(packages = 'renv')"
           Rscript -e "renv::restore(prompt = FALSE)"
-          # Clean
           rm -rf renv/library/windows/R-4.5/x86_64-w64-mingw32/.renv-backup*
-          # Report some diagnostics (should really run unit-tests)
           Rscript -e "renv::diagnostics()"
           Rscript -e "Sys.getenv('JAVA_HOME')"
           Rscript -e "Sys.getenv('DATABASECONNECTOR_JAR_FOLDER')"
-                              
+
       - name: Commit and push changes
         run: |
-          # Configure git identity for the bot
           git config user.name "Marc A. Suchard [github bot]"
           git config user.email "msuchard@ucla.edu"
 
-          # Stage all changes (adds, modifications, deletions)
           git add -f renv/library -A
-          
-          # Only commit if there are changes
+
           if ! git diff --cached --quiet; then
-            git commit -m "Update generated files after merge ${{ steps.ref.outputs.ref }}"
+            git commit -m "Update generated files after merge ${{ steps.src.outputs.source_ref }}"
             git push origin ingest_Rv4.5
           else
             echo "No changes to commit"
