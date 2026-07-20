@@ -68,7 +68,7 @@ jobs:
           SOURCE_SHA="$(git rev-parse "${{ steps.src.outputs.source_ref }}^{commit}")"
 
           git checkout ingest_Rv4.4
-          git pull origin ingest_Rv4.4
+          git pull -ff-only origin ingest_Rv4.4
 
           git merge --no-commit --no-ff "$SOURCE_SHA" -m "Merge ${{ steps.src.outputs.source_ref }} into ingest_Rv4.4"
           if [ $? -ne 0 ]; then
@@ -85,14 +85,11 @@ jobs:
         run: |
           Rscript -e "cat(R.version.string, '\n')"
           Rscript -e "cat(R.version\$platform, '\n')"
-          Rscript -e "stopifnot(as.character(getRversion()) == '4.4.1')"
+          Rscript -e "stopifnot(getRversion() >= '4.4', getRversion() < '4.5')"
 
-          # Remove all previously generated Windows project libraries.
           rm -rf renv/library/windows
-
-          #  Recreate the expected parent directory.
           mkdir -p renv/library/windows
-
+          
       - name: Restore R dependencies
         env:
           RENV_CONFIG_CACHE_ENABLED: "FALSE"
