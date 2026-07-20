@@ -79,30 +79,87 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '4.4'
+          r-version: '4.4.3'
 
-      - name: Restore R dependencies (renv)
+      - name: Prepare clean R 4.4 project library
+        run: |
+          Rscript -e "cat(R.version.string, '\n')"
+          Rscript -e "cat(R.version\$platform, '\n')"
+          Rscript -e "stopifnot(as.character(getRversion()) == '4.4.3')"
+
+          # Remove all previously generated Windows project libraries.
+          rm -rf renv/library/windows
+
+          #  Recreate the expected parent directory.
+          mkdir -p renv/library/windows
+
+      - name: Restore R dependencies
+        env:
+          RENV_CONFIG_CACHE_ENABLED: "FALSE"
+          RENV_CONFIG_CACHE_SYMLINKS: "FALSE"
+          RENV_CONFIG_UPDATES_CHECK: "FALSE"
         run: |
           Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
-          Rscript -e "renv::restore(packages = 'renv')"
+          Rscript -e "renv::restore(packages = 'renv', prompt = FALSE)"
           Rscript -e "renv::restore(prompt = FALSE)"
-          rm -rf renv/library/windows/R-4.4/x86_64-w64-mingw32/.renv-backup*
-          Rscript -e "renv::diagnostics()"
-          Rscript -e "Sys.getenv('JAVA_HOME')"
-          Rscript -e "Sys.getenv('DATABASECONNECTOR_JAR_FOLDER')"
+
+      - name: Verify generated library
+        env:
+            RENV_CONFIG_CACHE_ENABLED: "FALSE"
+            RENV_CONFIG_CACHE_SYMLINKS: "FALSE"
+        run: |
+          Rscript --vanilla -e "
+              source('renv/activate.R')
+
+              expected <- normalizePath(
+                'renv/library/windows/R-4.4/x86_64-w64-mingw32',
+                winslash = '/',
+                mustWork = TRUE
+              )
+
+              actual <- normalizePath(
+                renv::paths\$library(),
+                winslash = '/',
+                mustWork = TRUE
+              )
+
+              cat('Expected:', expected, '\n')
+              cat('Actual:  ', actual, '\n')
+              print(.libPaths())
+
+              stopifnot(getRversion() >= '4.4')
+              stopifnot(getRversion() < '4.5')
+              stopifnot(identical(actual, expected))
+              stopifnot(requireNamespace('renv', quietly = TRUE))
+            "
+
+          # Ensure the deployable library does not contain cache junctions.
+          powershell -NoProfile -Command '
+              $links = Get-ChildItem `
+                -Path "renv/library/windows/R-4.4" `
+                -Recurse -Force |
+                Where-Object {
+                  $_.Attributes -band [System.IO.FileAttributes]::ReparsePoint
+                }
+
+              if ($links) {
+                $links | Select-Object FullName, LinkType, Target
+                throw "The portable renv library contains junctions or symbolic links."
+              }
+            '
 
       - name: Commit and push changes
         run: |
-          git config user.name "Marc A. Suchard [github bot]"
-          git config user.email "msuchard@ucla.edu"
+            git config user.name "Marc A. Suchard [github bot]"
+            git config user.email "msuchard@ucla.edu"
 
-          # Stage ONLY renv library artifacts
-          git add -f -A -- renv/library
+            git add -f -A -- renv/library
 
-          if ! git diff --cached --quiet; then
-            git commit -m "Update generated files after merge ${{ steps.src.outputs.source_ref }}"
-            git push origin ingest_Rv4.4
-          else
-            echo "No changes to commit"
-          fi
-          
+            if ! git diff --cached --quiet; then
+              git commit -m "Build portable Windows R 4.4 renv library from ${{ steps.src.outputs.source_ref }}"
+              git push origin ingest_Rv4.4
+            else
+              echo "No changes to commit"
+            fi
+              
+
