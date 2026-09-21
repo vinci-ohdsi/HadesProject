@@ -18,7 +18,10 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.config.os }}
-    
+    defaults:
+      run:
+        shell: bash
+            
     strategy:      
       matrix:
         config:
@@ -45,8 +48,8 @@ jobs:
                        
       - name: Download asset
         run: |
-          curl -L -o file.zip \
-          https://github.com/vinci-ohdsi/jdk8/releases/download/v1.0.0/file.zip         
+          curl -L -o jdk8_and_driver.zip \
+          https://github.com/vinci-ohdsi/jdk8/releases/download/v0.1/jdk8_and_driver.zip    
 
 #       - uses: r-lib/actions/setup-r-dependencies@v2
 #         with:
