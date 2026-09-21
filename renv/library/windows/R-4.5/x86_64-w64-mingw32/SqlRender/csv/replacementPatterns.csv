@@ -20,9 +20,9 @@ oracle,<par_open>,(
 oracle,<par_close>,)
 oracle,EXCEPT,MINUS
 oracle,"CONCAT(@a, @b, @c)","CONCAT(@a, CONCAT(@b, @c))"
-oracle,"DATEADD(second,@seconds,@datetime)","(@date + NUMTODSINTERVAL(@seconds, 'second'))"
-oracle,"DATEADD(minute,@minutes,@datetime)","(@date + NUMTODSINTERVAL(@minutes, 'minute'))"
-oracle,"DATEADD(hour,@hours,@datetime)","(@date + NUMTODSINTERVAL(@hours, 'hour'))"
+oracle,"DATEADD(second,@seconds,@datetime)","(@datetime + NUMTODSINTERVAL(@seconds, 'second'))"
+oracle,"DATEADD(minute,@minutes,@datetime)","(@datetime + NUMTODSINTERVAL(@minutes, 'minute'))"
+oracle,"DATEADD(hour,@hours,@datetime)","(@datetime + NUMTODSINTERVAL(@hours, 'hour'))"
 oracle,"DATEADD(d,@days,@date)","(@date + NUMTODSINTERVAL(@days, 'day'))"
 oracle,"DATEADD(dd,@days,@date)","(@date + NUMTODSINTERVAL(@days, 'day'))"
 oracle,"DATEADD(day,@days,@date)","(@date + NUMTODSINTERVAL(@days, 'day'))"
@@ -215,7 +215,7 @@ postgresql,LOG(@expression),LN(CAST((@expression) AS REAL))
 postgresql,<L_O_G>,LOG
 postgresql,LOG10(@expression),"LOG(10,CAST((@expression) AS NUMERIC))"
 postgresql,"ISNULL(@a,@b)","COALESCE(@a,@b)"
-postgresql,"ISNUMERIC(@a)","CASE WHEN (CAST(@a AS VARCHAR) ~ '^([0-9]+\.?[0-9]*|\.[0-9]+)$') THEN 1 ELSE 0 END"
+postgresql,"ISNUMERIC(@a)","CASE WHEN (CAST(@a AS VARCHAR) ~ '^[\-\+]?([0-9]+\.?[0-9]*|\.[0-9]+)$') THEN 1 ELSE 0 END"
 postgresql,COUNT_BIG(@a),COUNT(@a)
 postgresql,SQUARE(@a),((@a)*(@a))
 postgresql,NEWID(),MD5(RANDOM()::TEXT || CLOCK_TIMESTAMP()::TEXT)
@@ -231,7 +231,7 @@ postgresql,PRIMARY KEY NONCLUSTERED,PRIMARY KEY
 postgresql,DATETIME,TIMESTAMP
 postgresql,DATETIME2,TIMESTAMP
 postgresql,VARCHAR(MAX),TEXT
-postgresql,FLOAT,NUMERIC
+postgresql,FLOAT,DOUBLE PRECISION
 postgresql,WITH @a AS @b SELECT @c INTO #@d FROM @e;,CREATE TEMP TABLE @d\nAS\nWITH @a AS @b SELECT\n@c\nFROM\n@e;\nANALYZE @d;
 postgresql,WITH @a AS @b SELECT @c INTO @d FROM @e;,CREATE TABLE @d\nAS\nWITH @a AS @b SELECT\n@c\nFROM\n@e;
 postgresql,SELECT @a INTO #@b FROM @c;,CREATE TEMP TABLE @b\nAS\nSELECT\n@a\nFROM\n@c;\nANALYZE @b;
@@ -602,7 +602,7 @@ impala,"CONSTRAINT @a DEFAULT NOW()",""
 impala,"DEFAULT NOW()",""
 impala,stats,_stats
 impala,UPDATE STATISTICS @a;,COMPUTE STATS @a;
-impala,"ISNUMERIC(@a)","case when regexp_like(@a,'^([0-9]+\.?[0-9]*|\.[0-9]+)$') then 1 else 0 end"
+impala,"ISNUMERIC(@a)","case when regexp_like(@a,'^[\-\+]?([0-9]+\.?[0-9]*|\.[0-9]+)$') then 1 else 0 end"
 impala,"HASHBYTES('MD5',@a)","fnv_hash(@a)"
 impala,"CONVERT(VARBINARY, @a, 1)","cast(conv(@a, 16, 10) as int)"
 netezza,...@([0-9]+|y)a,xxx@a
@@ -833,9 +833,9 @@ sqlite,DATETIME,REAL
 sqlite,DATETIME2,REAL
 sqlite,"CONVERT(DATE, @a)","CAST(STRFTIME('%s', SUBSTR(CAST(@a AS TEXT), 1, 4) || '-' || SUBSTR(CAST(@a AS TEXT), 5, 2) || '-' || SUBSTR(CAST(@a AS TEXT), 7)) AS REAL)"
 sqlite,CAST(@a AS DATE),"CAST(STRFTIME('%s', SUBSTR(CAST(@a AS TEXT), 1, 4) || '-' || SUBSTR(CAST(@a AS TEXT), 5, 2) || '-' || SUBSTR(CAST(@a AS TEXT), 7)) AS REAL)"
-sqlite,"DATEADD(second,@seconds,@datetime)","CAST(STRFTIME('%s', DATETIME(@date, 'unixepoch', (@seconds)||' seconds')) AS REAL)"
-sqlite,"DATEADD(minute,@minutes,@datetime)","CAST(STRFTIME('%s', DATETIME(@date, 'unixepoch', (@minutes)||' minutes')) AS REAL)"
-sqlite,"DATEADD(hour,@hours,@datetime)","CAST(STRFTIME('%s', DATETIME(@date, 'unixepoch', (@hours)||' hours')) AS REAL)"
+sqlite,"DATEADD(second,@seconds,@datetime)","CAST(STRFTIME('%s', DATETIME(@datetime, 'unixepoch', (@seconds)||' seconds')) AS REAL)"
+sqlite,"DATEADD(minute,@minutes,@datetime)","CAST(STRFTIME('%s', DATETIME(@datetime, 'unixepoch', (@minutes)||' minutes')) AS REAL)"
+sqlite,"DATEADD(hour,@hours,@datetime)","CAST(STRFTIME('%s', DATETIME(@datetime, 'unixepoch', (@hours)||' hours')) AS REAL)"
 sqlite,"DATEADD(d,@days,@date)","CAST(STRFTIME('%s', DATETIME(@date, 'unixepoch', (@days)||' days')) AS REAL)"
 sqlite,"DATEADD(dd,@days,@date)","CAST(STRFTIME('%s', DATETIME(@date, 'unixepoch', (@days)||' days')) AS REAL)"
 sqlite,"DATEADD(day,@days,@date)","CAST(STRFTIME('%s', DATETIME(@date, 'unixepoch', (@days)||' days')) AS REAL)"
@@ -878,7 +878,7 @@ sqlite,RAND(),((RANDOM()+9223372036854775808) / 18446744073709551615)
 sqlite,LEN(@a),LENGTH(@a)
 sqlite,"LOG(@expression,@base)","(LOG(@expression)/LOG(@base))"
 sqlite,"ISNULL(@a,@b)","COALESCE(@a,@b)"
-sqlite,"ISNUMERIC(@a)","CASE WHEN @a GLOB '[0-9]*' OR @a GLOB '[0-9]*.[0-9]*' OR @a GLOB '.[0-9]*' THEN 1 ELSE 0 END"
+sqlite,"ISNUMERIC(@a)","CASE WHEN TRIM(CAST(CAST(@a AS numeric) AS char), '0.') = TRIM(CAST(@a AS char), '0.') THEN 1 ELSE 0 END"
 sqlite,COUNT_BIG(@a),COUNT(@a)
 sqlite,NEWID(),RANDOM()
 sqlite,"RIGHT(@a,@b)","SUBSTR(CAST(@a AS TEXT),-@b)"
@@ -1127,8 +1127,8 @@ spark,SQUARE(@a),((@a)*(@a))
 spark,NEWID(),UUID()
 spark,.dbo.,.
 spark,CREATE CLUSTERED INDEX @index_name ON @table (@variable);,
-spark,CREATE UNIQUE CLUSTERED INDEX @index_name ON @table (@variable);,
-spark,PRIMARY KEY NONCLUSTERED,
+spark,CREATE UNIQUE CLUSTERED INDEX @index_name ON @table (@variable);,ALTER TABLE @table ADD CONSTRAINT @index_name UNIQUE(@variable);
+spark,PRIMARY KEY NONCLUSTERED,PRIMARY KEY
 spark,DATETIME,TIMESTAMP
 spark,DATETIME2,TIMESTAMP
 spark,VARCHAR(MAX),STRING
@@ -1140,7 +1140,7 @@ spark,(SELECT TOP @([0-9]+)rows @a),(SELECT @a LIMIT @rows)
 spark,SELECT DISTINCT TOP @([0-9]+)rows @a;,SELECT DISTINCT @a LIMIT @rows;
 spark,(SELECT DISTINCT TOP @([0-9]+)rows @a),(SELECT DISTINCT @a LIMIT @rows)
 spark,"WITH @cte AS (SELECT @s1 '@literal' @s2)","WITH @cte AS (SELECT @s1 CAST('@literal' as STRING) @s2)"
-spark,UPDATE STATISTICS @a;,
+spark,UPDATE STATISTICS @a;,ANALYZE TABLE @a COMPUTE STATISTICS;
 spark,"SELECT @columns FROM (@a) @x,(@b) @y;","SELECT @columns FROM (@a) @x cross join (@b) @y;"
 spark,"ALTER TABLE @table ADD COLUMN @([\w_-]+)column @type DEFAULT @default;","ALTER TABLE @table ADD COLUMN @column @type; \nALTER TABLE @table SET TBLPROPERTIES('delta.feature.allowColumnDefaults' = 'supported'); \nALTER TABLE @table ALTER COLUMN @column SET DEFAULT @default;"
 spark,"CAST(@a AS DATE)","IF(try_cast(@a AS DATE) IS NULL, to_date(cast(@a AS STRING), 'yyyyMMdd'), try_cast(@a AS DATE))"
@@ -1160,7 +1160,7 @@ sqlite extended,RAND(),RANDOM()
 sqlite extended,LEN(@a),LENGTH(@a)
 sqlite extended,"LOG(@expression,@base)","(LOG(@expression)/LOG(@base))"
 sqlite extended,"ISNULL(@a,@b)","COALESCE(@a,@b)"
-sqlite extended,"ISNUMERIC(@a)","CASE WHEN @a GLOB '[0-9]*' OR @a GLOB '[0-9]*.[0-9]*' OR @a GLOB '.[0-9]*' THEN 1 ELSE 0 END"
+sqlite extended,"ISNUMERIC(@a)","CASE WHEN TRIM(CAST(CAST(@a AS numeric) AS char), '0.') = TRIM(CAST(@a AS char), '0.') THEN 1 ELSE 0 END"
 sqlite extended,COUNT_BIG(@a),COUNT(@a)
 sqlite extended,NEWID(),RANDOM()
 sqlite extended,"RIGHT(@a,@b)","SUBSTR(@a,-@b)"
@@ -1253,7 +1253,7 @@ duckdb,LOG(@expression),LN(CAST((@expression) AS REAL))
 duckdb,<L_O_G>,LOG
 duckdb,LOG10(@expression),"LOG(@expression)"
 duckdb,"ISNULL(@a,@b)","COALESCE(@a,@b)"
-duckdb,"ISNUMERIC(@a)","CASE WHEN (CAST(@a AS VARCHAR) ~ '^([0-9]+\.?[0-9]*|\.[0-9]+)$') THEN 1 ELSE 0 END"
+duckdb,"ISNUMERIC(@a)","CASE WHEN (CAST(@a AS VARCHAR) ~ '^[\-\+]?([0-9]+\.?[0-9]*|\.[0-9]+)$') THEN 1 ELSE 0 END"
 duckdb,COUNT_BIG(@a),COUNT(@a)
 duckdb,SQUARE(@a),((@a)*(@a))
 duckdb,NEWID(),uuid()
@@ -1269,7 +1269,7 @@ duckdb,PRIMARY KEY NONCLUSTERED,PRIMARY KEY
 duckdb,DATETIME,TIMESTAMP
 duckdb,DATETIME2,TIMESTAMP
 duckdb,VARCHAR(MAX),TEXT
-duckdb,FLOAT,NUMERIC
+duckdb,FLOAT,DOUBLE
 duckdb,WITH @a AS @b SELECT @c INTO #@d FROM @e;,CREATE TEMP TABLE @d\nAS\nWITH @a AS @b SELECT\n@c\nFROM\n@e;\nANALYZE @d;
 duckdb,WITH @a AS @b SELECT @c INTO @d FROM @e;,CREATE TABLE @d\nAS\nWITH @a AS @b SELECT\n@c\nFROM\n@e;
 duckdb,SELECT @a INTO #@b FROM @c;,CREATE TEMP TABLE @b\nAS\nSELECT\n@a\nFROM\n@c;\nANALYZE @b;
@@ -1283,6 +1283,9 @@ duckdb,(SELECT DISTINCT TOP @([0-9]+)rows @a),(SELECT DISTINCT @a LIMIT @rows)
 duckdb,"WITH @cte AS (SELECT @s1 '@literal' @s2)","WITH @cte AS (SELECT @s1 CAST('@literal' as TEXT) @s2)"
 duckdb,UPDATE STATISTICS @a;,ANALYZE @a;
 duckdb,TRUNCATE TABLE @a;,DELETE FROM @a;
+duckdb,ALTER TABLE @a DROP CONSTRAINT @b;,CREATE TABLE @a_new AS SELECT * FROM @a;DROP TABLE @a;ALTER TABLE @a_new RENAME TO @a;
+duckdb,"ALTER TABLE @table ADD @a, @b;","ALTER TABLE @table ADD @a; ALTER TABLE @table ADD @b;"
+duckdb,"ALTER TABLE @table ALTER COLUMN @([0-9a-z_]+)a @b;","ALTER TABLE @table ALTER @a TYPE @b;"
 snowflake,.@([0-9a-z_]+)a...@([0-9]+|y)b,x@a...@b
 snowflake,.@([0-9a-z_]+)a...@([0-9]+|y)b,x@axxx@b
 snowflake,...@([0-9]+|y)a,xxx@a
@@ -1411,6 +1414,11 @@ iris,"--HINT PARTITION(@a @b)", -- "haven't looked into this yet, skip it for no
 iris,"--HINT DISTRIBUTE_ON_KEY(@key)", -- "haven't looked into this yet, skip it for now""
 iris,"DATEFROMPARTS(@year,@month,@day)","TO_DATE(TO_CHAR(@year,'FM0000')||'-'||TO_CHAR(@month,'FM00')||'-'||TO_CHAR(@day,'FM00'), 'YYYY-MM-DD')"
 iris,"DATETIMEFROMPARTS(@year,@month,@day,@hour,@minute,@second,@ms)","TO_TIMESTAMP(TO_CHAR(@year,'FM0000')||'-'||TO_CHAR(@month,'FM00')||'-'||TO_CHAR(@day,'FM00')||' '||TO_CHAR(@hour,'FM00')||':'||TO_CHAR(@minute,'FM00')||':'||TO_CHAR(@second,'FM00')||'.'||TO_CHAR(@ms,'FM000'), 'YYYY-MM-DD HH24:MI:SS.FF')"
+iris,"CAST('@a' AS DATE)","TO_DATE('@a', 'YYYYMMDD')"
+iris,"CAST('@a' + @b AS DATE)","TO_DATE('@a' + @b, 'YYYYMMDD')"
+iris,"CAST(@a + '@b' AS DATE)","TO_DATE(@a + '@b', 'YYYYMMDD')"
+iris,"CAST(CONCAT(@a) AS DATE)","TO_DATE(CONCAT(@a), 'YYYYMMDD')"
+iris,"CONVERT(DATE, @a)","TO_DATE(@a, 'YYYYMMDD')"
 iris," DATEADD(d, @a, @b) AS"," TO_DATE(DATEADD(d, @a, @b),'YYYY-MM-DD HH:MI:SS') AS"
 iris," DATEADD(dd, @a, @b) AS"," TO_DATE(DATEADD(dd, @a, @b),'YYYY-MM-DD HH:MI:SS') AS"
 iris," DATEADD(day, @a, @b) AS"," TO_DATE(DATEADD(day, @a, @b),'YYYY-MM-DD HH:MI:SS') AS"
@@ -1425,7 +1433,6 @@ iris,"case when DATEADD(day,@a,@b) > op_end_date then op_end_date else DATEADD(d
 iris,"select @a as cohort_definition_id, person_id, start_date, end_date","select @a as cohort_definition_id, person_id, CAST (start_date AS DATE), CAST (end_date AS DATE)"
 iris,"select @a as design_hash, person_id, start_date, end_date","select @a as design_hash, person_id, CAST (start_date AS DATE), CAST (end_date AS DATE)"
 iris,"select cohort_definition_id, subject_id, cohort_start_date, cohort_end_date, @a as adjusted_start_date, @b as adjusted_end_date","select cohort_definition_id, subject_id, cohort_start_date, cohort_end_date, CAST(@a AS DATE) as adjusted_start_date, CAST(@b AS DATE) as adjusted_end_date"
-iris,"CONCAT(p.year_of_birth, @b, @c)",p.year_of_birth||'-'||@b||'-'|| @c
 iris,"CONCAT(@a, @b,","@a || CONCAT(@b,"
 iris,"CONCAT(@a,@b)",@a || @b
 iris,CREATE CLUSTERED INDEX @index_name ON @table (@variable);,CREATE INDEX @index_name ON @table (@variable);
@@ -1440,3 +1447,5 @@ iris,EOMONTH(@date),LAST_DAY(@date)
 iris,.DOMAIN ,."DOMAIN" 
 iris,NEWID(),$TSQL_NEWID()
 iris,RAND(),$TSQL_NEWID()
+iris,CREATE TABLE @a AS (@b) ORDER BY @c;,CREATE TABLE @a AS @b ORDER BY @c;
+iris,CREATE TABLE @a AS (@b ORDER BY @c);,CREATE TABLE @a AS @b ORDER BY @c;

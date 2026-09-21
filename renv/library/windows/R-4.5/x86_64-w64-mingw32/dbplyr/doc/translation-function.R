@@ -1,106 +1,154 @@
 ## -----------------------------------------------------------------------------
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
-options(tibble.print_min = 4L, tibble.print_max = 4L)
+options(tibble.print_min = 6L, tibble.print_max = 6L, digits = 3)
 
 ## -----------------------------------------------------------------------------
 library(dbplyr)
-library(dplyr)
-
-con <- simulate_dbi()
+library(dplyr, warn.conflicts = FALSE)
 
 ## -----------------------------------------------------------------------------
-translate_sql((x + y) / 2, con = con)
+lf <- lazy_frame(x = 1, y = 2, g = "a")
+lf |> mutate(z = (x + y) / 2)
 
 ## -----------------------------------------------------------------------------
-translate_sql(x ^ 2L, con = con)
-translate_sql(x ^ 2L, con = simulate_sqlite())
-translate_sql(x ^ 2L, con = simulate_access())
+lf_sqlite <- lazy_frame(x = 1, con = simulate_sqlite())
+lf_access <- lazy_frame(x = 1, con = simulate_access())
+
+lf_sqlite |> transmute(z = x^2)
+lf_access |> transmute(z = x^2)
 
 ## -----------------------------------------------------------------------------
-# In SQLite variable names are escaped by double quotes:
-translate_sql(x, con = con)
-# And strings are escaped by single quotes
-translate_sql("x", con = con)
+lf |> filter(x == "x")
 
 ## -----------------------------------------------------------------------------
-translate_sql(substr(x, 5, 10), con = con)
-translate_sql(log(x, 10), con = con)
+lf |> transmute(z = 1)
+lf |> transmute(z = 1L)
 
 ## -----------------------------------------------------------------------------
-translate_sql(1, con = con)
-translate_sql(1L, con = con)
+lf |> transmute(x = x / 2, y = x^2 + y^2)
+
+lf |> transmute(x = log(x), y = round(y, 1))
 
 ## -----------------------------------------------------------------------------
 df <- tibble(
-  x = c(10L, 10L, -10L, -10L), 
+  x = c(10L, 10L, -10L, -10L),
   y = c(3L, -3L, 3L, -3L)
 )
-mf <- tbl_memdb(df)
+db <- copy_to(memdb(), df)
 
-df %>% mutate(x %% y)
-mf %>% mutate(x %% y)
-
-## -----------------------------------------------------------------------------
-translate_sql(mean(x), con = con)
-translate_sql(mean(x, na.rm = TRUE), con = con)
+df |> mutate(x %% y)
+db |> mutate(x %% y)
 
 ## -----------------------------------------------------------------------------
-translate_sql(mean(x, na.rm = TRUE), window = FALSE, con = con)
+lf |> filter(x > 5 | y == 2)
+
+lf |> filter(x %in% c(1, 2, 3))
+
+lf |> filter(between(x, 1, 5))
 
 ## -----------------------------------------------------------------------------
-translate_sql(if (x > 5) "big" else "small", con = con)
-translate_sql(switch(x, a = 1L, b = 2L, 3L), con = con)
+lf |> transmute(x = bitwAnd(x, 3L), y = bitwShiftL(x, 2L))
 
 ## -----------------------------------------------------------------------------
-translate_sql(foofify(x, y), con = con)
+lf |> transmute(x = as.integer(y), y = as.character(x))
 
 ## -----------------------------------------------------------------------------
-translate_sql(FOOFIFY(x, y), con = con)
+lf |> transmute(x = as(x, "TIME"), y = as(y, "DECIMAL(10, 2)"))
 
 ## -----------------------------------------------------------------------------
-translate_sql(x %LIKE% "%foo%", con = con)
+lf |> filter(!is.na(x))
+
+lf |> transmute(x = coalesce(x, 0L))
+
+lf |> transmute(x = na_if(x, 0L))
 
 ## -----------------------------------------------------------------------------
-translate_sql(x %||% y, con = con)
+lf |> summarise(z = mean(x))
+lf |> summarise(z = mean(x, na.rm = TRUE))
 
 ## -----------------------------------------------------------------------------
-translate_sql(sql("x!"), con = con)
-translate_sql(x == sql("ANY VALUES(1, 2, 3)"), con = con)
+lf |> mutate(z = mean(x, na.rm = TRUE))
+lf |> filter(mean(x, na.rm = TRUE) > 0)
 
 ## -----------------------------------------------------------------------------
-mf <- memdb_frame(x = 1, y = 2)
+lf |> transmute(z = ifelse(x > 5, "big", "small"))
 
-mf %>% 
-  transmute(factorial = sql("x!")) %>% 
-  show_query()
+## -----------------------------------------------------------------------------
+lf |> 
+  mutate(z = case_when(
+    x > 10 ~ "medium",
+    x > 30 ~ "big", 
+    .default = "small"
+  ))
 
-mf %>% 
-  transmute(factorial = sql("CAST(x AS FLOAT)")) %>% 
-  show_query()
+lf |> mutate(z = switch(g, a = 1L, b = 2L, 3L))
+
+## -----------------------------------------------------------------------------
+lf |> transmute(x = paste0(g, " dog"))
+
+lf |> transmute(x = substr(g, 1L, 2L))
+
+## -----------------------------------------------------------------------------
+lf_dt <- lazy_frame(dt = Sys.time())
+
+lf_dt |> transmute(
+  year = year(dt),
+  month = month(dt),
+  day = day(dt)
+)
+
+## -----------------------------------------------------------------------------
+lf |> mutate(z = foofify(x, y))
+
+## -----------------------------------------------------------------------------
+lf |> transmute(z = .sql$foofify(x, y))
+
+## -----------------------------------------------------------------------------
+lf |> filter(x %LIKE% "%foo%")
+
+## -----------------------------------------------------------------------------
+lf |> filter(str_like(x, "%foo%"))
+
+## -----------------------------------------------------------------------------
+lf |> transmute(z = x %||% y)
+lf |> transmute(z = paste0(x, y))
+lf |> transmute(z = paste(x, y))
+
+## -----------------------------------------------------------------------------
+lf |> transmute(z = sql("x!"))
+lf |> transmute(z = x == sql("ANY VALUES(1, 2, 3)"))
+
+## -----------------------------------------------------------------------------
+lf |> transmute(factorial = sql("x!"))
+lf |> transmute(factorial = sql("CAST(x AS FLOAT)"))
 
 ## -----------------------------------------------------------------------------
 try({
 options(dplyr.strict_sql = TRUE)
-translate_sql(glob(x, y), con = con)
+lf |> mutate(z = glob(x, y))
 })
 
 ## -----------------------------------------------------------------------------
 knitr::include_graphics("windows.png", dpi = 300)
 
 ## -----------------------------------------------------------------------------
-translate_sql(mean(G), con = con)
-translate_sql(rank(G), con = con)
-translate_sql(ntile(G, 2), con = con)
-translate_sql(lag(G), con = con)
+lf <- lazy_frame(g = 1, year = 2020, id = 3, con = simulate_dbi())
+
+lf |> transmute(
+  mean = mean(g), 
+  rank = min_rank(g), 
+  cumsum = cumsum(g),
+  lag = lag(g)
+)
 
 ## -----------------------------------------------------------------------------
-translate_sql(cummean(G), vars_order = "year", con = con)
-translate_sql(rank(), vars_group = "ID", con = con)
+lf |> arrange(year) |> mutate(z = cummean(g))
+lf |> group_by(id) |> mutate(z = rank())
 
 ## -----------------------------------------------------------------------------
-# mutate(players,
-#   min_rank(yearID),
-#   order_by(yearID, cumsum(G)),
-#   lead(G, order_by = yearID)
-# )
+lf |> transmute(
+  x1 = min_rank(g),
+  x2 = order_by(year, cumsum(g)),
+  x3 = lead(g, order_by = year)
+)
 

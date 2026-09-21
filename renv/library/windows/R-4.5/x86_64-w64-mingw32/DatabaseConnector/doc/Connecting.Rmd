@@ -157,7 +157,7 @@ In some organizations using Microsoft SQL Server and Windows, it is possible to 
 
 # Connecting to a SQLite database
 
-`DatabaseConnector` also supports SQLite through the [RSQLite package](https://cran.r-project.org/web/packages/RSQLite/index.html), mainly for testing and demonstration purposes. Provide the path to the SQLite file as the `server` argument when connecting. If no file exists it will be created:
+`DatabaseConnector` also supports SQLite through the [RSQLite package](https://CRAN.R-project.org/package=RSQLite), mainly for testing and demonstration purposes. Provide the path to the SQLite file as the `server` argument when connecting. If no file exists it will be created:
 
 ```{r}
 conn <- connect(dbms = "sqlite", server = tempfile())
@@ -190,7 +190,7 @@ Kerberos is used by Active Directory, you need to have the appropriate packages 
 
 2. Run `kinit <username>@DOMAIN.COMPANY.COM` to get a ticket granting ticket from the kerberos domain controller (KDC). (NOTE: you want to make sure your KDC is accessible from your machine)
 
-3. Download the latest [MSSql JDBC driver](https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15).
+3. Download the latest [MSSql JDBC driver](https://learn.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15).
 
 4. Try to connect to the database with the following code in RStudio:
 

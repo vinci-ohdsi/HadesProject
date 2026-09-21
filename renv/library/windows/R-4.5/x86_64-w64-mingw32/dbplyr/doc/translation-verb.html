@@ -348,59 +348,105 @@ describes how entire verbs are translated;
 expressions within those verbs are translated.</p>
 <p>All dplyr verbs generate a <code>SELECT</code> statement. To
 demonstrate we’ll make a temporary database with a couple of tables</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="st">&quot;:memory:&quot;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>flights <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, nycflights13<span class="sc">::</span>flights)</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>airports <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, nycflights13<span class="sc">::</span>airports)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="st">&quot;:memory:&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>flights <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, nycflights13<span class="sc">::</span>flights)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>airports <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, nycflights13<span class="sc">::</span>airports)</span></code></pre></div>
 <div id="single-table-verbs" class="section level2">
 <h2>Single table verbs</h2>
 <ul>
 <li><p><code>select()</code> and <code>mutate()</code> modify the
 <code>SELECT</code> clause:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;delay&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
-<pre><code>## &lt;SQL&gt;
-## SELECT `dep_delay`, `arr_delay`
-## FROM `nycflights13::flights`</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="fu">select</span>(distance, air_time) <span class="sc">%&gt;%</span>  </span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">speed =</span> distance <span class="sc">/</span> (air_time <span class="sc">/</span> <span class="dv">60</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
-<pre><code>## &lt;SQL&gt;
-## SELECT `distance`, `air_time`, `distance` / (`air_time` / 60.0) AS `speed`
-## FROM `nycflights13::flights`</code></pre></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;delay&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="fu">show_query</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; SELECT `dep_delay`, `arr_delay`</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; FROM `nycflights13::flights`</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  <span class="fu">select</span>(distance, air_time) <span class="sc">|&gt;</span>  </span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">speed =</span> distance <span class="sc">/</span> (air_time <span class="sc">/</span> <span class="dv">60</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  <span class="fu">show_query</span>()</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; SELECT `distance`, `air_time`, `distance` / (`air_time` / 60.0) AS `speed`</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; FROM `nycflights13::flights`</span></span></code></pre></div></li>
 <li><p><code>filter()</code> generates a <code>WHERE</code> clause:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
-<pre><code>## &lt;SQL&gt;
-## SELECT `nycflights13::flights`.*
-## FROM `nycflights13::flights`
-## WHERE (`month` = 1.0) AND (`day` = 1.0)</code></pre></li>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">show_query</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; SELECT *</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; FROM `nycflights13::flights`</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; WHERE (`month` = 1.0) AND (`day` = 1.0)</span></span></code></pre></div></li>
 <li><p><code>arrange()</code> generates an <code>ORDER BY</code>
 clause:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="fu">arrange</span>(carrier, <span class="fu">desc</span>(arr_delay)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
-<pre><code>## &lt;SQL&gt;
-## SELECT `nycflights13::flights`.*
-## FROM `nycflights13::flights`
-## ORDER BY `carrier`, `arr_delay` DESC</code></pre></li>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="fu">arrange</span>(carrier, <span class="fu">desc</span>(arr_delay)) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="fu">show_query</span>()</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; SELECT *</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; FROM `nycflights13::flights`</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; ORDER BY `carrier`, `arr_delay` DESC</span></span></code></pre></div></li>
 <li><p><code>summarise()</code> and <code>group_by()</code> work
 together to generate a <code>GROUP BY</code> clause:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="fu">group_by</span>(month, day) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
-<pre><code>## `summarise()` has grouped output by &quot;month&quot;. You can override using the
-## `.groups` argument.</code></pre>
-<pre><code>## &lt;SQL&gt;
-## SELECT `month`, `day`, AVG(`dep_delay`) AS `delay`
-## FROM `nycflights13::flights`
-## GROUP BY `month`, `day`</code></pre></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">group_by</span>(month, day) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">show_query</span>()</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; ! Grouped output by &quot;month&quot;.</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; ℹ Override behaviour and silence this message with the `.groups` argument.</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; ℹ Or use `.by` instead of `group_by()`.</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; SELECT `month`, `day`, AVG(`dep_delay`) AS `delay`</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; FROM `nycflights13::flights`</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; GROUP BY `month`, `day`</span></span></code></pre></div></li>
 </ul>
+</div>
+<div id="subqueries" class="section level2">
+<h2>Subqueries</h2>
+<p>It’s not always possible to translate a single dplyr verb into a
+single SQL query. For example, in SQL, variables in the
+<code>SELECT</code> clause have to come from another table; you can’t
+refer to a variable that you just created. For that reason, dbplyr will
+create subqueries where needed:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">select</span>(distance, air_time) <span class="sc">|&gt;</span>  </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    <span class="at">air_time_h =</span> air_time <span class="sc">/</span> <span class="dv">60</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    <span class="at">speed =</span> distance <span class="sc">/</span> air_time_h) <span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="fu">show_query</span>()</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; SELECT *, `distance` / `air_time_h` AS `speed`</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; FROM (</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;   SELECT `distance`, `air_time`, `air_time` / 60.0 AS `air_time_h`</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt;   FROM `nycflights13::flights`</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; ) AS `q01`</span></span></code></pre></div>
+<p>It’s also possible to use a CTE if you so desire:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">select</span>(distance, air_time) <span class="sc">|&gt;</span>  </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    <span class="at">air_time_h =</span> air_time <span class="sc">/</span> <span class="dv">60</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    <span class="at">speed =</span> distance <span class="sc">/</span> air_time_h) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="fu">show_query</span>(<span class="at">sql_options =</span> <span class="fu">sql_options</span>(<span class="at">cte =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; WITH `q01` AS (</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt;   SELECT `distance`, `air_time`, `air_time` / 60.0 AS `air_time_h`</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt;   FROM `nycflights13::flights`</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; )</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; SELECT *, `distance` / `air_time_h` AS `speed`</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; FROM `q01`</span></span></code></pre></div>
+<p>Sometimes dbplyr will create a subquery where it’s not strictly
+necessary. We strive to avoid this as much as possible, but our analysis
+of the generated SQL is not always complete, so we’ll typically err on
+the side of safety (creating more subqueries) rather than
+performance.</p>
+<p>It’s important to know that most SQL dialects either error or include
+<code>LIMIT</code> and <code>ORDER BY</code> statements inside of
+subqueries. For that reason, you should always put <code>head()</code>
+and <code>arrange()</code> as late as possible in your pipeline.</p>
 </div>
 <div id="dual-table-verbs" class="section level2">
 <h2>Dual table verbs</h2>
@@ -465,29 +511,6 @@ and then perform a efficient semi join in the database.</p>
 <p>If you’re working with large data, it maybe also be helpful to set
 <code>auto_index = TRUE</code>. That will automatically add an index on
 the join variables to the temporary table.</p>
-</div>
-<div id="behind-the-scenes" class="section level2">
-<h2>Behind the scenes</h2>
-<p>The verb level SQL translation is implemented on top of
-<code>tbl_lazy</code>, which basically tracks the operations you perform
-in a pipeline (see <code>lazy-ops.R</code>). Turning that into a SQL
-query takes place in three steps:</p>
-<ul>
-<li><p><code>sql_build()</code> recurses over the lazy op data structure
-building up query objects (<code>select_query()</code>,
-<code>join_query()</code>, <code>set_op_query()</code> etc) that
-represent the different subtypes of <code>SELECT</code> queries that we
-might generate.</p></li>
-<li><p><code>sql_optimise()</code> takes a pass over these SQL objects,
-looking for potential optimisations. Currently this only involves
-removing subqueries where possible.</p></li>
-<li><p><code>sql_render()</code> calls an SQL generation function
-(<code>sql_query_select()</code>, <code>sql_query_join()</code>,
-<code>sql_query_semi_join()</code>, <code>sql_query_set_op()</code>, …)
-to produce the actual SQL. Each of these functions is a generic, taking
-the connection as an argument, so that the translation can be customised
-for different databases.</p></li>
-</ul>
 </div>
 
 

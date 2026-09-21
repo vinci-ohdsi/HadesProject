@@ -371,32 +371,32 @@ out and a great place to start.</p>
 <code>memdb_frame()</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>mf <span class="ot">&lt;-</span> <span class="fu">memdb_frame</span>(<span class="at">g =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">y =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>mf</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; # Source:   table&lt;`dbplyr_4ZJoiwXKzG`&gt; [?? x 3]</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; # Database: sqlite 3.50.4 [:memory:]</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; # A query:  ?? x 3</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; # Database: sqlite 3.52.0 [:memory:]</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt;       g     x     y</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;</span></span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; 1     1     1     5</span></span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 2     1     2     4</span></span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; 3     2     3     3</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 4     2     4     2</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; # ℹ more rows</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 5     2     5     1</span></span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>mf <span class="sc">%&gt;%</span> </span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  <span class="fu">group_by</span>(g) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>mf <span class="sc">|&gt;</span> </span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  <span class="fu">group_by</span>(g) <span class="sc">|&gt;</span> </span>
 <span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  <span class="fu">summarise_all</span>(mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; # Source:   SQL [?? x 3]</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; # Database: sqlite 3.50.4 [:memory:]</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; # A query:  ?? x 3</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; # Database: sqlite 3.52.0 [:memory:]</span></span>
 <span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt;       g     x     y</span></span>
 <span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
 <span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt; 1     1   1.5   4.5</span></span>
 <span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; 2     2   4     2</span></span></code></pre></div>
 <p>Reprexes are easiest to understand if you create very small custom
 data, but if you do want to use an existing data frame you can use
-<code>tbl_memdb()</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>mtcars_db <span class="ot">&lt;-</span> <span class="fu">tbl_memdb</span>(mtcars)</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>mtcars_db <span class="sc">%&gt;%</span> </span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<code>copy_to()</code> + <code>memdb()</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>mtcars_db <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(<span class="fu">memdb</span>(), mtcars)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>mtcars_db <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  <span class="fu">show_query</span>()</span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; SELECT `cyl`, COUNT(*) AS `n`</span></span>
@@ -413,20 +413,20 @@ Fortunately, it’s possible to generate SQL without a database using
 etc.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;def&quot;</span>, <span class="st">&quot;ghif&quot;</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">lazy_frame</span>(<span class="at">x =</span> x, <span class="at">con =</span> <span class="fu">simulate_postgres</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">lazy_frame</span>(<span class="at">x =</span> x, <span class="at">con =</span> <span class="fu">simulate_postgres</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="fu">show_query</span>()</span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; SELECT `df`.*</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; FROM `df`</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; SELECT *</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; FROM &quot;df&quot;</span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; LIMIT 5</span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="fu">lazy_frame</span>(<span class="at">x =</span> x, <span class="at">con =</span> <span class="fu">simulate_mssql</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="fu">lazy_frame</span>(<span class="at">x =</span> x, <span class="at">con =</span> <span class="fu">simulate_mssql</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  <span class="fu">show_query</span>()</span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt;</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; SELECT TOP 5 `df`.*</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; FROM `df`</span></span></code></pre></div>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; SELECT TOP 5 *</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; FROM [df]</span></span></code></pre></div>
 <p>If you isolate the problem to incorrect SQL generation, it would be
 very helpful if you could also suggest more appropriate SQL.</p>
 </div>
@@ -436,7 +436,7 @@ very helpful if you could also suggest more appropriate SQL.</p>
 incorrect translation for a single column expression. In that case, you
 can make your reprex even simpler with <code>translate_sql()</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">substr</span>(x, <span class="dv">1</span>, <span class="dv">2</span>), <span class="at">con =</span> <span class="fu">simulate_postgres</span>())</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; SUBSTR(`x`, 1, 2)</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; SUBSTR(&quot;x&quot;, 1, 2)</span></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">substr</span>(x, <span class="dv">1</span>, <span class="dv">2</span>), <span class="at">con =</span> <span class="fu">simulate_sqlite</span>())</span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; SUBSTR(`x`, 1, 2)</span></span></code></pre></div>
 </div>

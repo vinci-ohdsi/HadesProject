@@ -84,6 +84,8 @@ dbUnloadDriver,DatabaseConnectorDriver-method
 dbWriteTable,DatabaseConnectorConnection,ANY-method
                         Copy data frames to database tables
 dbms                    Get the database platform from a connection
+dbplyr_edition.DatabaseConnectorConnection
+                        Declare dbplyr backend edition
 disconnect              Disconnect from the server
 downloadJdbcDrivers     Download DatabaseConnector JDBC Jar files
 dropEmulatedTempTables

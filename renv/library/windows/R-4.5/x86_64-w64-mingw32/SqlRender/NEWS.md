@@ -1,3 +1,37 @@
+SqlRender 1.19.7
+================
+
+Bugfixes:
+
+1. Fixing translation of literals to dates on Iris.
+
+2. Fixing translations of FLOAT. This is now translated to DOUBLE in DuckDB, and DOUBLE PRECISION in Posgresql. In all other dialects the current translation was found to be correct.
+
+3. Fixing SQLite, PosgreSQL, and DuckDB  translation of `ISNUMERIC`.
+
+
+SqlRender 1.19.6
+================
+
+Bugfixes:
+
+1. Now correctly translating `CREATE UNIQUE CLUSTERED INDEX`, `PRIMARY KEY NONCLUSTERED`, and `UPDATE STATISTICS` on Spark.
+
+2. Now correctly translating `DATEADD()` with `second`, `minute`, or `hour` on Oracle and SQLite (the datetime argument was being dropped, leaving an unresolved `@date` token in the output).
+
+
+SqlRender 1.19.5
+================
+
+Bugfixes:
+
+1. Now correctly translating `ALTER TABLE ADD` on DuckDB when adding multiple columns at once.
+
+2. Now correctly translating `ALTER TABLE ALTER COLUMN` on DuckDB.
+
+3. Removing parentheses in CTAS with ORDER BY on InterSystems IRIS
+
+
 SqlRender 1.19.4
 ================
 
