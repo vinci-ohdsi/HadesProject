@@ -1,3 +1,0 @@
-export(rateratio.test)
-
-importFrom("stats", "complete.cases", "pbinom", "qbeta")

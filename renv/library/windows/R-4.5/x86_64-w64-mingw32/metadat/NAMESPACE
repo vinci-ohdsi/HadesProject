@@ -1,5 +1,0 @@
-exportPattern("^[^\\.]")
-
-import(utils)
-import(tools)
-import(mathjaxr)

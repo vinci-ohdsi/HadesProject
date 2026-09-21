@@ -1,6 +1,0 @@
-BigKnn-package	BigKnn-package
-BigKnn	BigKnn-package
-buildKnn	buildKnn
-buildKnnFromPlpData	buildKnnFromPlpData
-predictKnn	predictKnn
-predictKnnUsingPlpData	predictKnnUsingPlpData

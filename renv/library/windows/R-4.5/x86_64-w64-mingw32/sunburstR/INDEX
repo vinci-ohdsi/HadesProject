@@ -1,7 +1,0 @@
-add_shiny               Add Shiny Events
-d2b-shiny               Shiny bindings for d2b
-sunburst                'd3.js' Sequence Sunburst Diagrams
-sunburst-shiny          Shiny bindings for sunburst
-sund2b                  Sunburst Using 'd2b'
-sund2bBreadcrumb        Advanced Customization of 'd2b' Breadcrumb
-sund2bTooltip           Advanced Customization of 'd2b' Tooltip

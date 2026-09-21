@@ -1,9 +1,0 @@
-default_conn            Get the default connection
-duckdb                  Connect to a DuckDB database instance
-duckdb_explain-class    DuckDB EXPLAIN query tree
-duckdb_read_csv         Reads a CSV file into DuckDB
-duckdb_register         Register a data frame as a virtual table
-duckdb_register_arrow   Register an Arrow data source as a virtual
-                        table
-sql_query               Run an SQL query or statement
-tbl_file                DuckDB SQL backend for dbplyr
